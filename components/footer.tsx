@@ -101,6 +101,9 @@ export default function Footer() {
                 {link.label}
               </Link>
             ))}
+            <Link href="/privacy-policy" className="text-sm text-slate-400 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>
