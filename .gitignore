@@ -10,9 +10,9 @@ out/
 dist/
 build/
 
-# env files
+# env files (never commit secrets)
 .env
-.env.* 
+.env.*
 
 # logs
 npm-debug.log*
