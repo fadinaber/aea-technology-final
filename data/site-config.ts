@@ -174,8 +174,7 @@ export const siteConfig: SiteConfig = {
     ],
     copyright: "© 2025 AEA Technology. All rights reserved.",
     legalLinks: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Service", href: "/terms" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
     ],
   },
 
