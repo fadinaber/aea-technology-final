@@ -1,3 +1,6 @@
+ "use client"
+
+import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Mail, MapPin, Phone, Clock } from "lucide-react"
 import Link from "next/link"
@@ -6,6 +9,11 @@ import { siteConfig } from "@/data/site-config"
 
 export default function Footer() {
   const { contact, footer, logo } = siteConfig
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <footer className="bg-slate-950 text-white">
@@ -96,11 +104,17 @@ export default function Footer() {
         <div className="border-t border-slate-800 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-sm text-slate-400 text-center sm:text-left">{footer.copyright}</div>
           <div className="flex space-x-4 sm:space-x-6">
-            {footer.legalLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-sm text-slate-400 hover:text-white transition-colors">
-                {link.label}
-              </Link>
-            ))}
+            {mounted
+              ? footer.legalLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className="text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))
+              : null}
           </div>
         </div>
       </div>

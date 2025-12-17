@@ -4,6 +4,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 // Disable Turbopack (more stable on Windows right now)
+// Next 16: prefer explicit CLI flag.
 process.env.NEXT_DISABLE_TURBOPACK = "1"
 
 function loadEnvLocal() {
@@ -37,10 +38,6 @@ function loadEnvLocal() {
 
 const envLoad = loadEnvLocal()
 
-// #region agent log
-fetch('http://127.0.0.1:7242/ingest/5cdeb406-5c0a-4951-a5a6-6f8a4dcbcc43',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'scripts/dev-no-turbo-safe.mjs:8',message:'safe dev launcher starting',data:{platform:process.platform,node:process.version,disableTurbopackEnv:process.env.NEXT_DISABLE_TURBOPACK,useShell:false,envLocalLoaded:envLoad.loaded,envLocalApplied:(envLoad.applied??null),hasResendTestToEmail:Boolean(process.env.RESEND_TEST_TO_EMAIL)},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'H1'})}).catch(()=>{});
-// #endregion agent log
-
 // Avoid `shell: true` to prevent Node DEP0190 deprecation warning.
 // Run the Next CLI directly via Node to keep behavior consistent across Windows/macOS/Linux.
 const require = createRequire(import.meta.url)
@@ -53,9 +50,6 @@ const child = spawn(process.execPath, [nextBin, "dev"], {
 })
 
 child.on("exit", (code) => {
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/5cdeb406-5c0a-4951-a5a6-6f8a4dcbcc43',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'scripts/dev-no-turbo-safe.mjs:25',message:'safe dev launcher child exit',data:{code},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'H1'})}).catch(()=>{});
-  // #endregion agent log
   process.exit(code ?? 0)
 })
 
