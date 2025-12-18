@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import ClientLayout from "./client-layout"
 import OrganizationSchema from "@/components/seo/organization-schema"
@@ -108,6 +109,44 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
+
+        {/* 
+          ============================================
+          GOOGLE ANALYTICS & ADS TRACKING
+          ============================================
+          Replace the placeholder IDs below with your real IDs:
+          
+          1. Google Analytics 4 Measurement ID
+             - Replace: G-PLACEHOLDER (line 117 and 124)
+             - Format: G-XXXXXXXXXX
+             - Get it from: Google Analytics → Admin → Data Streams
+          
+          2. Google Ads Conversion ID
+             - Replace: AW-PLACEHOLDER (line 131)
+             - Format: AW-XXXXXXXXX
+             - Get it from: Google Ads → Tools & Settings → Conversions
+          ============================================
+        */}
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER`}
+        />
+        <Script id="google-analytics-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PLACEHOLDER');
+          `}
+        </Script>
+
+        {/* Google Ads Conversion Tracking */}
+        <Script id="google-ads-conversion" strategy="afterInteractive">
+          {`
+            gtag('config', 'AW-PLACEHOLDER');
+          `}
+        </Script>
       </body>
     </html>
   )
