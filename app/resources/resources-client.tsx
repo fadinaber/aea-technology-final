@@ -300,7 +300,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.7,
         featured: true,
         tags: ["Avionics", "TDR", "Operation", "E20/20"],
-        downloadUrl: "/documents/avioinics%20manuals/E20_and_Avionics_TDR_Operator_Manual-05%202025%20with%20LHT%20Note.pdf",
+        downloadUrl: "/documents/avioinics manuals/E2020_and_Avionics_TDR_Operator_Manual-05 2025 with LHT Note.pdf",
       },
       {
         id: "avionics-tdr-quick-start",
@@ -313,7 +313,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.8,
         featured: true,
         tags: ["Avionics", "TDR", "Quick Start", "E20/20"],
-        downloadUrl: "/documents/avioinics%20manuals/6021-3010%20E2020%20and%20Avionics%20TDR%20QSG%20Rev%20May%202016%20WEB.pdf",
+        downloadUrl: "/documents/avioinics manuals/6021-3010 E2020 and Avionics TDR QSG Rev May 2016 WEB.pdf",
       },
       {
         id: "avionics-tdr-basic-guide",
@@ -325,7 +325,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloads: 2890,
         rating: 4.6,
         tags: ["Avionics", "TDR", "Basic Guide", "E20/20"],
-        downloadUrl: "/documents/avioinics%20manuals/E2020_Avionics_TDR_Basic_Guide_%20Aug%202022.pdf",
+        downloadUrl: "/documents/avioinics manuals/E2020_Avionics_TDR_Basic_Guide_ Aug 2022.pdf",
       },
       {
         id: "avionics-training",
@@ -337,7 +337,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloads: 2156,
         rating: 4.5,
         tags: ["Avionics", "TDR", "Training", "Presentation"],
-        downloadUrl: "/documents/avioinics%20manuals/Avionics%20Kit%20%26%20Avionics%20TDR%20Training.ppt",
+        downloadUrl: "/documents/avioinics manuals/Avionics Kit & Avionics TDR Training.ppt",
       },
       {
         id: "avionics-introduction",
@@ -349,7 +349,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloads: 1890,
         rating: 4.4,
         tags: ["Avionics", "TDR", "Introduction", "Overview"],
-        downloadUrl: "/documents/avioinics%20manuals/Intoduction%20to%20Avionics%20TDR.ppsx",
+        downloadUrl: "/documents/avioinics manuals/Intoduction to Avionics TDR.ppsx",
       },
       {
         id: "via-bravo-manual",
