@@ -192,7 +192,11 @@ export default async function ResourcesPage() {
                 noteId = `an${anMatch[1]}`.toLowerCase()
               } else if (titleLower.includes("cold weather") && titleLower.includes("operation")) {
                 noteId = "an153"
-              } else if (titleLower.includes("white paper") && titleLower.includes("via")) {
+              } else if (
+                (titleLower.includes("white paper") && titleLower.includes("via")) ||
+                (titleLower.includes("via analyzer") && titleLower.includes("via bravo")) ||
+                (titleLower.includes("via") && titleLower.includes("analyzer") && titleLower.includes("bravo"))
+              ) {
                 noteId = "white-paper-via"
               }
               

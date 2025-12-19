@@ -36,7 +36,12 @@ function extractNoteIdFromFilename(filename: string): string | null {
   }
 
   // Check for "white-paper-via" pattern
-  if (nameLower.includes("white paper") && nameLower.includes("via")) {
+  // Matches: "white paper" + "via", or "via analyzer" + "via bravo"
+  if (
+    (nameLower.includes("white paper") && nameLower.includes("via")) ||
+    (nameLower.includes("via analyzer") && nameLower.includes("via bravo")) ||
+    (nameLower.includes("via") && nameLower.includes("analyzer") && nameLower.includes("bravo"))
+  ) {
     return "white-paper-via"
   }
 
