@@ -96,23 +96,35 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
     // Group products by category
     const tdrProducts = products
       .filter((p) => p.category === "tdr")
-      .map((p) => ({
-        id: p.slug?.current || p._id,
-        name: p.name,
-        tagline: p.tagline || p.shortDescription || "",
-        image: p.imageUrl || "/placeholder.svg",
-        category: p.badges?.[0]?.text || "Product",
-      }))
+      .map((p) => {
+        // Try to find matching fallback product for image
+        const fallbackProduct = fallbackProductCategories[0]?.products.find(
+          (fp) => fp.id === (p.slug?.current || p._id)
+        )
+        return {
+          id: p.slug?.current || p._id,
+          name: p.name,
+          tagline: p.tagline || p.shortDescription || "",
+          image: p.imageUrl || fallbackProduct?.image || "/placeholder.svg",
+          category: p.badges?.[0]?.text || fallbackProduct?.category || "Product",
+        }
+      })
 
     const vnaProducts = products
       .filter((p) => p.category === "vna-swr")
-      .map((p) => ({
-        id: p.slug?.current || p._id,
-        name: p.name,
-        tagline: p.tagline || p.shortDescription || "",
-        image: p.imageUrl || "/placeholder.svg",
-        category: p.badges?.[0]?.text || "Product",
-      }))
+      .map((p) => {
+        // Try to find matching fallback product for image
+        const fallbackProduct = fallbackProductCategories[1]?.products.find(
+          (fp) => fp.id === (p.slug?.current || p._id)
+        )
+        return {
+          id: p.slug?.current || p._id,
+          name: p.name,
+          tagline: p.tagline || p.shortDescription || "",
+          image: p.imageUrl || fallbackProduct?.image || "/placeholder.svg",
+          category: p.badges?.[0]?.text || fallbackProduct?.category || "Product",
+        }
+      })
 
     return [
       {
