@@ -1,5 +1,4 @@
 import { Users } from "lucide-react"
-import { TestimonialCarousel } from "./testimonials/testimonial-carousel"
 
 export default function TestimonialSnippet() {
   return (
@@ -29,7 +28,7 @@ export default function TestimonialSnippet() {
           </p>
         </div>
 
-        <TestimonialCarousel />
+        {/* TestimonialCarousel component will be added later */}
       </div>
     </section>
   )

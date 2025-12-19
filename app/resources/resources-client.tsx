@@ -1009,7 +1009,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
     return filtered
   }, [currentResources, selectedCategory])
 
-  const handleTabChange = useCallback((tab) => {
+  const handleTabChange = useCallback((tab: string) => {
     setActiveTab(tab)
     setSelectedCategory("all")
     setExpandedSections([]) // Reset expanded sections when tab changes
@@ -1163,7 +1163,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                             .filter((r) => r.category === "General Application Notes")
                             .map((resource) => (
                               // Added ref to each card for scrolling
-                              <div key={resource.id} ref={(el) => (noteRefs.current[resource.id] = el)}>
+                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
                                 <ResourceCard resource={resource} />
                               </div>
                             ))}
@@ -1181,7 +1181,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                           {filteredResources
                             .filter((r) => r.category === "VNA Application Notes")
                             .map((resource) => (
-                              <div key={resource.id} ref={(el) => (noteRefs.current[resource.id] = el)}>
+                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
                                 <ResourceCard resource={resource} />
                               </div>
                             ))}
@@ -1199,7 +1199,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                           {filteredResources
                             .filter((r) => r.category === "TDR Application Notes")
                             .map((resource) => (
-                              <div key={resource.id} ref={(el) => (noteRefs.current[resource.id] = el)}>
+                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
                                 <ResourceCard resource={resource} />
                               </div>
                             ))}
