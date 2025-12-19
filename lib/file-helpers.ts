@@ -76,11 +76,16 @@ export function getApplicationNotePathVariations(noteId: string): string[] {
 
 /**
  * Get the local path for a product datasheet PDF
+ * Uses a dynamic route that automatically finds the file
+ * by scanning the folder and matching the product slug
+ * 
  * @param productSlug - The product slug (e.g., "e20-20n", "via-bravo-mri-3000")
- * @returns Local file path
+ * @returns Local file path - uses dynamic route that finds the actual file
  */
 export function getDatasheetPath(productSlug: string): string {
-  return `/documents/datasheets/${productSlug}.pdf`
+  // Use the dynamic route that will automatically find the file
+  // The route handler scans the folder and matches files by product identifier
+  return `/documents/datasheets/${productSlug}`
 }
 
 /**

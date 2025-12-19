@@ -16,6 +16,7 @@ export interface ApplicationNoteMapping {
 function extractNoteIdFromFilename(filename: string): string | null {
   // Remove extension
   const nameWithoutExt = filename.replace(/\.pdf$/i, "")
+  const nameLower = nameWithoutExt.toLowerCase()
 
   // Try to find AN### pattern (case insensitive)
   const anMatch = nameWithoutExt.match(/an(\d+)/i)
@@ -35,8 +36,14 @@ function extractNoteIdFromFilename(filename: string): string | null {
   }
 
   // Check for "white-paper-via" pattern
-  if (nameWithoutExt.toLowerCase().includes("white paper") && nameWithoutExt.toLowerCase().includes("via")) {
+  if (nameLower.includes("white paper") && nameLower.includes("via")) {
     return "white-paper-via"
+  }
+
+  // Special cases: files without AN numbers in filename
+  // AN153 - Cold Weather
+  if (nameLower.includes("cold weather") && nameLower.includes("operation")) {
+    return "an153"
   }
 
   return null
