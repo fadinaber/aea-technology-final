@@ -111,8 +111,8 @@ export default function Footer() {
                     href={link.href}
                     className="text-sm text-slate-400 hover:text-white transition-colors"
                   >
-                    {link.label}
-                  </Link>
+                {link.label}
+              </Link>
                 ))
               : null}
           </div>

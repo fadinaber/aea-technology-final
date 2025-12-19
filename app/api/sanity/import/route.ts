@@ -476,7 +476,6 @@ async function importResources(dryRun: boolean) {
       videoId: item.videoId,
       duration: item.duration,
       tags: item.tags || [],
-      featured: item.featured || false,
     }
 
     if (!dryRun) {
