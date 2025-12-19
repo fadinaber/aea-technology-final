@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og"
+import { readFile } from "fs/promises"
+import { join } from "path"
 
 export const size = {
   width: 1200,
@@ -8,8 +10,16 @@ export const size = {
 export const contentType = "image/png"
 
 export default async function OpenGraphImage() {
-  // Use absolute URL for the logo
-  const logoUrl = "https://aeatechnology.com/images/design-mode/5fecf0649903fbea970aeb38_AEA-Logo-4c.png"
+  // Load logo from local file system and convert to data URL
+  let logoDataUrl: string | null = null
+  try {
+    const logoPath = join(process.cwd(), "public", "images", "design-mode", "5fecf0649903fbea970aeb38_AEA-Logo-4c.png")
+    const logoBuffer = await readFile(logoPath)
+    const base64 = logoBuffer.toString("base64")
+    logoDataUrl = `data:image/png;base64,${base64}`
+  } catch (error) {
+    console.error("Failed to load logo:", error)
+  }
 
   return new ImageResponse(
     (
@@ -20,71 +30,51 @@ export default async function OpenGraphImage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)",
-          color: "#1e293b",
+          background: "#ffffff",
           position: "relative",
-          fontFamily:
-            "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'",
+          fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
-        {/* Subtle background pattern */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(circle at 20% 30%, rgba(37,99,235,0.05) 0%, rgba(37,99,235,0) 55%), radial-gradient(circle at 80% 70%, rgba(37,99,235,0.05) 0%, rgba(37,99,235,0) 55%)",
-          }}
-        />
-
+        {/* Logo centered and prominent */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: 40,
-            padding: "80px 100px",
-            zIndex: 1,
+            width: "100%",
+            height: "100%",
+            padding: "60px",
           }}
         >
-          {/* Logo - larger and more prominent */}
-          <img
-            src={logoUrl}
-            width={600}
-            height={200}
-            style={{ objectFit: "contain" }}
-            alt="AEA Technology, Inc."
-          />
-
-          <div
-            style={{
-              fontSize: 32,
-              fontWeight: 600,
-              letterSpacing: "-0.01em",
-              textAlign: "center",
-              color: "#475569",
-              marginTop: 8,
-            }}
-          >
-            Professional RF &amp; Cable Test Equipment
-          </div>
-          <div
-            style={{
-              fontSize: 20,
-              color: "#64748b",
-              textAlign: "center",
-              marginTop: -8,
-            }}
-          >
-            TDR • VNA • SWR Meters
-          </div>
+          {logoDataUrl ? (
+            <img
+              src={logoDataUrl}
+              width={800}
+              height={400}
+              style={{ 
+                objectFit: "contain",
+                maxWidth: "90%",
+                maxHeight: "90%",
+              }}
+              alt="AEA Technology, Inc."
+            />
+          ) : (
+            <div
+              style={{
+                fontSize: 72,
+                fontWeight: 700,
+                color: "#1e40af",
+                textAlign: "center",
+              }}
+            >
+              AEA Technology, Inc.
+            </div>
+          )}
         </div>
       </div>
     ),
     {
       ...size,
-      fonts: [],
     },
   )
 }
