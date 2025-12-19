@@ -349,7 +349,7 @@ export const homepageData: {
             },
             {
               name: "ANAB Accredited",
-              image: "/images/anab-logo.png",
+              image: "/images/design-mode/anab.png",
               link: "https://anab.ansi.org/",
               isDownload: false,
             },
