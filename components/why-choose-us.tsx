@@ -104,8 +104,8 @@ export default function WhyChooseUs() {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12">
               {certifications.map((cert, index) => {
                 // Debug: Log certification data
-                if (typeof window !== "undefined" && index === 0) {
-                  console.log("Certifications:", certifications)
+                if (typeof window !== 'undefined' && index === 0) {
+                  console.log('Certifications:', certifications)
                 }
                 // Non-clickable badge (SCB)
                 if (!cert.link) {
