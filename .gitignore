@@ -26,4 +26,7 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Documentation (internal - not for reviewers)
+docs/*.md
+
 
