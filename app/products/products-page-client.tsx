@@ -190,8 +190,10 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                           width={400}
                           height={300}
                           className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                          priority
+                          loading={categoryIndex === 0 && category.products.indexOf(product) < 4 ? undefined : "lazy"}
+                          priority={categoryIndex === 0 && category.products.indexOf(product) < 4}
                           quality={85}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                         />
                       </div>
                       <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
