@@ -23,7 +23,8 @@ const typeConfig = {
 
 const ResourceCard = React.memo(({ resource }: { resource: any }) => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
-  const config = typeConfig[resource.type]
+  const resourceType = resource.type as keyof typeof typeConfig
+  const config = typeConfig[resourceType] || typeConfig.software
   const Icon = config.icon
 
   const handleVideoClick = useCallback(() => {
