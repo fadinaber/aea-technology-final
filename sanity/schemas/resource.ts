@@ -113,7 +113,7 @@ export default defineType({
             return "General Application Notes"
           }
         }
-        return undefined
+        return ""
       },
     }),
     // Software-specific fields
@@ -232,16 +232,6 @@ export default defineType({
       title: "By Category",
       name: "byCategory",
       by: [{ field: "category", direction: "asc" }],
-    },
-  ],
-  initialValueTemplates: [
-    {
-      id: "resource-application-note",
-      title: "Application Note",
-      schemaType: "resource",
-      value: {
-        type: "application-note",
-      },
     },
   ],
 })
