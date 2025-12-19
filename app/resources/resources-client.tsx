@@ -1018,7 +1018,8 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
   const filteredResources = useMemo(() => {
     let filtered = currentResources
 
-    if (selectedCategory !== "all") {
+    // For application-notes tab, don't filter by category since accordion sections handle their own filtering
+    if (activeTab !== "application-notes" && selectedCategory !== "all") {
       filtered = filtered.filter((item) => item.category === selectedCategory)
     }
 
@@ -1029,7 +1030,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
     })
 
     return filtered
-  }, [currentResources, selectedCategory])
+  }, [currentResources, selectedCategory, activeTab])
 
   const handleTabChange = useCallback((tab: string) => {
     setActiveTab(tab)
