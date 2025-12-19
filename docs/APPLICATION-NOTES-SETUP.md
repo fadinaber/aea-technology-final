@@ -1,21 +1,39 @@
 # Application Notes Setup Guide
 
+## ✅ No Renaming Required!
+
+You can now paste your application note PDFs into the folder with **any filename** - the system will automatically detect and link them!
+
 ## Where to Put Application Notes PDFs
 
 **Location**: `public/documents/application-notes/`
 
-## File Naming Convention
+## How It Works
 
-Rename your application note PDFs to match their ID in **lowercase** format:
+The system automatically:
+1. Scans the folder for PDF files
+2. Extracts the application note ID from the filename (e.g., "AN258", "an258")
+3. Links them automatically based on the ID found
 
-### Examples:
+### Supported Filename Formats
 
-| Original Filename | Rename To | Application Note |
-|------------------|-----------|-----------------|
-| `63dc295f5032918ac9873629_AN258 USB-to-Serial Communications.pdf` | `an258.pdf` | AN258 - USB-to-Serial Communications |
-| `AN150 Using Batteries.pdf` | `an150.pdf` | AN150 - Using Batteries |
-| `AN223 Wet Twisted Pair Cable.pdf` | `an223.pdf` | AN223 - Wet Twisted Pair Cable |
-| `White Paper VIA Analyzer vs VIA Bravo.pdf` | `white-paper-via.pdf` | White Paper - VIA Analyzer vs VIA Bravo |
+The system can detect application note IDs from these filename patterns:
+
+✅ **Works:**
+- `63dc295f5032918ac9873629_AN258 USB-to-Serial Communications.pdf` → Detects "an258"
+- `AN258 USB-to-Serial Communications.pdf` → Detects "an258"
+- `an258.pdf` → Detects "an258"
+- `AN258.pdf` → Detects "an258"
+- `Application Note 258.pdf` → Detects "an258"
+- `White Paper VIA Analyzer vs VIA Bravo.pdf` → Detects "white-paper-via"
+
+### Examples
+
+| Your Filename | System Detects | Links To |
+|--------------|----------------|----------|
+| `63dc295f5032918ac9873629_AN258 USB-to-Serial Communications.pdf` | `an258` | `/documents/application-notes/an258` |
+| `AN150 Using Batteries.pdf` | `an150` | `/documents/application-notes/an150` |
+| `White Paper VIA Analyzer vs VIA Bravo.pdf` | `white-paper-via` | `/documents/application-notes/white-paper-via` |
 
 ## Step-by-Step Instructions
 
@@ -24,88 +42,58 @@ Rename your application note PDFs to match their ID in **lowercase** format:
    public/documents/application-notes/
    ```
 
-2. **Rename your PDF files**:
-   - Extract the application note ID from the filename (e.g., "AN258" from your example)
-   - Convert to lowercase (e.g., "an258")
-   - Add `.pdf` extension
-   - Final name: `an258.pdf`
+2. **Copy your PDF files** into this folder - **keep their original names!**
 
-3. **Copy the renamed files** into `public/documents/application-notes/`
+3. **That's it!** The system will automatically:
+   - Detect the application note ID from each filename
+   - Link them on the Resources page
+   - Make them available for download
+
+## How the System Finds Files
+
+The system looks for these patterns in filenames:
+- `AN###` or `an###` (e.g., "AN258", "an150")
+- Numbers in the range 100-259 (e.g., "258" in "Application Note 258")
+- "white paper" + "via" for the white paper
 
 ## Complete List of Application Notes
 
-The system expects these files (all in lowercase):
+The system expects these application note IDs (it will find them automatically):
 
 ### General Application Notes
-- `an150.pdf` - Using Batteries in AEA Technology Instruments
-- `an152.pdf` - Troubleshooting Serial Port Operations
-- `an153.pdf` - Cold Weather Operations for AEA Technology Instruments
+- `an150` - Using Batteries in AEA Technology Instruments
+- `an152` - Troubleshooting Serial Port Operations
+- `an153` - Cold Weather Operations for AEA Technology Instruments
 
 ### VNA Application Notes
-- `an100.pdf` - What SWR Does Not Show
-- `an101.pdf` - When to Use Cable Null
-- `an102.pdf` - Understanding Vector Network Analysis
-- `an103.pdf` - Understanding Relationships of Impedance
-- `an104.pdf` - Smith Chart 101
-- `an110.pdf` - Coaxial Stub Tuning
-- `an111.pdf` - Find Characteristics of an Unknown Cable
-- `an112.pdf` - Tuning an Antenna
-- `an113.pdf` - Measuring Discrete Components
-- `an114.pdf` - Tower Site Tips
-- `an120.pdf` - Measuring Amplifier Gain
-- `an121.pdf` - Measuring Group Delay
-- `an122.pdf` - Measuring Gain Compression
-- `an124.pdf` - Measuring Differential Amplifiers
-- `an125.pdf` - Measuring AM to PM Distortion
-- `an131.pdf` - Using the Network Analyzer as a Signal Source
-- `an132.pdf` - Using the Network Analyzer as a Grid Dip Oscillator
-- `white-paper-via.pdf` - White Paper - VIA Analyzer vs VIA Bravo
+- `an100` through `an132` - Various VNA topics
+- `white-paper-via` - White Paper - VIA Analyzer vs VIA Bravo
 
 ### TDR Application Notes
-- `an200.pdf` - Basic Theory of TDR Operation
-- `an201.pdf` - Step vs Pulse TDR Technology
-- `an203.pdf` - Getting the Most From Your TDR
-- `an204.pdf` - Impedance Shifts
-- `an205.pdf` - Comparison of TDR vs FDR
-- `an210.pdf` - Coax Cable Resistance
-- `an211.pdf` - Poor Coax Splice
-- `an212.pdf` - Crushed or Pinched Coax
-- `an213.pdf` - Wet Coax Cable
-- `an214.pdf` - Coax Cable Terminations
-- `an215.pdf` - Mixed Cable Types
-- `an216.pdf` - Coax Cable Tee
-- `an217.pdf` - Measuring Feedline on a Tower
-- `an220.pdf` - Twisted Pair Cable Resistance
-- `an221.pdf` - Poor Splice in a Twisted Pair Cable
-- `an222.pdf` - Telco Style Alligator Clips
-- `an223.pdf` - Wet Twisted Pair Cable
-- `an224.pdf` - Twisted Pair Cable Terminations
-- `an225.pdf` - Split Pairs and Re-split Pairs
-- `an226.pdf` - Bridged Taps
-- `an227.pdf` - Testing Premise Telco Pairs
-- `an228.pdf` - Testing Network Cable Shields
-- `an250.pdf` - Measuring a Cable from Both Ends
-- `an254.pdf` - Intermittent Cable Operations
-- `an255.pdf` - Removing Test Lead Lengths
-- `an256.pdf` - Sampling a Cable's Velocity
-- `an257.pdf` - TDR's Soft Reset and Battery Charging
-- `an258.pdf` - USB-to-Serial Communications
-- `an259.pdf` - Testing Single Wires In A Harness
+- `an200` through `an259` - Various TDR topics
 
-## How It Works
+## Testing
 
-Once you place the files in the correct location with the correct names:
+After adding files, you can:
+1. Visit `/api/application-notes/mapping` to see which files were detected
+2. Check the Resources page - the application notes should appear automatically
+3. Click on any application note to download it
 
-1. The website will automatically link to them
-2. Users can download them from the Resources page
-3. Links are generated automatically based on the application note ID
-4. Files are served from your domain (better SEO)
+## Troubleshooting
 
-## Quick Reference
+**File not showing up?**
+- Make sure the file is a PDF (`.pdf` extension)
+- Check that the filename contains the application note ID (e.g., "AN258", "an150")
+- Visit `/api/application-notes/mapping` to see if the file was detected
 
-**Folder Path**: `public/documents/application-notes/`
+**File detected but link doesn't work?**
+- The system uses a dynamic route that finds files automatically
+- Make sure the file is in `public/documents/application-notes/`
+- Check the browser console for any errors
 
-**Naming Pattern**: `{id}.pdf` (lowercase, e.g., `an258.pdf`)
+## Benefits
 
-**Example**: For "AN258 USB-to-Serial Communications", the file should be named `an258.pdf` and placed in `public/documents/application-notes/an258.pdf`
-
+✅ **No renaming required** - paste files as-is  
+✅ **Automatic detection** - system finds IDs in filenames  
+✅ **Flexible naming** - works with various filename formats  
+✅ **Easy to manage** - just add files to the folder  

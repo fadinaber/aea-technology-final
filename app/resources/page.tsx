@@ -184,6 +184,7 @@ export default async function ResourcesPage() {
               
               // Use Sanity file URL if available, otherwise try local file, otherwise fallback
               const sanityUrl = r.fileUrl || r.downloadUrl
+              // Use the dynamic route that automatically finds the file by ID
               const localPath = getApplicationNotePath(r._id)
               const downloadUrl = sanityUrl || localPath || "#"
               
