@@ -995,11 +995,11 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
     
     // Merge Sanity data with static data, prioritizing Sanity but keeping static as fallback
     return {
-      software: initialData.software.length > 0 ? initialData.software : defaultData.software,
-      manuals: initialData.manuals.length > 0 ? initialData.manuals : defaultData.manuals,
-      videos: initialData.videos.length > 0 ? initialData.videos : defaultData.videos,
-      faqs: initialData.faqs.length > 0 ? initialData.faqs : defaultData.faqs,
-      "application-notes": initialData["application-notes"].length > 0 
+      software: (initialData.software && initialData.software.length > 0) ? initialData.software : defaultData.software,
+      manuals: (initialData.manuals && initialData.manuals.length > 0) ? initialData.manuals : defaultData.manuals,
+      videos: (initialData.videos && initialData.videos.length > 0) ? initialData.videos : defaultData.videos,
+      faqs: (initialData.faqs && initialData.faqs.length > 0) ? initialData.faqs : defaultData.faqs,
+      "application-notes": (initialData["application-notes"] && initialData["application-notes"].length > 0) 
         ? initialData["application-notes"] 
         : defaultData["application-notes"],
     }
@@ -1182,7 +1182,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                       </AccordionTrigger>
                       <AccordionContent className="pb-6">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 pt-4">
-                          {filteredResources
+                          {currentResources
                             .filter((r) => r.category === "General Application Notes")
                             .map((resource) => (
                               // Added ref to each card for scrolling
@@ -1201,7 +1201,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                       </AccordionTrigger>
                       <AccordionContent className="pb-6">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 pt-4">
-                          {filteredResources
+                          {currentResources
                             .filter((r) => r.category === "VNA Application Notes")
                             .map((resource) => (
                               <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
@@ -1219,7 +1219,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                       </AccordionTrigger>
                       <AccordionContent className="pb-8">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 pt-4">
-                          {filteredResources
+                          {currentResources
                             .filter((r) => r.category === "TDR Application Notes")
                             .map((resource) => (
                               <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
