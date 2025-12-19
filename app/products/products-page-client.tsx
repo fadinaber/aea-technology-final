@@ -180,8 +180,8 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                           quality={85}
                         />
                       </div>
-                      <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
-                        <Badge className="bg-blue-600 text-white shadow-lg text-xs sm:text-sm">
+                      <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
+                        <Badge className="bg-blue-600 text-white shadow-lg text-xs sm:text-sm px-3 py-1.5 rounded-sm font-semibold">
                           {product.category}
                         </Badge>
                       </div>

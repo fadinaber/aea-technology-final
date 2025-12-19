@@ -205,7 +205,7 @@ export const aboutPageData: AboutPageData = {
       {
         id: "anab-accredited",
         name: "ANAB Accredited",
-        image: "/images/design-mode/anab.png",
+        image: "/images/design-mode/ANAB-MS-CB-3C.png",
         link: "https://anab.ansi.org/",
         width: 140,
         height: 140,
