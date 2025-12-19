@@ -983,7 +983,10 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
 
   const resourcesData = initialData || defaultData
 
-  const currentResources = useMemo(() => resourcesData[activeTab] || [], [activeTab, resourcesData])
+  const currentResources = useMemo(() => {
+    const tab = activeTab as keyof typeof resourcesData
+    return resourcesData[tab] || []
+  }, [activeTab, resourcesData])
 
   const categories = useMemo(() => {
     const cats = [...new Set(currentResources.map((item) => item.category))]
