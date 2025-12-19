@@ -38,14 +38,23 @@ function extractProductFromFilename(filename: string): string[] {
   }
 
   // E20/20 General (shared by all E20/20 variants including Avionics)
+  // Matches: "E2020", "E20/20", "E20-20", etc. with "General" or "Data Sheet"
   if (nameLower.includes("e20") || nameLower.includes("e2020")) {
-    if (nameLower.includes("general") || nameLower.includes("network")) {
+    if (nameLower.includes("general") || nameLower.includes("network") || nameLower.includes("data sheet")) {
       // All E20/20 variants use the same general datasheet
       products.push("e20-20-avionics")
       products.push("e20-20n")
       products.push("e20-20b")
       products.push("e20-20f-catv")
     }
+  }
+  
+  // Also check if it's the general datasheet by checking for "E2020" and "General" together
+  if (nameLower.includes("e2020") && nameLower.includes("general")) {
+    products.push("e20-20-avionics")
+    products.push("e20-20n")
+    products.push("e20-20b")
+    products.push("e20-20f-catv")
   }
 
   return products
