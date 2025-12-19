@@ -88,7 +88,7 @@ export const resourcesContent: ResourcesData = {
       rating: 4.8,
       featured: true,
       tags: ["TDR", "Analysis", "Reporting", "Windows"],
-      downloadUrl: "#",
+      downloadUrl: "https://s3-us-west-2.amazonaws.com/aea-technology/software/ETDR+PC+Vision+2015-3.zip",
     },
     {
       id: "site-analyzer-pc-vision",
