@@ -48,7 +48,8 @@ export async function GET(
     })
   } catch (error) {
     console.error("Error serving datasheet:", error)
-    return new NextResponse(`Error serving file: ${error.message}`, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : "Unknown error"
+    return new NextResponse(`Error serving file: ${errorMessage}`, { status: 500 })
   }
 }
 

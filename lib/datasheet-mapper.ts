@@ -17,8 +17,9 @@ function extractProductFromFilename(filename: string): string[] {
   const nameLower = filename.toLowerCase()
   const products: string[] = []
 
-  // Avionics
-  if (nameLower.includes("avionics")) {
+  // Skip Avionics-specific datasheet - all E20 products use the General datasheet
+  // Only map Avionics datasheet if it's NOT the general one
+  if (nameLower.includes("avionics") && !nameLower.includes("e20") && !nameLower.includes("general")) {
     products.push("e20-20-avionics")
   }
 
