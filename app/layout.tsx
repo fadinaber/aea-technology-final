@@ -104,7 +104,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" href="/images/featured/e20-20-tdr.png" as="image" type="image/png" />
+        {/* Preload LCP image - hero featured product image */}
+        <link rel="preload" href="/images/products/avionics/full-kit.png" as="image" type="image/png" fetchPriority="high" />
         <OrganizationSchema />
         <WebsiteSchema />
       </head>
@@ -149,7 +150,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* Vercel Speed Insights */}
+        {/* Vercel Speed Insights - Load after page is interactive */}
         <SpeedInsights />
       </body>
     </html>
