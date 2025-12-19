@@ -136,13 +136,13 @@ interface ProductPageClientProps {
 function ProductVideoCard({ video }: { video: ProductResource }) {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
 
-  // Extract video ID from YouTube URL or use videoId directly
+  // Extract video ID from YouTube URL
   const getVideoId = (url: string) => {
     const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s]+)/)
     return match ? match[1] : null
   }
 
-  const videoId = video.videoId || getVideoId(video.url)
+  const videoId = getVideoId(video.url)
 
   if (!videoId) {
     return null
