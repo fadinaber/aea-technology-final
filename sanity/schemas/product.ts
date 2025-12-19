@@ -9,6 +9,7 @@ export default defineType({
   type: "document",
   groups: [
     { name: "basic", title: "Basic Info" },
+    { name: "files", title: "Files & Downloads" },
     { name: "media", title: "Media" },
     { name: "specs", title: "Specifications" },
     { name: "models", title: "Models & Accessories" },
@@ -77,6 +78,26 @@ export default defineType({
           ],
         },
       ],
+    }),
+
+    // Datasheet - Moved to top for easy access
+    defineField({
+      name: "datasheetUrl",
+      title: "Datasheet URL (External)",
+      type: "url",
+      group: "files",
+      description: "External link to datasheet. Leave empty if uploading a file.",
+    }),
+    defineField({
+      name: "datasheetFile",
+      title: "Datasheet File (Upload PDF)",
+      type: "file",
+      group: "files",
+      description: "Upload datasheet PDF directly. This will be used if no external URL is provided. Click the uploaded file to replace it.",
+      options: {
+        accept: ".pdf",
+        storeOriginalFilename: true,
+      },
     }),
 
     // Media
@@ -285,26 +306,6 @@ export default defineType({
           ],
         },
       ],
-    }),
-
-    // Datasheet
-    defineField({
-      name: "datasheetUrl",
-      title: "Datasheet URL (External)",
-      type: "url",
-      group: "content",
-      description: "External link to datasheet. Leave empty if uploading a file.",
-    }),
-    defineField({
-      name: "datasheetFile",
-      title: "Datasheet File (Upload PDF)",
-      type: "file",
-      group: "content",
-      description: "Upload datasheet PDF directly. This will be used if no external URL is provided. Click the uploaded file to replace it.",
-      options: {
-        accept: ".pdf",
-        storeOriginalFilename: true,
-      },
     }),
 
     // Software Info

@@ -21,6 +21,40 @@ export default defineType({
       options: { source: "title", maxLength: 96 },
     }),
     defineField({
+      name: "type",
+      title: "Resource Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Software", value: "software" },
+          { title: "Manual", value: "manual" },
+          { title: "Video", value: "video" },
+          { title: "FAQ", value: "faq" },
+          { title: "Application Note", value: "application-note" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    // File uploads - Moved to top for easy access
+    defineField({
+      name: "downloadUrl",
+      title: "Download URL (External Link)",
+      type: "url",
+      description: "Use this for external download links. Leave empty if uploading a file directly.",
+      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+    }),
+    defineField({
+      name: "file",
+      title: "Upload File (PDF, ZIP, EXE, DMG, etc.)",
+      type: "file",
+      description: "Upload files directly to Sanity (supports PDF, ZIP, EXE, DMG, DOC, XLS). The file URL will be auto-generated. Click the uploaded file to replace it.",
+      options: {
+        accept: ".pdf,.zip,.exe,.dmg,.doc,.docx,.xls,.xlsx,.msi,.app",
+        storeOriginalFilename: true,
+      },
+      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "text",
@@ -41,45 +75,12 @@ export default defineType({
         ],
       },
     }),
-    defineField({
-      name: "type",
-      title: "Resource Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Software", value: "software" },
-          { title: "Manual", value: "manual" },
-          { title: "Video", value: "video" },
-          { title: "FAQ", value: "faq" },
-          { title: "Application Note", value: "application-note" },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
     // Software-specific fields
     defineField({
       name: "version",
       title: "Version",
       type: "string",
       hidden: ({ document }) => document?.type !== "software",
-    }),
-    defineField({
-      name: "downloadUrl",
-      title: "Download URL (External Link)",
-      type: "url",
-      description: "Use this for external download links. Leave empty if uploading a file directly.",
-      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
-    }),
-    defineField({
-      name: "file",
-      title: "Upload File (PDF, ZIP, etc.)",
-      type: "file",
-      description: "Upload files directly to Sanity. The file URL will be auto-generated. Click the uploaded file to replace it.",
-      options: {
-        accept: ".pdf,.zip,.exe,.dmg,.doc,.docx,.xls,.xlsx",
-        storeOriginalFilename: true,
-      },
-      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
     defineField({
       name: "fileSize",
