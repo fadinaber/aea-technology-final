@@ -1,9 +1,5 @@
 import type { Metadata } from "next"
-import { client } from "@/sanity/lib/client"
-import { allProductsQuery } from "@/sanity/lib/queries"
 import ProductsPageClient from "./products-page-client"
-
-export const revalidate = 60
 
 export const metadata: Metadata = {
   title: "TDR, VNA & SWR Test Equipment - RF & Cable Testing Products",
@@ -40,19 +36,6 @@ export const metadata: Metadata = {
   },
 }
 
-type SanityProductListItem = {
-  _id: string
-  slug: { current: string } | null
-  name: string
-  tagline?: string
-  shortDescription?: string
-  category?: string
-  badges?: string[]
-  imageUrl?: string
-}
-
-export default async function ProductsPage() {
-  const products = await client.fetch<SanityProductListItem[]>(allProductsQuery).catch(() => [])
-
-  return <ProductsPageClient products={products} />
+export default function ProductsPage() {
+  return <ProductsPageClient />
 }
