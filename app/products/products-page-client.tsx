@@ -56,7 +56,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
               <Badge className="bg-blue-600 text-white shadow">Product Catalog</Badge>
               <span className="text-sm text-slate-600">Professional RF & Cable Testing Equipment</span>
             </div>
-            <h1 className="text-3xl sm:4xl lg:text-5xl font-black text-slate-900 mt-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-6 leading-tight">
               Discover High-Performance Testing Instruments
             </h1>
             <p className="text-lg sm:text-xl text-slate-600 mt-4 leading-relaxed">
