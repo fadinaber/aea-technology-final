@@ -36,20 +36,20 @@ foreach ($test in $testUrls) {
         if ($response.StatusCode -eq 301 -or $response.StatusCode -eq 308) {
             $location = $response.Headers.Location
             if ($location -like "*$($test.expected)*") {
-                $status = "✓ PASS"
+                $status = "[PASS]"
                 $passed++
-                Write-Host "$status - $($test.description): $($test.path) → $location" -ForegroundColor Green
+                Write-Host "$status - $($test.description): $($test.path) -> $location" -ForegroundColor Green
             } else {
-                $status = "✗ FAIL (wrong destination)"
+                $status = "[FAIL] (wrong destination)"
                 $failed++
-                Write-Host "$status - $($test.description): $($test.path) → $location (expected: $($test.expected))" -ForegroundColor Red
+                Write-Host "$status - $($test.description): $($test.path) -> $location (expected: $($test.expected))" -ForegroundColor Red
             }
         } elseif ($response.StatusCode -eq 200) {
-            $status = "✗ FAIL (no redirect)"
+            $status = "[FAIL] (no redirect)"
             $failed++
             Write-Host "$status - $($test.description): $($test.path) returned 200 (should redirect)" -ForegroundColor Red
         } else {
-            $status = "✗ FAIL (unexpected status)"
+            $status = "[FAIL] (unexpected status)"
             $failed++
             Write-Host "$status - $($test.description): $($test.path) returned $($response.StatusCode)" -ForegroundColor Red
         }
@@ -61,7 +61,7 @@ foreach ($test in $testUrls) {
             Expected = $test.expected
         }
     } catch {
-        $status = "✗ ERROR"
+        $status = "[ERROR]"
         $failed++
         Write-Host "$status - $($test.description): $($test.path) - $($_.Exception.Message)" -ForegroundColor Red
         $results += [PSCustomObject]@{
