@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -7,7 +8,19 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-const productCategories = [
+type SanityProduct = {
+  _id: string
+  slug: { current: string } | null
+  name: string
+  tagline?: string
+  shortDescription?: string
+  category?: string
+  badges?: Array<{ text: string; variant?: string }>
+  imageUrl?: string
+}
+
+// Fallback static data if Sanity is empty
+const fallbackProductCategories = [
   {
     name: "Time Domain Reflectometers (TDRs)",
     products: [
@@ -69,7 +82,49 @@ const productCategories = [
   },
 ]
 
-export default function ProductsPageClient() {
+interface ProductsPageClientProps {
+  products?: SanityProduct[]
+}
+
+export default function ProductsPageClient({ products = [] }: ProductsPageClientProps) {
+  // Transform Sanity products into category structure, or use fallback
+  const productCategories = useMemo(() => {
+    if (products.length === 0) {
+      return fallbackProductCategories
+    }
+
+    // Group products by category
+    const tdrProducts = products
+      .filter((p) => p.category === "tdr")
+      .map((p) => ({
+        id: p.slug?.current || p._id,
+        name: p.name,
+        tagline: p.tagline || p.shortDescription || "",
+        image: p.imageUrl || "/placeholder.svg",
+        category: p.badges?.[0]?.text || "Product",
+      }))
+
+    const vnaProducts = products
+      .filter((p) => p.category === "vna-swr")
+      .map((p) => ({
+        id: p.slug?.current || p._id,
+        name: p.name,
+        tagline: p.tagline || p.shortDescription || "",
+        image: p.imageUrl || "/placeholder.svg",
+        category: p.badges?.[0]?.text || "Product",
+      }))
+
+    return [
+      {
+        name: "Time Domain Reflectometers (TDRs)",
+        products: tdrProducts,
+      },
+      {
+        name: "Network Analyzers (VNAs) & SWR Meters",
+        products: vnaProducts,
+      },
+    ].filter((cat) => cat.products.length > 0) // Only show categories with products
+  }, [products])
   const handleProductClick = () => {
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "instant" })
