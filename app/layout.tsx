@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 import ClientLayout from "./client-layout"
 import OrganizationSchema from "@/components/seo/organization-schema"
@@ -147,6 +148,9 @@ export default function RootLayout({
             gtag('config', 'AW-PLACEHOLDER');
           `}
         </Script>
+
+        {/* Vercel Speed Insights */}
+        <SpeedInsights />
       </body>
     </html>
   )

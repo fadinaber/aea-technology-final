@@ -7,23 +7,17 @@ export default defineType({
   name: "resource",
   title: "Resource",
   type: "document",
+  groups: [
+    { name: "basic", title: "Basic Info" },
+    { name: "file", title: "File Upload" },
+    { name: "content", title: "Content & Details" },
+  ],
   fields: [
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: { source: "title", maxLength: 96 },
-    }),
     defineField({
       name: "type",
       title: "Resource Type",
       type: "string",
+      group: "basic",
       options: {
         list: [
           { title: "Software", value: "software" },
@@ -34,45 +28,92 @@ export default defineType({
         ],
       },
       validation: (Rule) => Rule.required(),
+      description: "Select 'Application Note' to create or edit an application note PDF.",
     }),
-    // File uploads - Moved to top for easy access
     defineField({
-      name: "downloadUrl",
-      title: "Download URL (External Link)",
-      type: "url",
-      description: "Use this for external download links. Leave empty if uploading a file directly.",
-      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+      name: "title",
+      title: "Title",
+      type: "string",
+      group: "basic",
+      validation: (Rule) => Rule.required(),
+      description: "For application notes, use format: 'AN### - Title' (e.g., 'AN258 - USB-to-Serial Communications')",
     }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      group: "basic",
+      options: { source: "title", maxLength: 96 },
+    }),
+    // File uploads - Moved to dedicated group at top for easy access
     defineField({
       name: "file",
-      title: "Upload File (PDF, ZIP, EXE, DMG, etc.)",
+      title: "Upload PDF File",
       type: "file",
-      description: "Upload files directly to Sanity (supports PDF, ZIP, EXE, DMG, DOC, XLS). The file URL will be auto-generated. Click the uploaded file to replace it.",
+      group: "file",
+      description: "📎 Upload the application note PDF here. Click the uploaded file to replace it with a new version. The system will automatically link it based on the title (e.g., 'AN258' in the title).",
       options: {
-        accept: ".pdf,.zip,.exe,.dmg,.doc,.docx,.xls,.xlsx,.msi,.app",
+        accept: ".pdf",
         storeOriginalFilename: true,
       },
+      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+      validation: (Rule) =>
+        Rule.custom((file, context) => {
+          const doc = context.document as { type?: string }
+          if (doc?.type === "application-note" && !file) {
+            return "Application notes require a PDF file upload"
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: "downloadUrl",
+      title: "External Download URL (Optional)",
+      type: "url",
+      group: "file",
+      description: "Only use if the file is hosted elsewhere. Leave empty if uploading directly to Sanity.",
       hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
+      group: "content",
       rows: 2,
     }),
     defineField({
       name: "category",
       title: "Category",
       type: "string",
+      group: "content",
       options: {
         list: [
           "Analysis Software",
           "User Manuals",
           "Technical Documentation",
-          "Application Notes",
+          "General Application Notes",
+          "VNA Application Notes",
+          "TDR Application Notes",
           "Training",
           "Troubleshooting",
         ],
+      },
+      description: "For application notes, select: 'General Application Notes', 'VNA Application Notes', or 'TDR Application Notes'",
+      initialValue: ({ document }) => {
+        // Auto-set category based on title for application notes
+        if (document?.type === "application-note") {
+          const title = (document.title || "").toLowerCase()
+          if (title.match(/an1[0-3]/) || title.includes("white paper") || title.includes("via")) {
+            return "VNA Application Notes"
+          }
+          if (title.match(/an2[0-9]/)) {
+            return "TDR Application Notes"
+          }
+          if (title.match(/an15[0-3]/) || title.includes("cold weather") || title.includes("battery") || title.includes("serial port")) {
+            return "General Application Notes"
+          }
+        }
+        return undefined
       },
     }),
     // Software-specific fields
@@ -80,12 +121,14 @@ export default defineType({
       name: "version",
       title: "Version",
       type: "string",
+      group: "content",
       hidden: ({ document }) => document?.type !== "software",
     }),
     defineField({
       name: "fileSize",
       title: "File Size",
       type: "string",
+      group: "content",
       hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
     // Manual-specific fields
@@ -93,6 +136,7 @@ export default defineType({
       name: "pages",
       title: "Number of Pages",
       type: "number",
+      group: "content",
       hidden: ({ document }) => document?.type !== "manual",
     }),
     // Video-specific fields
@@ -100,12 +144,14 @@ export default defineType({
       name: "videoId",
       title: "YouTube Video ID",
       type: "string",
+      group: "content",
       hidden: ({ document }) => document?.type !== "video",
     }),
     defineField({
       name: "duration",
       title: "Duration",
       type: "string",
+      group: "content",
       hidden: ({ document }) => document?.type !== "video",
     }),
     // FAQ-specific fields
@@ -113,6 +159,7 @@ export default defineType({
       name: "content",
       title: "FAQ Answer / Content",
       type: "array",
+      group: "content",
       of: [{ type: "block" }],
       hidden: ({ document }) => document?.type !== "faq",
     }),
@@ -120,6 +167,7 @@ export default defineType({
       name: "difficulty",
       title: "Difficulty",
       type: "string",
+      group: "content",
       options: { list: ["Beginner", "Intermediate", "Advanced"] },
       hidden: ({ document }) => document?.type !== "faq",
     }),
@@ -128,19 +176,24 @@ export default defineType({
       name: "tags",
       title: "Tags",
       type: "array",
+      group: "content",
       of: [{ type: "string" }],
       options: { layout: "tags" },
+      description: "Add tags to help users find this resource (e.g., 'TDR', 'Cable Testing', 'Troubleshooting')",
     }),
     defineField({
       name: "featured",
       title: "Featured",
       type: "boolean",
+      group: "content",
       initialValue: false,
+      description: "Featured resources appear first in listings",
     }),
     defineField({
       name: "relatedProducts",
       title: "Related Products",
       type: "array",
+      group: "content",
       of: [{ type: "reference", to: [{ type: "product" }] }],
     }),
   ],
@@ -148,8 +201,10 @@ export default defineType({
     select: {
       title: "title",
       subtitle: "type",
+      category: "category",
+      media: "file",
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subtitle, category, media }) {
       const typeIcons: Record<string, string> = {
         software: "💾",
         manual: "📄",
@@ -159,8 +214,34 @@ export default defineType({
       }
       return {
         title,
-        subtitle: `${typeIcons[subtitle] || ""} ${subtitle}`,
+        subtitle: `${typeIcons[subtitle] || ""} ${subtitle}${category ? ` • ${category}` : ""}`,
+        media: media?.asset || undefined,
       }
     },
   },
+  orderings: [
+    {
+      title: "Application Notes (by AN number)",
+      name: "applicationNotesByNumber",
+      by: [
+        { field: "type", direction: "asc" },
+        { field: "title", direction: "asc" },
+      ],
+    },
+    {
+      title: "By Category",
+      name: "byCategory",
+      by: [{ field: "category", direction: "asc" }],
+    },
+  ],
+  initialValueTemplates: [
+    {
+      id: "resource-application-note",
+      title: "Application Note",
+      schemaType: "resource",
+      value: {
+        type: "application-note",
+      },
+    },
+  ],
 })

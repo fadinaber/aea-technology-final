@@ -72,6 +72,13 @@ export const certifications: Certification[] = [
     link: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
     isDownload: true,
   },
+  {
+    id: "anab-accredited",
+    name: "ANAB Accredited",
+    image: "/images/design-mode/anab.png",
+    link: "https://anab.ansi.org/",
+    isDownload: false,
+  },
 ]
 
 // Helper functions for CMS integration

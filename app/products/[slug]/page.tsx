@@ -24,6 +24,7 @@ type SanityProduct = {
   applications?: string[]
   badges?: { text: string; variant: "green" | "blue" }[]
   datasheetUrl?: string
+  datasheetFileUrl?: string
   modelImages?: Array<{ modelIndex?: number; images?: string[] }>
 }
 
@@ -64,11 +65,15 @@ function mergeSanityProduct(base: Product | undefined, sanity: SanityProduct | n
     if (sanity.applications) merged.applications = sanity.applications
     if (sanity.badges) merged.badges = sanity.badges as Product["badges"]
     
-    // Prioritize Sanity datasheet URL, but fallback to local file if not provided
-    if (sanity.datasheetUrl) {
+    // Prioritize Sanity datasheet (uploaded file > external URL > local file)
+    if (sanity.datasheetFileUrl) {
+      // Use uploaded file from Sanity
+      merged.datasheetUrl = sanity.datasheetFileUrl
+    } else if (sanity.datasheetUrl) {
+      // Use external URL from Sanity
       merged.datasheetUrl = sanity.datasheetUrl
     } else if (!merged.datasheetUrl || merged.datasheetUrl === "") {
-      // Use local datasheet if no URL is set
+      // Fallback to local datasheet if no Sanity URL is set
       merged.datasheetUrl = getDatasheetPath(slug)
     }
 

@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision'
 
 // Import schemas from the parent directory
 import { schemaTypes } from '../sanity/schemas'
+import { deskStructure } from './deskStructure'
 
 export default defineConfig({
   name: 'aea-technology',
@@ -15,7 +16,9 @@ export default defineConfig({
   basePath: '/studio',
   
   plugins: [
-    deskTool(),
+    deskTool({
+      structure: deskStructure,
+    }),
     visionTool(),
   ],
   
