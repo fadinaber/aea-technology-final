@@ -37,10 +37,11 @@ function extractProductFromFilename(filename: string): string[] {
     products.push("swr-site-analyzer")
   }
 
-  // E20/20 General (could be multiple products)
+  // E20/20 General (shared by all E20/20 variants including Avionics)
   if (nameLower.includes("e20") || nameLower.includes("e2020")) {
     if (nameLower.includes("general") || nameLower.includes("network")) {
-      // Could be e20-20n, e20-20b, or e20-20f-catv
+      // All E20/20 variants use the same general datasheet
+      products.push("e20-20-avionics")
       products.push("e20-20n")
       products.push("e20-20b")
       products.push("e20-20f-catv")

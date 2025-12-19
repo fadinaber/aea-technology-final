@@ -182,14 +182,28 @@ export default async function ResourcesPage() {
                 }
               }
               
+              // Extract application note ID from title (e.g., "AN258" -> "an258")
+              let noteId = r._id // Fallback to Sanity ID
+              const titleLower = r.title?.toLowerCase() || ""
+              
+              // Try to extract AN number from title
+              const anMatch = r.title?.match(/an(\d+)/i)
+              if (anMatch) {
+                noteId = `an${anMatch[1]}`.toLowerCase()
+              } else if (titleLower.includes("cold weather") && titleLower.includes("operation")) {
+                noteId = "an153"
+              } else if (titleLower.includes("white paper") && titleLower.includes("via")) {
+                noteId = "white-paper-via"
+              }
+              
               // Use Sanity file URL if available, otherwise try local file, otherwise fallback
               const sanityUrl = r.fileUrl || r.downloadUrl
               // Use the dynamic route that automatically finds the file by ID
-              const localPath = getApplicationNotePath(r._id)
+              const localPath = getApplicationNotePath(noteId)
               const downloadUrl = sanityUrl || localPath || "#"
               
               return {
-                id: r._id,
+                id: noteId, // Use extracted note ID instead of Sanity _id
                 title: r.title,
                 description: r.description || "",
                 category: category,
