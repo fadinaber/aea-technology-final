@@ -180,16 +180,16 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                           quality={85}
                         />
                       </div>
-                      <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
-                        <Badge className="bg-blue-600 text-white shadow-lg text-xs sm:text-sm">
-                          {product.category}
-                        </Badge>
-                      </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                   </Link>
                 </CardHeader>
                 <CardContent className="p-3 sm:p-4 flex flex-col flex-1">
+                  <div className="mb-2">
+                    <Badge className="bg-blue-600 text-white shadow-lg text-xs sm:text-sm mb-2">
+                      {product.category}
+                    </Badge>
+                  </div>
                   <Link href={`/products/${product.id}`} onClick={handleProductClick} className="cursor-pointer">
                     <CardTitle className="text-base sm:text-lg mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {product.name}
