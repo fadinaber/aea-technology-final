@@ -7,7 +7,10 @@ export const size = {
 
 export const contentType = "image/png"
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  // Use absolute URL for the logo
+  const logoUrl = "https://aeatechnology.com/images/design-mode/5fecf0649903fbea970aeb38_AEA-Logo-4c.png"
+
   return new ImageResponse(
     (
       <div
@@ -17,19 +20,20 @@ export default function OpenGraphImage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #0b1220 0%, #0f1a33 55%, #0b1220 100%)",
-          color: "#ffffff",
+          background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)",
+          color: "#1e293b",
           position: "relative",
           fontFamily:
             "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'",
         }}
       >
+        {/* Subtle background pattern */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle at 20% 30%, rgba(37,99,235,0.35) 0%, rgba(37,99,235,0) 55%), radial-gradient(circle at 80% 70%, rgba(16,185,129,0.25) 0%, rgba(16,185,129,0) 55%)",
+              "radial-gradient(circle at 20% 30%, rgba(37,99,235,0.05) 0%, rgba(37,99,235,0) 55%), radial-gradient(circle at 80% 70%, rgba(37,99,235,0.05) 0%, rgba(37,99,235,0) 55%)",
           }}
         />
 
@@ -38,33 +42,50 @@ export default function OpenGraphImage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 28,
-            padding: "64px 80px",
-            borderRadius: 28,
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+            justifyContent: "center",
+            gap: 40,
+            padding: "80px 100px",
             zIndex: 1,
           }}
         >
+          {/* Logo - larger and more prominent */}
           <img
-            src="https://aeatechnology.com/images/design-mode/5fecf0649903fbea970aeb38_AEA-Logo-4c.png"
-            width={520}
-            height={170}
+            src={logoUrl}
+            width={600}
+            height={200}
             style={{ objectFit: "contain" }}
-            alt="AEA Technology"
+            alt="AEA Technology, Inc."
           />
 
-          <div style={{ fontSize: 34, fontWeight: 600, letterSpacing: "-0.02em", textAlign: "center" }}>
-            TDR • VNA • SWR Test Equipment
+          <div
+            style={{
+              fontSize: 32,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              textAlign: "center",
+              color: "#475569",
+              marginTop: 8,
+            }}
+          >
+            Professional RF &amp; Cable Test Equipment
           </div>
-          <div style={{ fontSize: 22, opacity: 0.9, textAlign: "center" }}>
-            Designed &amp; manufactured in the USA since 1990
+          <div
+            style={{
+              fontSize: 20,
+              color: "#64748b",
+              textAlign: "center",
+              marginTop: -8,
+            }}
+          >
+            TDR • VNA • SWR Meters
           </div>
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [],
+    },
   )
 }
 

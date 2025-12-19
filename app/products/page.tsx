@@ -8,7 +8,7 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: "TDR, VNA & SWR Test Equipment - RF & Cable Testing Products",
   description:
-    "Browse our complete line of Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Professional cable fault locators and RF test equipment for aviation, CATV, telecommunications, and medical applications. Made in USA.",
+    "Browse our complete line of Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Professional cable fault locators and RF test equipment for aviation, CATV, telecommunications, and medical applications.",
   keywords: [
     "TDR products",
     "E20/20 TDR",

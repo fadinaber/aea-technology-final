@@ -97,32 +97,46 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
     const tdrProducts = products
       .filter((p) => p.category === "tdr")
       .map((p) => {
-        // Try to find matching fallback product for image
-        const fallbackProduct = fallbackProductCategories[0]?.products.find(
-          (fp) => fp.id === (p.slug?.current || p._id)
+        // Try to find matching fallback product by ID first, then by name
+        const productSlug = p.slug?.current || p._id
+        let fallbackProduct = fallbackProductCategories[0]?.products.find(
+          (fp) => fp.id === productSlug
         )
+        // If not found by ID, try matching by name
+        if (!fallbackProduct) {
+          fallbackProduct = fallbackProductCategories[0]?.products.find(
+            (fp) => p.name.toLowerCase().includes(fp.name.toLowerCase()) || fp.name.toLowerCase().includes(p.name.toLowerCase())
+          )
+        }
         return {
-          id: p.slug?.current || p._id,
+          id: productSlug,
           name: p.name,
           tagline: p.tagline || p.shortDescription || "",
           image: p.imageUrl || fallbackProduct?.image || "/placeholder.svg",
-          category: p.badges?.[0]?.text || fallbackProduct?.category || "Product",
+          category: fallbackProduct?.category || p.badges?.[0]?.text || "Product",
         }
       })
 
     const vnaProducts = products
       .filter((p) => p.category === "vna-swr")
       .map((p) => {
-        // Try to find matching fallback product for image
-        const fallbackProduct = fallbackProductCategories[1]?.products.find(
-          (fp) => fp.id === (p.slug?.current || p._id)
+        // Try to find matching fallback product by ID first, then by name
+        const productSlug = p.slug?.current || p._id
+        let fallbackProduct = fallbackProductCategories[1]?.products.find(
+          (fp) => fp.id === productSlug
         )
+        // If not found by ID, try matching by name
+        if (!fallbackProduct) {
+          fallbackProduct = fallbackProductCategories[1]?.products.find(
+            (fp) => p.name.toLowerCase().includes(fp.name.toLowerCase()) || fp.name.toLowerCase().includes(p.name.toLowerCase())
+          )
+        }
         return {
-          id: p.slug?.current || p._id,
+          id: productSlug,
           name: p.name,
           tagline: p.tagline || p.shortDescription || "",
           image: p.imageUrl || fallbackProduct?.image || "/placeholder.svg",
-          category: p.badges?.[0]?.text || fallbackProduct?.category || "Product",
+          category: fallbackProduct?.category || p.badges?.[0]?.text || "Product",
         }
       })
 
@@ -150,7 +164,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
           Professional RF & Cable Testing Equipment
         </h1>
         <p className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto px-4">
-          Discover our comprehensive range of precision testing instruments, designed and manufactured in the USA for
+          Discover our comprehensive range of precision testing instruments, designed for
           professionals who demand reliability and accuracy.
         </p>
       </div>
