@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { client } from "@/sanity/lib/client"
 import { allResourcesQuery, allFaqsQuery } from "@/sanity/lib/queries"
 import ResourcesClient from "./resources-client"
+import { getApplicationNotePath } from "@/lib/file-helpers"
 
 export const revalidate = 60
 
@@ -181,6 +182,11 @@ export default async function ResourcesPage() {
                 }
               }
               
+              // Use Sanity file URL if available, otherwise try local file, otherwise fallback
+              const sanityUrl = r.fileUrl || r.downloadUrl
+              const localPath = getApplicationNotePath(r._id)
+              const downloadUrl = sanityUrl || localPath || "#"
+              
               return {
                 id: r._id,
                 title: r.title,
@@ -188,7 +194,7 @@ export default async function ResourcesPage() {
                 category: category,
                 type: "manual" as const,
                 size: r.fileSize,
-                downloadUrl: r.fileUrl || r.downloadUrl || "#",
+                downloadUrl: downloadUrl,
                 tags: r.tags || [],
                 featured: r.featured,
               }

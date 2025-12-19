@@ -6,6 +6,7 @@ import { getProductBySlug, getAllProductSlugs, type Product } from "@/data/all-p
 import ProductPageClient from "./product-page-client"
 import ProductSchema from "@/components/seo/product-schema"
 import BreadcrumbSchema from "@/components/seo/breadcrumb-schema"
+import { getDatasheetPath } from "@/lib/file-helpers"
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>
@@ -62,7 +63,14 @@ function mergeSanityProduct(base: Product | undefined, sanity: SanityProduct | n
     if (sanity.displayFeatures) merged.displayFeatures = sanity.displayFeatures
     if (sanity.applications) merged.applications = sanity.applications
     if (sanity.badges) merged.badges = sanity.badges as Product["badges"]
-    if (sanity.datasheetUrl) merged.datasheetUrl = sanity.datasheetUrl
+    
+    // Prioritize Sanity datasheet URL, but fallback to local file if not provided
+    if (sanity.datasheetUrl) {
+      merged.datasheetUrl = sanity.datasheetUrl
+    } else if (!merged.datasheetUrl || merged.datasheetUrl === "") {
+      // Use local datasheet if no URL is set
+      merged.datasheetUrl = getDatasheetPath(slug)
+    }
 
     if (sanity.modelImages) {
       const record: Record<number, string[]> = { ...(merged.modelImages || {}) }
@@ -73,6 +81,11 @@ function mergeSanityProduct(base: Product | undefined, sanity: SanityProduct | n
         }
       })
       merged.modelImages = record
+    }
+  } else {
+    // If no Sanity data, use local datasheet if base doesn't have one
+    if (!merged.datasheetUrl || merged.datasheetUrl === "") {
+      merged.datasheetUrl = getDatasheetPath(slug)
     }
   }
 

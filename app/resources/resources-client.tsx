@@ -12,6 +12,12 @@ import SearchBar from "@/components/search-bar"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import FAQSchema from "@/components/seo/faq-schema"
 import { SupportCTA } from "@/components/support-cta"
+import { getApplicationNotePath } from "@/lib/file-helpers"
+
+// Helper to get download URL for application notes (local file or fallback)
+const getAppNoteUrl = (noteId: string): string => {
+  return getApplicationNotePath(noteId) || "#"
+}
 
 // Type mappings for icons and colors
 const typeConfig = {
@@ -535,7 +541,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "General Application Notes",
         type: "manual",
         tags: ["Battery", "General", "Power Management"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an150"),
       },
       {
         id: "an152",
@@ -544,7 +550,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "General Application Notes",
         type: "manual",
         tags: ["Serial Port", "Troubleshooting", "Communication"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an152"),
       },
       {
         id: "an153",
@@ -553,7 +559,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "General Application Notes",
         type: "manual",
         tags: ["Cold Weather", "Environmental", "Operation"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an153"),
       },
       {
         id: "an100",
@@ -562,7 +568,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "SWR", "Theory"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an100"),
       },
       {
         id: "an101",
@@ -571,7 +577,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Calibration", "Cable Null"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an101"),
       },
       {
         id: "an102",
@@ -580,7 +586,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Theory", "Fundamentals"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an102"),
       },
       {
         id: "an103",
@@ -589,7 +595,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Impedance", "Theory"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an103"),
       },
       {
         id: "an104",
@@ -598,7 +604,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Smith Chart", "Analysis"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an104"),
       },
       {
         id: "an110",
@@ -607,7 +613,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Coaxial", "Tuning"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an110"),
       },
       {
         id: "an111",
@@ -616,7 +622,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Cable", "Testing"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an111"),
       },
       {
         id: "an112",
@@ -625,7 +631,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Antenna", "Tuning"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an112"),
       },
       {
         id: "an113",
@@ -634,7 +640,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Components", "Measurement"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an113"),
       },
       {
         id: "an114",
@@ -643,7 +649,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Tower", "Field Testing"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an114"),
       },
       {
         id: "an120",
@@ -652,7 +658,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Gain", "Amplifier"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an120"),
       },
       {
         id: "an121",
@@ -661,7 +667,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Group Delay", "Measurement"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an121"),
       },
       {
         id: "an122",
@@ -670,7 +676,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Compression", "Amplifier"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an122"),
       },
       {
         id: "an124",
@@ -679,7 +685,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Differential", "Amplifier"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an124"),
       },
       {
         id: "an125",
@@ -688,7 +694,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Distortion", "Analysis"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an125"),
       },
       {
         id: "an131",
@@ -697,7 +703,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Signal Source", "Application"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an131"),
       },
       {
         id: "an132",
@@ -706,7 +712,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Grid Dip", "Oscillator"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an132"),
       },
       {
         id: "white-paper-via",
@@ -715,7 +721,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "VNA Application Notes",
         type: "manual",
         tags: ["VNA", "Comparison", "White Paper"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("white-paper-via"),
       },
       {
         id: "an200",
@@ -724,7 +730,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Theory", "Fundamentals"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an200"),
       },
       {
         id: "an201",
@@ -733,7 +739,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Step", "Pulse"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an201"),
       },
       {
         id: "an203",
@@ -742,7 +748,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Best Practices", "Operation"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an203"),
       },
       {
         id: "an204",
@@ -751,7 +757,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Impedance", "Analysis"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an204"),
       },
       {
         id: "an205",
@@ -760,7 +766,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "FDR", "Comparison"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an205"),
       },
       {
         id: "an210",
@@ -769,7 +775,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Coaxial", "Resistance"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an210"),
       },
       {
         id: "an211",
@@ -778,7 +784,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Coaxial", "Splice"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an211"),
       },
       {
         id: "an212",
@@ -787,7 +793,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Coaxial", "Fault"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an212"),
       },
       {
         id: "an213",
@@ -796,7 +802,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Coaxial", "Water"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an213"),
       },
       {
         id: "an214",
@@ -805,7 +811,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Coaxial", "Termination"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an214"),
       },
       {
         id: "an215",
@@ -814,7 +820,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Mixed Cable", "Analysis"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an215"),
       },
       {
         id: "an216",
@@ -823,7 +829,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Coaxial", "Tee"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an216"),
       },
       {
         id: "an217",
@@ -832,7 +838,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Tower", "Feedline"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an217"),
       },
       {
         id: "an220",
@@ -841,7 +847,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Twisted Pair", "Resistance"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an220"),
       },
       {
         id: "an221",
@@ -850,7 +856,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Twisted Pair", "Splice"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an221"),
       },
       {
         id: "an222",
@@ -859,7 +865,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Telco", "Clips"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an222"),
       },
       {
         id: "an223",
@@ -868,7 +874,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Twisted Pair", "Water"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an223"),
       },
       {
         id: "an224",
@@ -877,7 +883,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Twisted Pair", "Termination"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an224"),
       },
       {
         id: "an225",
@@ -886,7 +892,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Twisted Pair", "Split Pairs"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an225"),
       },
       {
         id: "an226",
@@ -895,7 +901,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Bridged Taps", "Telco"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an226"),
       },
       {
         id: "an227",
@@ -904,7 +910,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Telco", "Premise"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an227"),
       },
       {
         id: "an228",
@@ -913,7 +919,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Network", "Shield"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an228"),
       },
       {
         id: "an250",
@@ -922,7 +928,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Bidirectional", "Testing"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an250"),
       },
       {
         id: "an254",
@@ -931,7 +937,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Intermittent", "Troubleshooting"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an254"),
       },
       {
         id: "an255",
@@ -940,7 +946,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Test Leads", "Calibration"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an255"),
       },
       {
         id: "an256",
@@ -949,7 +955,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Velocity", "Calibration"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an256"),
       },
       {
         id: "an257",
@@ -958,7 +964,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Reset", "Battery"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an257"),
       },
       {
         id: "an258",
@@ -967,7 +973,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "USB", "Serial"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an258"),
       },
       {
         id: "an259",
@@ -976,7 +982,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         category: "TDR Application Notes",
         type: "manual",
         tags: ["TDR", "Harness", "Single Wire"],
-        downloadUrl: "#",
+        downloadUrl: getAppNoteUrl("an259"),
       },
     ],
   }
