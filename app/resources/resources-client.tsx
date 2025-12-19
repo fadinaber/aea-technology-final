@@ -61,7 +61,7 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
         <CardContent className="flex flex-col flex-1">
           <div className="flex-1 mb-3">
             <div className="p-3 bg-gray-50 rounded-lg h-full">
-              <p className="text-gray-700 leading-relaxed text-sm line-clamp-4">{resource.content}</p>
+              <p className="text-gray-700 leading-relaxed text-sm">{resource.content}</p>
             </div>
           </div>
 

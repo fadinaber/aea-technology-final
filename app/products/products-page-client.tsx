@@ -181,7 +181,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                         />
                       </div>
                       <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
-                        <Badge className="bg-blue-600 text-white shadow-lg text-xs sm:text-sm px-3 py-1.5 rounded-sm font-semibold">
+                        <Badge className="bg-primary text-primary-foreground shadow-lg text-xs sm:text-sm">
                           {product.category}
                         </Badge>
                       </div>
@@ -195,7 +195,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                       {product.name}
                     </CardTitle>
                   </Link>
-                  <CardDescription className="text-slate-600 mb-4 text-sm leading-relaxed flex-1 line-clamp-2">
+                  <CardDescription className="text-slate-600 mb-4 text-sm leading-relaxed flex-1">
                     {product.tagline}
                   </CardDescription>
                   <div className="flex flex-col sm:flex-row gap-2 mt-auto">
