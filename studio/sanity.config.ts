@@ -4,7 +4,6 @@ import { visionTool } from '@sanity/vision'
 
 // Import schemas from the parent directory
 import { schemaTypes } from '../sanity/schemas'
-import { documentActionsPlugin } from './plugins/document-actions'
 
 export default defineConfig({
   name: 'aea-technology',
@@ -18,7 +17,6 @@ export default defineConfig({
   plugins: [
     deskTool(),
     visionTool(),
-    documentActionsPlugin(),
   ],
   
   schema: {
