@@ -73,6 +73,7 @@ export type SanityAboutPageData = {
       name?: string
       imageUrl?: string
       link?: string
+      isDownload?: boolean
     }>
   }
   cta?: {
@@ -145,6 +146,7 @@ function mergeAboutData(sanityData: SanityAboutPageData | null) {
               link: cert.link || null,
               width: 140,
               height: 140,
+              isDownload: cert.isDownload || false,
             }))
           : aboutPageData.certifications.items,
     },

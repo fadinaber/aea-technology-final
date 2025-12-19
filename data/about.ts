@@ -49,6 +49,7 @@ export interface CertificationDisplay {
   link: string | null
   width: number
   height: number
+  isDownload?: boolean
 }
 
 export interface AboutPageData {
@@ -193,12 +194,31 @@ export const aboutPageData: AboutPageData = {
     description: "Certified excellence backed by industry-leading standards and accreditations",
     items: [
       {
+        id: "iso-9001",
+        name: "ISO 9001:2015 Certificate",
+        image: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
+        link: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
+        width: 140,
+        height: 140,
+        isDownload: true,
+      },
+      {
+        id: "anab-accredited",
+        name: "ANAB Accredited",
+        image: "/images/anab-logo.png",
+        link: "https://anab.ansi.org/",
+        width: 140,
+        height: 140,
+        isDownload: false,
+      },
+      {
         id: "made-in-usa",
         name: "Made in USA",
         image: "/images/design-mode/made%20in%20usa.jpg.jpeg",
         link: null,
         width: 100,
         height: 80,
+        isDownload: false,
       },
     ],
   },

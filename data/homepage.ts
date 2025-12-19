@@ -342,10 +342,16 @@ export const homepageData: {
           description: "Recognized by leading industry standards and accreditation bodies",
           items: [
             {
-              name: "ISO 9001 Certificate",
+              name: "ISO 9001:2015 Certificate",
               image: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
               link: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
               isDownload: true,
+            },
+            {
+              name: "ANAB Accredited",
+              image: "/images/anab-logo.png",
+              link: "https://anab.ansi.org/",
+              isDownload: false,
             },
           ],
         },

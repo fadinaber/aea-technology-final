@@ -137,6 +137,13 @@ export default defineType({
                 { name: "name", type: "string", title: "Certification Name" },
                 { name: "image", type: "image", title: "Logo/Badge" },
                 { name: "link", type: "url", title: "Link (optional)" },
+                { 
+                  name: "isDownload", 
+                  type: "boolean", 
+                  title: "Is Download Link?", 
+                  description: "Check if this is a PDF download (like ISO certificate). Uncheck for external links.",
+                  initialValue: false,
+                },
               ],
               preview: {
                 select: {

@@ -211,24 +211,56 @@ export default function AboutPageClient({ data }: AboutPageClientProps) {
 
           {/* Certification Logos */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12 px-4">
-            {certifications.items.map((cert) =>
-              cert.link ? (
-                <a
-                  key={cert.id}
-                  href={cert.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-500"
-                >
-                  <Image
-                    src={cert.image || "/placeholder.svg"}
-                    alt={cert.name}
-                    width={cert.width}
-                    height={cert.height}
-                    className="h-24 w-auto"
-                  />
-                </a>
-              ) : (
+            {certifications.items.map((cert) => {
+              // Download button for PDF certificates (like ISO 9001)
+              if (cert.link && cert.isDownload) {
+                return (
+                  <a
+                    key={cert.id}
+                    href={cert.link}
+                    download
+                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-500 flex flex-col justify-center items-center h-32 w-44 cursor-pointer group"
+                    title={`Download ${cert.name}`}
+                  >
+                    <div className="text-blue-600 font-bold text-lg mb-2">ISO 9001</div>
+                    <div className="flex items-center gap-1.5 text-blue-500 group-hover:text-blue-600">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                      <span className="text-sm font-medium">Certificate</span>
+                    </div>
+                  </a>
+                )
+              }
+
+              // External link (like ANAB)
+              if (cert.link && !cert.isDownload) {
+                return (
+                  <a
+                    key={cert.id}
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-500"
+                  >
+                    <Image
+                      src={cert.image || "/placeholder.svg"}
+                      alt={cert.name}
+                      width={cert.width || 140}
+                      height={cert.height || 140}
+                      className="h-24 w-auto"
+                    />
+                  </a>
+                )
+              }
+
+              // Non-clickable badge (like Made in USA)
+              return (
                 <div
                   key={cert.id}
                   className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-500"
@@ -236,14 +268,14 @@ export default function AboutPageClient({ data }: AboutPageClientProps) {
                   <Image
                     src={cert.image || "/placeholder.svg"}
                     alt={cert.name}
-                    width={cert.width}
-                    height={cert.height}
+                    width={cert.width || 100}
+                    height={cert.height || 80}
                     className="h-16 w-auto"
                     priority
                   />
                 </div>
-              ),
-            )}
+              )
+            })}
           </div>
         </div>
       </section>
