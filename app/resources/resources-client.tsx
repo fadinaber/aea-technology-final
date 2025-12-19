@@ -183,10 +183,10 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
               </Button>
             ) : (
               <Button className="w-full min-h-[44px] text-sm cursor-pointer" asChild>
-                <Link href={resource.downloadUrl || "#"}>
+                <a href={resource.downloadUrl || "#"} target="_blank" rel="noopener noreferrer">
                   Download
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
+                </a>
               </Button>
             )}
           </div>
