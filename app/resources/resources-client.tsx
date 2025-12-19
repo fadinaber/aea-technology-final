@@ -981,7 +981,23 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
     ],
   }
 
-  const resourcesData = initialData || defaultData
+  // Merge Sanity data with static fallback data
+  const resourcesData = useMemo(() => {
+    if (!initialData) {
+      return defaultData
+    }
+    
+    // Merge Sanity data with static data, prioritizing Sanity but keeping static as fallback
+    return {
+      software: initialData.software.length > 0 ? initialData.software : defaultData.software,
+      manuals: initialData.manuals.length > 0 ? initialData.manuals : defaultData.manuals,
+      videos: initialData.videos.length > 0 ? initialData.videos : defaultData.videos,
+      faqs: initialData.faqs.length > 0 ? initialData.faqs : defaultData.faqs,
+      "application-notes": initialData["application-notes"].length > 0 
+        ? initialData["application-notes"] 
+        : defaultData["application-notes"],
+    }
+  }, [initialData])
 
   const currentResources = useMemo(() => {
     const tab = activeTab as keyof typeof resourcesData

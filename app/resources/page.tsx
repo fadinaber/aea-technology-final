@@ -131,17 +131,68 @@ export default async function ResourcesPage() {
                   })),
           "application-notes": resources
             .filter((r) => r.type === "application-note")
-            .map((r) => ({
-              id: r._id,
-              title: r.title,
-              description: r.description || "",
-              category: r.category || "Application Note",
-              type: "manual" as const,
-              size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
-              tags: r.tags || [],
-              featured: r.featured,
-            })),
+            .map((r) => {
+              // Map Sanity category to the expected category names
+              let category = r.category || ""
+              
+              // Normalize category to match expected format
+              if (category.includes("General") || category === "General Application Notes") {
+                category = "General Application Notes"
+              } else if (category.includes("VNA") || category === "VNA Application Notes") {
+                category = "VNA Application Notes"
+              } else if (category.includes("TDR") || category === "TDR Application Notes") {
+                category = "TDR Application Notes"
+              } else {
+                // Try to infer category from title/description if not set
+                const titleLower = r.title?.toLowerCase() || ""
+                const descLower = r.description?.toLowerCase() || ""
+                const combined = `${titleLower} ${descLower}`
+                
+                // General application notes (AN150-AN153)
+                if (titleLower.match(/an15[0-3]/) || combined.includes("battery") || combined.includes("serial port") || combined.includes("cold weather")) {
+                  category = "General Application Notes"
+                }
+                // VNA application notes (AN100-AN132, white paper)
+                else if (
+                  titleLower.match(/an1[0-3]/) ||
+                  titleLower.includes("white paper") ||
+                  titleLower.includes("via") ||
+                  combined.includes("swr") ||
+                  combined.includes("network analyzer") ||
+                  combined.includes("smith chart") ||
+                  combined.includes("impedance") ||
+                  combined.includes("antenna")
+                ) {
+                  category = "VNA Application Notes"
+                }
+                // TDR application notes (AN200-AN259)
+                else if (
+                  titleLower.match(/an2[0-9]/) ||
+                  combined.includes("tdr") ||
+                  combined.includes("time domain") ||
+                  combined.includes("cable") ||
+                  combined.includes("coax") ||
+                  combined.includes("twisted pair")
+                ) {
+                  category = "TDR Application Notes"
+                } else {
+                  // Default fallback
+                  category = "General Application Notes"
+                }
+              }
+              
+              return {
+                id: r._id,
+                title: r.title,
+                description: r.description || "",
+                category: category,
+                type: "manual" as const,
+                size: r.fileSize,
+                downloadUrl: r.fileUrl || r.downloadUrl || "#",
+                tags: r.tags || [],
+                featured: r.featured,
+              }
+            }),
         }
       : undefined // Will use default static data in client
 
