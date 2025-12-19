@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import ClientLayout from "./client-layout"
 import OrganizationSchema from "@/components/seo/organization-schema"
@@ -109,6 +110,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
+        <Analytics />
 
         {/* 
           ============================================
