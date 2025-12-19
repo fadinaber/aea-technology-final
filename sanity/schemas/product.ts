@@ -300,9 +300,10 @@ export default defineType({
       title: "Datasheet File (Upload PDF)",
       type: "file",
       group: "content",
-      description: "Upload datasheet PDF directly. This will be used if no external URL is provided.",
+      description: "Upload datasheet PDF directly. This will be used if no external URL is provided. Click the uploaded file to replace it.",
       options: {
         accept: ".pdf",
+        storeOriginalFilename: true,
       },
     }),
 

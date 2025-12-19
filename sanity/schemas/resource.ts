@@ -74,9 +74,10 @@ export default defineType({
       name: "file",
       title: "Upload File (PDF, ZIP, etc.)",
       type: "file",
-      description: "Upload files directly to Sanity. The file URL will be auto-generated.",
+      description: "Upload files directly to Sanity. The file URL will be auto-generated. Click the uploaded file to replace it.",
       options: {
         accept: ".pdf,.zip,.exe,.dmg,.doc,.docx,.xls,.xlsx",
+        storeOriginalFilename: true,
       },
       hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
