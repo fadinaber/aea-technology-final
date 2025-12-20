@@ -183,7 +183,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                 <CardHeader className="p-0 relative">
                   <Link href={`/products/${product.id}`} onClick={handleProductClick} className="cursor-pointer">
                     <div className="relative overflow-hidden bg-gradient-to-br from-white to-slate-50">
-                      <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6">
+                      <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6" style={{ minHeight: '192px' }}>
                         <Image
                           src={product.image || "/placeholder.svg"}
                           alt={product.name}

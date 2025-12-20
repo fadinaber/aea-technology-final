@@ -44,12 +44,13 @@ export default function WhyChooseUs() {
             <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-r from-background via-muted to-background border border-border p-0">
               <div className="grid lg:grid-cols-2">
                 {/* Mobile: Image on top with aspect ratio */}
-                <div className="relative w-full aspect-[2/1] lg:hidden">
+                <div className="relative w-full aspect-[2/1] lg:hidden" style={{ minHeight: '200px' }}>
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
                     alt="Made in USA Manufacturing"
                     fill
                     className="object-cover object-top"
+                    sizes="100vw"
                   />
                 </div>
 
@@ -73,12 +74,13 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Desktop: Image fills right side completely */}
-                <div className="hidden lg:block relative h-full min-h-[400px]">
+                <div className="hidden lg:block relative h-full min-h-[400px]" style={{ minHeight: '400px' }}>
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
                     alt="Made in USA Manufacturing"
                     fill
                     className="object-cover object-top"
+                    sizes="50vw"
                   />
                 </div>
               </div>
