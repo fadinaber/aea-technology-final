@@ -106,6 +106,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Preload LCP image - hero featured product image */}
         <link rel="preload" href="/images/products/avionics/full-kit.png" as="image" type="image/png" fetchPriority="high" />
+        {/* Preconnect to Sanity CDN for faster image loading */}
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <OrganizationSchema />
         <WebsiteSchema />
       </head>
@@ -129,6 +132,10 @@ export default function RootLayout({
              - Get it from: Google Ads → Tools & Settings → Conversions
           ============================================
         */}
+        {/* Preconnect to Google Analytics for faster loading */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        
         <Script
           id="google-analytics"
           strategy="afterInteractive"

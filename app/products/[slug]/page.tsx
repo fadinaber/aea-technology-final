@@ -8,6 +8,8 @@ import ProductSchema from "@/components/seo/product-schema"
 import BreadcrumbSchema from "@/components/seo/breadcrumb-schema"
 import { getDatasheetPath } from "@/lib/file-helpers"
 
+export const revalidate = 300 // Revalidate every 5 minutes for better caching
+
 interface ProductPageProps {
   params: Promise<{ slug: string }>
 }

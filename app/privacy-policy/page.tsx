@@ -5,9 +5,11 @@ export const metadata: Metadata = {
   description: "AEA Technology, Inc. privacy policy and how we handle personal data.",
 }
 
+export const revalidate = 3600 // Revalidate every hour
+
 export default function PrivacyPolicyPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 pt-24 sm:pt-32 pb-16">
+    <main className="mx-auto max-w-3xl px-4 pt-24 sm:pt-32 pb-16" style={{ minHeight: '100vh' }}>
       <h1 className="text-3xl font-bold tracking-tight text-foreground">Privacy Policy</h1>
       <p className="mt-4 text-muted-foreground">
         AEA Technology, Inc. respects your privacy and is committed to protecting it, along with your personal data,

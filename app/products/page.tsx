@@ -3,7 +3,7 @@ import { client } from "@/sanity/lib/client"
 import { allProductsQuery } from "@/sanity/lib/queries"
 import ProductsPageClient from "./products-page-client"
 
-export const revalidate = 60
+export const revalidate = 300 // Revalidate every 5 minutes for better caching
 
 export const metadata: Metadata = {
   title: "TDR, VNA & SWR Test Equipment - RF & Cable Testing Products",

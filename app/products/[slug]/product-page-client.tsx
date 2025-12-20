@@ -244,13 +244,16 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               </div>
 
               {/* Main Product Image */}
-              <div className="relative bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96">
+              <div className="relative bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96" style={{ minHeight: '256px' }}>
                 <Image
                   src={currentImages[selectedImage] || currentImages[0] || "/placeholder.svg"}
                   alt={product.name}
                   fill
                   className="object-contain p-4"
                   priority
+                  fetchPriority="high"
+                  quality={90}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
 

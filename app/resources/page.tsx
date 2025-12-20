@@ -4,7 +4,7 @@ import { allResourcesQuery, allFaqsQuery } from "@/sanity/lib/queries"
 import ResourcesClient from "./resources-client"
 import { getApplicationNotePath } from "@/lib/file-helpers"
 
-export const revalidate = 60
+export const revalidate = 300 // Revalidate every 5 minutes for better caching
 
 export const metadata: Metadata = {
   title: "Resources - Manuals, Software, Videos & FAQs | AEA Technology",

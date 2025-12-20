@@ -39,14 +39,17 @@ export default function FeaturedProducts({ data: overrideData }: FeaturedProduct
               <CardHeader className="p-0 relative">
                 <Link href={`/products/${product.id}`} className="cursor-pointer">
                   <div className="relative overflow-hidden bg-gradient-to-br from-background to-muted/50">
-                    <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6">
+                    <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6" style={{ minHeight: '192px' }}>
                       <Image
                         src={product.image || "/placeholder.svg"}
                         alt={product.name}
                         width={400}
                         height={300}
-                        loading="lazy"
+                        loading={product.id === data.products[0]?.id ? "eager" : "lazy"}
+                        priority={product.id === data.products[0]?.id}
                         className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                        quality={85}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                     </div>
                     <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
