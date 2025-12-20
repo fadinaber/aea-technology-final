@@ -20,50 +20,53 @@ export default function PrivacyPolicyPage() {
           privacy rights and how the law will protect you.
         </p>
 
-        <div className="prose prose-slate dark:prose-invert max-w-none">
-          <h2>1. Important Information and Who We Are</h2>
-          
-          <h3>Purpose of This Privacy Notice</h3>
-          <p>
-            This privacy policy aims to provide you with information on how AEA Technology, Inc. collects and processes
-            your personally identifiable information through your use of this website, including data you may provide
-            through this website when you sign up to our newsletter, avail offers on this website, purchase a product or
-            service or partake in a competition.
-          </p>
-          <p>This website is not intended for children, and we do not knowingly collect data concerning children.</p>
-          <p>
-            It is vital that you read this privacy policy along with any other privacy notice or processing notice we may
-            provide on some occasions when we may be collecting or processing personal information about you so that you
-            are well aware of how and why we may use your information. This privacy notice also supplements the other
-            notices and is not made to override them.
-          </p>
+        <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:mt-8 prose-headings:mb-4 prose-p:mb-4 prose-p:leading-relaxed prose-ul:my-6 prose-li:my-2">
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">1. Important Information and Who We Are</h2>
+            
+            <h3 className="text-xl font-semibold text-foreground mb-4 mt-8">Purpose of This Privacy Notice</h3>
+            <p>
+              This privacy policy aims to provide you with information on how AEA Technology, Inc. collects and processes
+              your personally identifiable information through your use of this website, including data you may provide
+              through this website when you sign up to our newsletter, avail offers on this website, purchase a product or
+              service or partake in a competition.
+            </p>
+            <p>This website is not intended for children, and we do not knowingly collect data concerning children.</p>
+            <p>
+              It is vital that you read this privacy policy along with any other privacy notice or processing notice we may
+              provide on some occasions when we may be collecting or processing personal information about you so that you
+              are well aware of how and why we may use your information. This privacy notice also supplements the other
+              notices and is not made to override them.
+            </p>
 
-          <h3>Controller</h3>
-          <p>
-            This privacy notice is issued on behalf of AEA Technology, Inc. so when we mention &quot;AEA Technology,
-            Inc.,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot; in this policy, we are referring to AEA
-            Technology, Inc.
-          </p>
-          <p>
-            We also have a Data Privacy Department accountable for overseeing questions regarding this privacy notice. If
-            you have any questions about this privacy policy, including requests to exercise your legal rights, please
-            contact us through our <Link href="/contact">Contact page</Link> or email us at <a href="mailto:SALES@AEATECHNOLOGY.COM">SALES@AEATECHNOLOGY.COM</a>.
-          </p>
-          <p>
-            It is crucial that the personal information we collect about you is accurate and updated so that we continue
-            to provide you with better products and services. Please inform us if your personally identifiable
-            information changes during your business with us.
-          </p>
+            <h3 className="text-xl font-semibold text-foreground mb-4 mt-8">Controller</h3>
+            <p>
+              This privacy notice is issued on behalf of AEA Technology, Inc. so when we mention &quot;AEA Technology,
+              Inc.,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot; in this policy, we are referring to AEA
+              Technology, Inc.
+            </p>
+            <p>
+              We also have a Data Privacy Department accountable for overseeing questions regarding this privacy notice. If
+              you have any questions about this privacy policy, including requests to exercise your legal rights, please
+              contact us through our <Link href="/contact" className="text-primary hover:underline">Contact page</Link> or email us at <a href="mailto:SALES@AEATECHNOLOGY.COM" className="text-primary hover:underline">SALES@AEATECHNOLOGY.COM</a>.
+            </p>
+            <p>
+              It is crucial that the personal information we collect about you is accurate and updated so that we continue
+              to provide you with better products and services. Please inform us if your personally identifiable
+              information changes during your business with us.
+            </p>
 
-          <h3>Third-Party Links</h3>
-          <p>
-            This website may contain links to third-party websites, applications, and plug-ins. Clicking on those links
-            or allowing those connections may enable third parties to collect and/or share your data. AEA Technology, Inc.
-            does not control any third-party website and is not responsible for their privacy policies. When you leave our
-            website, we recommend you reading the privacy notice of every website you visit.
-          </p>
+            <h3 className="text-xl font-semibold text-foreground mb-4 mt-8">Third-Party Links</h3>
+            <p>
+              This website may contain links to third-party websites, applications, and plug-ins. Clicking on those links
+              or allowing those connections may enable third parties to collect and/or share your data. AEA Technology, Inc.
+              does not control any third-party website and is not responsible for their privacy policies. When you leave our
+              website, we recommend you reading the privacy notice of every website you visit.
+            </p>
+          </section>
 
-          <h2>2. The Data We Collect About You</h2>
+          <section className="mb-12 pt-8 border-t border-border">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">2. The Data We Collect About You</h2>
           <p>
             Personal data or personally identifiable information means any information about an individual from which
             they can be identified. We may gather, store, use, and transfer different kinds of personal information, which
@@ -103,22 +106,24 @@ export default function PrivacyPolicyPage() {
               interests, and subscription preferences.
             </li>
           </ul>
-          <p>
-            We may also collect, use, and share Aggregated Data, such as statistical or demographic data, for any purpose.
-            However, we do not collect any Special Categories of Personal Data about the visitors of this website. This
-            includes details about your race or ethnicity, sex life, religious or philosophical beliefs, sexual
-            orientation, political opinions, information about your health and genetic and biometric data, and trade union
-            membership. Nor do we collect any data about criminal convictions and offences.
-          </p>
+            <p>
+              We may also collect, use, and share Aggregated Data, such as statistical or demographic data, for any purpose.
+              However, we do not collect any Special Categories of Personal Data about the visitors of this website. This
+              includes details about your race or ethnicity, sex life, religious or philosophical beliefs, sexual
+              orientation, political opinions, information about your health and genetic and biometric data, and trade union
+              membership. Nor do we collect any data about criminal convictions and offences.
+            </p>
 
-          <h3>If You Fail to Provide Personal Data</h3>
-          <p>
-            Where we are required to collect personally identifiable information by law or under the terms of a contract
-            we share with you and you fail to give that data when requested, we may not be able to fulfill the contract we
-            have with you or are trying to enter into with you.
-          </p>
+            <h3 className="text-xl font-semibold text-foreground mb-4 mt-8">If You Fail to Provide Personal Data</h3>
+            <p>
+              Where we are required to collect personally identifiable information by law or under the terms of a contract
+              we share with you and you fail to give that data when requested, we may not be able to fulfill the contract we
+              have with you or are trying to enter into with you.
+            </p>
+          </section>
 
-          <h2>3. How Is Your Personal Data Collected?</h2>
+          <section className="mb-12 pt-8 border-t border-border">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">3. How Is Your Personal Data Collected?</h2>
           <p>We use different ways to collect data from and about the visitors of this website including through:</p>
           <ul>
             <li>
@@ -135,20 +140,22 @@ export default function PrivacyPolicyPage() {
               <strong>Third parties or publicly available sources.</strong> We may get personal data related to you from
               various third parties and public sources.
             </li>
-          </ul>
+            </ul>
+          </section>
 
-          <h2>4. How We Use Your Personal Data</h2>
-          <p>We only use your personal information when the law allows us. Most commonly, we use it in the following circumstances:</p>
-          <ul>
-            <li>Where we need to fulfill the contract we are about to enter into or have already entered into with you.</li>
-            <li>
-              Where it is required for our legitimate interests (or those of a third party) and your interests and when
-              fundamental rights and freedoms do not override those interests.
-            </li>
-            <li>Where we need to comply with a regulatory or legal obligation.</li>
-          </ul>
+          <section className="mb-12 pt-8 border-t border-border">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">4. How We Use Your Personal Data</h2>
+            <p>We only use your personal information when the law allows us. Most commonly, we use it in the following circumstances:</p>
+            <ul>
+              <li>Where we need to fulfill the contract we are about to enter into or have already entered into with you.</li>
+              <li>
+                Where it is required for our legitimate interests (or those of a third party) and your interests and when
+                fundamental rights and freedoms do not override those interests.
+              </li>
+              <li>Where we need to comply with a regulatory or legal obligation.</li>
+            </ul>
 
-          <h3>Purposes for Which We Will Use Your Personal Data</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-4 mt-8">Purposes for Which We Will Use Your Personal Data</h3>
           <ul>
             <li>Provide, maintain and improve our products and services.</li>
             <li>
@@ -164,24 +171,29 @@ export default function PrivacyPolicyPage() {
             <li>Monitor and analyze trends and activities in connection with our products and services.</li>
             <li>Personalize and improve our products and services, and promote content or features that match interests.</li>
             <li>Perform any other purpose for which the information was collected.</li>
-          </ul>
+            </ul>
+          </section>
 
-          <h2>5. Disclosures of Your Personal Data</h2>
-          <p>
-            We may have to share your personal data with our business partners or third parties for the purposes mentioned
-            above. We require all third parties to respect the privacy of your personal data and to treat it in accordance
-            with the law.
-          </p>
+          <section className="mb-12 pt-8 border-t border-border">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">5. Disclosures of Your Personal Data</h2>
+            <p>
+              We may have to share your personal data with our business partners or third parties for the purposes mentioned
+              above. We require all third parties to respect the privacy of your personal data and to treat it in accordance
+              with the law.
+            </p>
+          </section>
 
-          <h2>6. Your Legal Rights</h2>
-          <p>Under certain circumstances, you hold rights under data protection laws concerning your personal data. You have the right to:</p>
-          <ul>
-            <li>Request access to your personal information.</li>
-            <li>Request correction of the personal data that we have of you.</li>
-            <li>Request erasure of your personal information, in certain circumstances.</li>
-            <li>Object to processing of your personal information, in certain circumstances.</li>
-            <li>Withdraw consent at any time where we are depending on consent to process your personal information.</li>
-          </ul>
+          <section className="mb-12 pt-8 border-t border-border">
+            <h2 className="text-2xl font-semibold text-foreground mb-6">6. Your Legal Rights</h2>
+            <p>Under certain circumstances, you hold rights under data protection laws concerning your personal data. You have the right to:</p>
+            <ul>
+              <li>Request access to your personal information.</li>
+              <li>Request correction of the personal data that we have of you.</li>
+              <li>Request erasure of your personal information, in certain circumstances.</li>
+              <li>Object to processing of your personal information, in certain circumstances.</li>
+              <li>Withdraw consent at any time where we are depending on consent to process your personal information.</li>
+            </ul>
+          </section>
         </div>
       </div>
     </main>
