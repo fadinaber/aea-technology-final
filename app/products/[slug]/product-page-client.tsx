@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { SupportCTA } from "@/components/support-cta" // Added SupportCTA import
+import { SupportCTA } from "@/components/support-cta"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -33,11 +33,13 @@ import {
   Cpu,
   ExternalLink,
   Clock,
+  GraduationCap,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
-import type { Product, ProductResource } from "@/data/all-products" // Added ProductResource type
+import { useState, useMemo } from "react"
+import type { Product } from "@/data/all-products"
+import { getProductResources, type ProductResourceItem } from "@/data/product-resources"
 
 // Icon mapping for capability cards
 const iconMap: Record<string, React.ElementType> = {
@@ -76,6 +78,8 @@ function getResourceIcon(type: string) {
       return <Download className="w-5 h-5 text-green-600" />
     case "guide":
       return <BookOpen className="w-5 h-5 text-teal-600" />
+    case "training":
+      return <GraduationCap className="w-5 h-5 text-indigo-600" />
     case "faq":
       return <HelpCircle className="w-5 h-5 text-yellow-600" />
     default:
@@ -99,6 +103,8 @@ function getResourceIconBg(type: string) {
       return "bg-green-100"
     case "guide":
       return "bg-teal-100"
+    case "training":
+      return "bg-indigo-100"
     case "faq":
       return "bg-yellow-100"
     default:
@@ -121,7 +127,9 @@ function getResourceTypeLabel(type: string) {
     case "software":
       return "Software"
     case "guide":
-      return "Guide"
+      return "Quick Start Guide"
+    case "training":
+      return "Training Material"
     case "faq":
       return "FAQ"
     default:
@@ -129,15 +137,21 @@ function getResourceTypeLabel(type: string) {
   }
 }
 
+// Helper to get download URL from resource (supports localPath or url)
+function getResourceDownloadUrl(resource: ProductResourceItem): string {
+  return resource.localPath || resource.url || "#"
+}
+
 interface ProductPageClientProps {
   product: Product
 }
 
-function ProductVideoCard({ video }: { video: ProductResource }) {
+function ProductVideoCard({ video }: { video: ProductResourceItem }) {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
 
   // Extract video ID from YouTube URL
-  const getVideoId = (url: string) => {
+  const getVideoId = (url: string | undefined) => {
+    if (!url) return null
     const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s]+)/)
     return match ? match[1] : null
   }
@@ -212,6 +226,19 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
 
   // Get current images based on first model (since both look the same)
   const currentImages = product.modelImages[0] || []
+
+  // Get resources from centralized data file (CMS-ready structure)
+  const productResources = useMemo(() => getProductResources(product.slug), [product.slug])
+
+  // Separate videos from other resources
+  const videos = useMemo(
+    () => productResources.filter((r) => r.type === "video"),
+    [productResources]
+  )
+  const documents = useMemo(
+    () => productResources.filter((r) => r.type !== "video"),
+    [productResources]
+  )
 
   return (
     <div className="min-h-screen bg-white">
@@ -844,74 +871,72 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                     Documents & Downloads
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {/* Datasheet - Always show if available */}
-                    <Card className="hover:shadow-md transition-shadow">
-                      <CardContent className="pt-6">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
-                            <FileText className="w-5 h-5 text-red-600" />
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-gray-900">Datasheet</h4>
-                            <p className="text-xs text-gray-500">PDF Download</p>
-                          </div>
-                        </div>
-                        <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
-                          <a href={product.datasheetUrl} target="_blank" rel="noopener noreferrer">
-                            <Download className="w-4 h-4 mr-2" />
-                            Download
-                          </a>
-                        </Button>
-                      </CardContent>
-                    </Card>
-
-                    {/* Dynamic resources (non-video) */}
-                    {product.resources
-                      ?.filter((r) => r.type !== "video")
-                      .map((resource, index) => (
-                        <Card key={index} className="hover:shadow-md transition-shadow">
-                          <CardContent className="pt-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div
-                                className={`w-10 h-10 rounded-lg ${getResourceIconBg(resource.type)} flex items-center justify-center`}
-                              >
-                                {getResourceIcon(resource.type)}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-gray-900 truncate">{resource.title}</h4>
-                                <p className="text-xs text-gray-500">
-                                  {getResourceTypeLabel(resource.type)}
-                                  {resource.fileSize && ` • ${resource.fileSize}`}
-                                </p>
-                              </div>
+                    {/* Dynamic resources (non-video) from centralized data */}
+                    {documents.map((resource, index) => (
+                      <Card key={index} className="hover:shadow-md transition-shadow">
+                        <CardContent className="pt-6">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div
+                              className={`w-10 h-10 rounded-lg ${getResourceIconBg(resource.type)} flex items-center justify-center`}
+                            >
+                              {getResourceIcon(resource.type)}
                             </div>
-                            {resource.description && (
-                              <p className="text-xs text-gray-600 mb-3 line-clamp-2">{resource.description}</p>
-                            )}
-                            <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
-                              <a href={resource.url} target="_blank" rel="noopener noreferrer">
-                                <Download className="w-4 h-4 mr-2" />
-                                Download
-                              </a>
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      ))}
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-gray-900 truncate">{resource.title}</h4>
+                              <p className="text-xs text-gray-500">
+                                {getResourceTypeLabel(resource.type)}
+                                {resource.fileSize && ` • ${resource.fileSize}`}
+                              </p>
+                            </div>
+                          </div>
+                          {resource.description && (
+                            <p className="text-xs text-gray-600 mb-3 line-clamp-2">{resource.description}</p>
+                          )}
+                          <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
+                            <a href={getResourceDownloadUrl(resource)} target="_blank" rel="noopener noreferrer">
+                              <Download className="w-4 h-4 mr-2" />
+                              Download
+                            </a>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    ))}
+
+                    {/* Show message if no documents */}
+                    {documents.length === 0 && (
+                      <Card className="hover:shadow-md transition-shadow">
+                        <CardContent className="pt-6">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
+                              <FileText className="w-5 h-5 text-red-600" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-gray-900">Datasheet</h4>
+                              <p className="text-xs text-gray-500">PDF Download</p>
+                            </div>
+                          </div>
+                          <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
+                            <a href={product.datasheetUrl} target="_blank" rel="noopener noreferrer">
+                              <Download className="w-4 h-4 mr-2" />
+                              Download
+                            </a>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    )}
                   </div>
                 </div>
 
-                {product.resources?.some((r) => r.type === "video") && (
+                {videos.length > 0 && (
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                       <Play className="w-5 h-5 text-primary" />
                       Videos & Demos
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {product.resources
-                        .filter((r) => r.type === "video")
-                        .map((video, index) => (
-                          <ProductVideoCard key={index} video={video} />
-                        ))}
+                      {videos.map((video, index) => (
+                        <ProductVideoCard key={index} video={video} />
+                      ))}
                     </div>
                   </div>
                 )}

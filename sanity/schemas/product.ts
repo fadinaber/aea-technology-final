@@ -80,7 +80,8 @@ export default defineType({
       ],
     }),
 
-    // Datasheet - Moved to top for easy access
+    // ========== FILES & DOWNLOADS ==========
+    // Datasheet
     defineField({
       name: "datasheetUrl",
       title: "Datasheet URL (External)",
@@ -93,14 +94,135 @@ export default defineType({
       title: "Datasheet File (Upload PDF)",
       type: "file",
       group: "files",
-      description: "Upload datasheet PDF directly. This will be used if no external URL is provided. Click the uploaded file to replace it.",
+      description: "Upload datasheet PDF directly. This will be used if no external URL is provided.",
       options: {
         accept: ".pdf",
         storeOriginalFilename: true,
       },
     }),
 
-    // Media
+    // ========== PRODUCT RESOURCES (Manuals, Guides, etc.) ==========
+    defineField({
+      name: "resources",
+      title: "Product Resources (Manuals, Guides, Videos)",
+      type: "array",
+      group: "files",
+      description: "Add manuals, guides, training materials, and videos for this product. These appear in the Resources tab on the product page.",
+      of: [
+        {
+          type: "object",
+          name: "productResource",
+          title: "Resource",
+          fields: [
+            {
+              name: "type",
+              type: "string",
+              title: "Resource Type",
+              options: {
+                list: [
+                  { title: "📄 Manual", value: "manual" },
+                  { title: "📋 Quick Start Guide", value: "guide" },
+                  { title: "🎥 Video", value: "video" },
+                  { title: "📊 Datasheet", value: "datasheet" },
+                  { title: "📝 Application Note", value: "application-note" },
+                  { title: "💾 Firmware", value: "firmware" },
+                  { title: "🖥️ Software", value: "software" },
+                  { title: "🎓 Training Material", value: "training" },
+                  { title: "❓ FAQ", value: "faq" },
+                ],
+              },
+              validation: (Rule) => Rule.required(),
+            },
+            { 
+              name: "title", 
+              type: "string", 
+              title: "Title",
+              validation: (Rule) => Rule.required(),
+            },
+            { 
+              name: "description", 
+              type: "text", 
+              title: "Description",
+              rows: 2,
+            },
+            // File upload option
+            {
+              name: "file",
+              type: "file",
+              title: "Upload File (PDF, PPT, etc.)",
+              description: "Upload the resource file directly. Supports PDF, PowerPoint, and other document formats.",
+              options: {
+                accept: ".pdf,.ppt,.pptx,.ppsx,.doc,.docx,.zip,.exe",
+                storeOriginalFilename: true,
+              },
+              hidden: ({ parent }) => parent?.type === "video",
+            },
+            // External URL option (for links or videos)
+            { 
+              name: "url", 
+              type: "url", 
+              title: "External URL",
+              description: "For external links or YouTube videos. Leave empty if uploading a file above.",
+            },
+            // Local file path (for existing files in /public/documents)
+            {
+              name: "localPath",
+              type: "string",
+              title: "Local File Path",
+              description: "Path to file in public folder (e.g., /documents/manuals/6021/filename.pdf). Use this for existing files.",
+              hidden: ({ parent }) => parent?.type === "video",
+            },
+            // Video-specific fields
+            { 
+              name: "thumbnailUrl", 
+              type: "string", 
+              title: "Video Thumbnail URL",
+              hidden: ({ parent }) => parent?.type !== "video",
+            },
+            { 
+              name: "duration", 
+              type: "string", 
+              title: "Duration (e.g., 5:30)",
+              hidden: ({ parent }) => parent?.type !== "video",
+            },
+            // File metadata
+            { 
+              name: "fileSize", 
+              type: "string", 
+              title: "File Size (e.g., 4.2 MB)",
+              hidden: ({ parent }) => parent?.type === "video",
+            },
+          ],
+          preview: {
+            select: {
+              title: "title",
+              type: "type",
+              file: "file",
+            },
+            prepare({ title, type, file }) {
+              const typeEmoji: Record<string, string> = {
+                manual: "📄",
+                guide: "📋",
+                video: "🎥",
+                datasheet: "📊",
+                "application-note": "📝",
+                firmware: "💾",
+                software: "🖥️",
+                training: "🎓",
+                faq: "❓",
+              }
+              const hasFile = !!file?.asset
+              return {
+                title: title || "Untitled Resource",
+                subtitle: `${typeEmoji[type] || "📁"} ${type}${hasFile ? " (file uploaded)" : ""}`,
+              }
+            },
+          },
+        },
+      ],
+    }),
+
+    // ========== MEDIA ==========
     defineField({
       name: "modelImages",
       title: "Model Images",
@@ -122,7 +244,7 @@ export default defineType({
       ],
     }),
 
-    // Content
+    // ========== CONTENT ==========
     defineField({
       name: "keyFeatures",
       title: "Key Features",
@@ -168,7 +290,7 @@ export default defineType({
       ],
     }),
 
-    // Specifications
+    // ========== SPECIFICATIONS ==========
     defineField({
       name: "specifications",
       title: "Specifications",
@@ -234,7 +356,7 @@ export default defineType({
       ],
     }),
 
-    // Models & Accessories
+    // ========== MODELS & ACCESSORIES ==========
     defineField({
       name: "models",
       title: "Models",
@@ -279,35 +401,6 @@ export default defineType({
       ],
     }),
 
-    // Resources
-    defineField({
-      name: "resources",
-      title: "Product Resources",
-      type: "array",
-      group: "content",
-      of: [
-        {
-          type: "object",
-          fields: [
-            {
-              name: "type",
-              type: "string",
-              title: "Type",
-              options: {
-                list: ["video", "manual", "datasheet", "application-note", "firmware", "software", "guide", "faq"],
-              },
-            },
-            { name: "title", type: "string", title: "Title" },
-            { name: "description", type: "string", title: "Description" },
-            { name: "url", type: "url", title: "URL" },
-            { name: "thumbnailUrl", type: "string", title: "Thumbnail URL" },
-            { name: "fileSize", type: "string", title: "File Size" },
-            { name: "duration", type: "string", title: "Duration" },
-          ],
-        },
-      ],
-    }),
-
     // Software Info
     defineField({
       name: "softwareInfo",
@@ -339,7 +432,7 @@ export default defineType({
       ],
     }),
 
-    // SEO
+    // ========== SEO ==========
     defineField({
       name: "seoTitle",
       title: "SEO Title",

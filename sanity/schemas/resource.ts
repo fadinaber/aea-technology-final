@@ -1,5 +1,5 @@
 // Resource Schema for Sanity CMS
-// Migrated from /data/resources-content.ts
+// For managing software downloads, manuals, videos, FAQs, and application notes
 
 import { defineField, defineType } from "sanity"
 
@@ -9,10 +9,12 @@ export default defineType({
   type: "document",
   groups: [
     { name: "basic", title: "Basic Info" },
-    { name: "file", title: "File Upload" },
+    { name: "file", title: "File & Links" },
     { name: "content", title: "Content & Details" },
+    { name: "associations", title: "Product Associations" },
   ],
   fields: [
+    // ========== BASIC INFO ==========
     defineField({
       name: "type",
       title: "Resource Type",
@@ -20,15 +22,17 @@ export default defineType({
       group: "basic",
       options: {
         list: [
-          { title: "Software", value: "software" },
-          { title: "Manual", value: "manual" },
-          { title: "Video", value: "video" },
-          { title: "FAQ", value: "faq" },
-          { title: "Application Note", value: "application-note" },
+          { title: "💾 Software", value: "software" },
+          { title: "📄 Manual", value: "manual" },
+          { title: "📋 Quick Start Guide", value: "guide" },
+          { title: "🎥 Video", value: "video" },
+          { title: "❓ FAQ", value: "faq" },
+          { title: "📝 Application Note", value: "application-note" },
+          { title: "🎓 Training Material", value: "training" },
         ],
       },
       validation: (Rule) => Rule.required(),
-      description: "Select 'Application Note' to create or edit an application note PDF.",
+      description: "Select the type of resource",
     }),
     defineField({
       name: "title",
@@ -45,42 +49,45 @@ export default defineType({
       group: "basic",
       options: { source: "title", maxLength: 96 },
     }),
-    // File uploads - Moved to dedicated group at top for easy access
-    defineField({
-      name: "file",
-      title: "Upload PDF File",
-      type: "file",
-      group: "file",
-      description: "📎 Upload the application note PDF here. Click the uploaded file to replace it with a new version. The system will automatically link it based on the title (e.g., 'AN258' in the title).",
-      options: {
-        accept: ".pdf",
-        storeOriginalFilename: true,
-      },
-      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
-      validation: (Rule) =>
-        Rule.custom((file, context) => {
-          const doc = context.document as { type?: string }
-          if (doc?.type === "application-note" && !file) {
-            return "Application notes require a PDF file upload"
-          }
-          return true
-        }),
-    }),
-    defineField({
-      name: "downloadUrl",
-      title: "External Download URL (Optional)",
-      type: "url",
-      group: "file",
-      description: "Only use if the file is hosted elsewhere. Leave empty if uploading directly to Sanity.",
-      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
-    }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
-      group: "content",
+      group: "basic",
       rows: 2,
     }),
+
+    // ========== FILE & LINKS ==========
+    defineField({
+      name: "file",
+      title: "Upload File",
+      type: "file",
+      group: "file",
+      description: "Upload the resource file directly (PDF, PPT, ZIP, etc.)",
+      options: {
+        accept: ".pdf,.ppt,.pptx,.ppsx,.doc,.docx,.zip,.exe",
+        storeOriginalFilename: true,
+      },
+      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+    }),
+    defineField({
+      name: "localPath",
+      title: "Local File Path",
+      type: "string",
+      group: "file",
+      description: "Path to existing file in public folder (e.g., /documents/manuals/6021/filename.pdf)",
+      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+    }),
+    defineField({
+      name: "downloadUrl",
+      title: "External Download URL",
+      type: "url",
+      group: "file",
+      description: "Only use if the file is hosted elsewhere (Google Drive, S3, etc.)",
+      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
+    }),
+
+    // ========== CONTENT & DETAILS ==========
     defineField({
       name: "category",
       title: "Category",
@@ -88,34 +95,34 @@ export default defineType({
       group: "content",
       options: {
         list: [
-          "Analysis Software",
-          "User Manuals",
-          "Technical Documentation",
-          "General Application Notes",
-          "VNA Application Notes",
-          "TDR Application Notes",
-          "Training",
-          "Troubleshooting",
+          // Software categories
+          { title: "Analysis Software", value: "Analysis Software" },
+          // Manual categories
+          { title: "User Manuals", value: "User Manuals" },
+          { title: "Quick Reference", value: "Quick Reference" },
+          { title: "Technical Documentation", value: "Technical Documentation" },
+          // Training
+          { title: "Training", value: "Training" },
+          // Application notes categories
+          { title: "General Application Notes", value: "General Application Notes" },
+          { title: "VNA Application Notes", value: "VNA Application Notes" },
+          { title: "TDR Application Notes", value: "TDR Application Notes" },
+          // Video categories
+          { title: "Product Overviews", value: "Product Overviews" },
+          { title: "Educational", value: "Educational" },
+          { title: "Operation Tutorials", value: "Operation Tutorials" },
+          { title: "Software Tutorials", value: "Software Tutorials" },
+          { title: "Testing Procedures", value: "Testing Procedures" },
+          // FAQ categories
+          { title: "TDR Operation", value: "TDR Operation" },
+          { title: "VNA Operation", value: "VNA Operation" },
+          { title: "Calibration", value: "Calibration" },
+          { title: "Software Support", value: "Software Support" },
+          { title: "Warranty & Support", value: "Warranty & Support" },
         ],
       },
-      description: "For application notes, select: 'General Application Notes', 'VNA Application Notes', or 'TDR Application Notes'",
-      initialValue: ({ document }) => {
-        // Auto-set category based on title for application notes
-        if (document?.type === "application-note") {
-          const title = (document.title || "").toLowerCase()
-          if (title.match(/an1[0-3]/) || title.includes("white paper") || title.includes("via")) {
-            return "VNA Application Notes"
-          }
-          if (title.match(/an2[0-9]/)) {
-            return "TDR Application Notes"
-          }
-          if (title.match(/an15[0-3]/) || title.includes("cold weather") || title.includes("battery") || title.includes("serial port")) {
-            return "General Application Notes"
-          }
-        }
-        return ""
-      },
     }),
+
     // Software-specific fields
     defineField({
       name: "version",
@@ -126,34 +133,29 @@ export default defineType({
     }),
     defineField({
       name: "fileSize",
-      title: "File Size",
+      title: "File Size (e.g., 4.2 MB)",
       type: "string",
       group: "content",
       hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
-    // Manual-specific fields
-    defineField({
-      name: "pages",
-      title: "Number of Pages",
-      type: "number",
-      group: "content",
-      hidden: ({ document }) => document?.type !== "manual",
-    }),
+
     // Video-specific fields
     defineField({
       name: "videoId",
       title: "YouTube Video ID",
       type: "string",
       group: "content",
+      description: "The video ID from YouTube URL (e.g., dQw4w9WgXcQ from https://youtube.com/watch?v=dQw4w9WgXcQ)",
       hidden: ({ document }) => document?.type !== "video",
     }),
     defineField({
       name: "duration",
-      title: "Duration",
+      title: "Duration (e.g., 5:30)",
       type: "string",
       group: "content",
       hidden: ({ document }) => document?.type !== "video",
     }),
+
     // FAQ-specific fields
     defineField({
       name: "content",
@@ -171,6 +173,7 @@ export default defineType({
       options: { list: ["Beginner", "Intermediate", "Advanced"] },
       hidden: ({ document }) => document?.type !== "faq",
     }),
+
     // Common fields
     defineField({
       name: "tags",
@@ -189,40 +192,64 @@ export default defineType({
       initialValue: false,
       description: "Featured resources appear first in listings",
     }),
+
+    // ========== PRODUCT ASSOCIATIONS ==========
     defineField({
       name: "relatedProducts",
       title: "Related Products",
       type: "array",
-      group: "content",
+      group: "associations",
+      description: "Select which products this resource applies to",
       of: [{ type: "reference", to: [{ type: "product" }] }],
+    }),
+    defineField({
+      name: "productSlugs",
+      title: "Product Slugs (for static data)",
+      type: "array",
+      group: "associations",
+      description: "Product slugs this resource applies to (e.g., e20-20-avionics, e20-20n). Used when products aren't in Sanity yet.",
+      of: [{ type: "string" }],
+      options: {
+        list: [
+          { title: "E20/20N TDR", value: "e20-20n" },
+          { title: "Avionics TDR Kit", value: "e20-20-avionics" },
+          { title: "E20/20B Network TDR", value: "e20-20b" },
+          { title: "E20/20F CATV Network TDR", value: "e20-20f-catv" },
+          { title: "SWR Site Analyzer", value: "swr-site-analyzer" },
+          { title: "VIA Bravo Ex2", value: "via-bravo-ex2" },
+          { title: "Bravo MRI-3000", value: "via-bravo-mri-3000" },
+        ],
+      },
     }),
   ],
   preview: {
     select: {
       title: "title",
-      subtitle: "type",
+      type: "type",
       category: "category",
       media: "file",
     },
-    prepare({ title, subtitle, category, media }) {
+    prepare({ title, type, category, media }) {
       const typeIcons: Record<string, string> = {
         software: "💾",
         manual: "📄",
-        video: "🎬",
+        guide: "📋",
+        video: "🎥",
         faq: "❓",
         "application-note": "📝",
+        training: "🎓",
       }
       return {
         title,
-        subtitle: `${typeIcons[subtitle] || ""} ${subtitle}${category ? ` • ${category}` : ""}`,
+        subtitle: `${typeIcons[type] || "📁"} ${type}${category ? ` • ${category}` : ""}`,
         media: media?.asset || undefined,
       }
     },
   },
   orderings: [
     {
-      title: "Application Notes (by AN number)",
-      name: "applicationNotesByNumber",
+      title: "By Type",
+      name: "byType",
       by: [
         { field: "type", direction: "asc" },
         { field: "title", direction: "asc" },
@@ -232,6 +259,14 @@ export default defineType({
       title: "By Category",
       name: "byCategory",
       by: [{ field: "category", direction: "asc" }],
+    },
+    {
+      title: "Featured First",
+      name: "featuredFirst",
+      by: [
+        { field: "featured", direction: "desc" },
+        { field: "title", direction: "asc" },
+      ],
     },
   ],
 })

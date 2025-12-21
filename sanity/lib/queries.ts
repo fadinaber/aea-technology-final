@@ -24,7 +24,19 @@ export const productBySlugQuery = groq`
       modelIndex,
       "images": images[].asset->url
     },
-    "datasheetFileUrl": datasheetFile.asset->url
+    "datasheetFileUrl": datasheetFile.asset->url,
+    // Get resources with file URLs resolved
+    "resources": resources[] {
+      type,
+      title,
+      description,
+      url,
+      localPath,
+      thumbnailUrl,
+      duration,
+      fileSize,
+      "fileUrl": file.asset->url
+    }
   }
 `
 
@@ -48,7 +60,7 @@ export const allPressReleasesQuery = groq`
 
 // Resources
 export const resourcesByTypeQuery = groq`
-  *[_type == "resource" && type == $type] | order(_createdAt desc) {
+  *[_type == "resource" && type == $type] | order(featured desc, _createdAt desc) {
     _id,
     title,
     description,
@@ -56,18 +68,21 @@ export const resourcesByTypeQuery = groq`
     type,
     version,
     downloadUrl,
+    localPath,
     "fileUrl": file.asset->url,
     fileSize,
     videoId,
     duration,
     tags,
     featured,
-    content
+    content,
+    productSlugs,
+    "relatedProductSlugs": relatedProducts[]->slug.current
   }
 `
 
 export const allResourcesQuery = groq`
-  *[_type == "resource"] | order(type asc, _createdAt desc) {
+  *[_type == "resource"] | order(type asc, featured desc, _createdAt desc) {
     _id,
     title,
     description,
@@ -75,13 +90,54 @@ export const allResourcesQuery = groq`
     type,
     version,
     downloadUrl,
+    localPath,
     "fileUrl": file.asset->url,
     fileSize,
     videoId,
     duration,
     tags,
     featured,
-    content
+    content,
+    productSlugs,
+    "relatedProductSlugs": relatedProducts[]->slug.current
+  }
+`
+
+// Resources by product slug - for product pages
+export const resourcesByProductSlugQuery = groq`
+  *[_type == "resource" && ($slug in productSlugs || $slug in relatedProducts[]->slug.current)] | order(type asc, featured desc) {
+    _id,
+    title,
+    description,
+    category,
+    type,
+    downloadUrl,
+    localPath,
+    "fileUrl": file.asset->url,
+    fileSize,
+    videoId,
+    duration,
+    tags,
+    featured
+  }
+`
+
+// Manuals specifically - for the resources page manuals section
+export const allManualsQuery = groq`
+  *[_type == "resource" && (type == "manual" || type == "guide")] | order(featured desc, title asc) {
+    _id,
+    title,
+    description,
+    category,
+    type,
+    downloadUrl,
+    localPath,
+    "fileUrl": file.asset->url,
+    fileSize,
+    tags,
+    featured,
+    productSlugs,
+    "relatedProductSlugs": relatedProducts[]->slug.current
   }
 `
 
