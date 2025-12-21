@@ -263,7 +263,7 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 lg:h-20 gap-4">
           {/* Logo - Fixed dimensions to prevent CLS */}
           <Link href="/" className="flex-shrink-0 cursor-pointer" onClick={handleLinkClick}>
             <Image
@@ -277,7 +277,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1 flex-shrink min-w-0">
             {/* Home */}
             <Link
               href="/"
@@ -755,7 +755,7 @@ export default function Header() {
           </nav>
 
           {/* Right side - Search and Actions */}
-          <div className="flex items-center gap-2 lg:gap-4">
+          <div className="flex items-center gap-2 lg:gap-4 flex-shrink-0">
             {/* Desktop Search */}
             <div className="hidden lg:flex items-center gap-3" ref={searchRef}>
               {/* Search - Integrated button inside input */}
@@ -766,10 +766,10 @@ export default function Header() {
                       <Search className="absolute left-3 w-4 h-4 text-muted-foreground pointer-events-none" />
                       <Input
                         type="text"
-                        placeholder="Search..."
+                        placeholder="Search products, software, manuals..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-48 h-9 pl-9 pr-9 text-sm"
+                        className="w-72 h-9 pl-9 pr-9 text-sm"
                         autoFocus
                       />
                       <Button
@@ -787,7 +787,7 @@ export default function Header() {
                     </div>
 
                     {searchResults.length > 0 && (
-                      <Card className="absolute top-full mt-2 w-64 bg-popover shadow-xl border z-50">
+                      <Card className="absolute top-full mt-2 w-72 bg-popover shadow-xl border z-50">
                         <CardContent className="p-0 max-h-80 overflow-y-auto">
                           {searchResults.map((result) => {
                             const Icon = TYPE_ICONS[result.type as keyof typeof TYPE_ICONS] || Search
