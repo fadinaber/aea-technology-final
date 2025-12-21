@@ -36,15 +36,17 @@ export function ProductGallery({ images, productName, badges }: ProductGalleryPr
       )}
 
       {/* Main Product Image - Fixed height container to prevent CLS */}
-      <div className="relative bg-card border border-border rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96 overflow-hidden">
+      <div className="relative bg-card border border-border rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96 overflow-hidden aspect-[4/3]">
         <Image
           src={images[selectedImage] || images[0] || "/placeholder.svg"}
           alt={`AEA Technology ${productName} - product image`}
           fill
           className="object-contain p-4"
           priority
-          quality={85}
+          fetchPriority="high"
+          quality={90}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+          decoding="async"
         />
       </div>
 
@@ -67,6 +69,7 @@ export function ProductGallery({ images, productName, badges }: ProductGalleryPr
               height={64}
               className="w-full h-full object-contain p-1"
               loading="lazy"
+              decoding="async"
               quality={75}
             />
           </button>

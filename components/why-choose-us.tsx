@@ -52,6 +52,8 @@ export default function WhyChooseUs() {
                     sizes="100vw"
                     className="object-cover object-top"
                     loading="lazy"
+                    decoding="async"
+                    quality={85}
                   />
                 </div>
 
@@ -75,7 +77,7 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Desktop: Image fills right side completely */}
-                <div className="hidden lg:block relative h-full min-h-[400px] overflow-hidden">
+                <div className="hidden lg:block relative h-full min-h-[400px] overflow-hidden aspect-[2/1]">
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
                     alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
@@ -83,6 +85,8 @@ export default function WhyChooseUs() {
                     sizes="50vw"
                     className="object-cover object-top"
                     loading="lazy"
+                    decoding="async"
+                    quality={85}
                   />
                 </div>
               </div>
@@ -121,6 +125,8 @@ export default function WhyChooseUs() {
                         height={80}
                         className="h-20 w-20 object-contain"
                         loading="lazy"
+                        decoding="async"
+                        quality={75}
                       />
                     </div>
                   )

@@ -139,7 +139,7 @@ export default function Hero({ data: overrideData }: HeroProps) {
                   </div>
 
                   <div className="relative p-6 sm:p-8 pt-14 pb-24 sm:pb-28">
-                    <div className="relative h-[240px] sm:h-[300px] lg:h-[360px] w-full overflow-hidden">
+                    <div className="relative h-[240px] sm:h-[300px] lg:h-[360px] w-full overflow-hidden aspect-[4/3]">
                       <Image
                         src={data.featuredProduct.image || "/placeholder.svg"}
                         alt={`AEA Technology ${data.featuredProduct.name} - Professional RF and Cable Testing Equipment`}
@@ -148,6 +148,8 @@ export default function Hero({ data: overrideData }: HeroProps) {
                         fetchPriority="high"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                         className="object-contain group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-lg"
+                        decoding="async"
+                        quality={90}
                       />
                     </div>
                   </div>

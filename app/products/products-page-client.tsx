@@ -183,17 +183,18 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                 <CardHeader className="p-0 relative">
                   <Link href={`/products/${product.id}`} onClick={handleProductClick} className="cursor-pointer">
                     <div className="relative overflow-hidden bg-gradient-to-br from-white to-slate-50">
-                      <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6">
+                      <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6 aspect-[4/3]">
                         <Image
                           src={product.image || "/placeholder.svg"}
                           alt={product.name}
                           width={400}
                           height={300}
                           className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                          loading={categoryIndex === 0 && category.products.indexOf(product) < 4 ? undefined : "lazy"}
+                          loading={categoryIndex === 0 && category.products.indexOf(product) < 4 ? "eager" : "lazy"}
                           priority={categoryIndex === 0 && category.products.indexOf(product) < 4}
                           quality={85}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                          decoding="async"
                         />
                       </div>
                       <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">

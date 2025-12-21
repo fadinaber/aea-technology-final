@@ -13,6 +13,8 @@ const inter = Inter({
   display: "swap",
   variable: "--font-inter",
   preload: true,
+  adjustFontFallback: true,
+  fallback: ["system-ui", "arial"],
 })
 
 export const metadata: Metadata = {

@@ -97,6 +97,9 @@ function mergeSanityProduct(base: Product | undefined, sanity: SanityProduct | n
   return merged
 }
 
+// Increase revalidation time for better TTFB - product content doesn't change frequently
+export const revalidate = 3600
+
 // Generate static params for all products
 export async function generateStaticParams() {
   const sanitySlugs = await client.fetch<{ slug: string }[]>(productSlugsQuery).catch(() => [])

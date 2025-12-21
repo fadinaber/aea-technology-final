@@ -758,21 +758,36 @@ export default function Header() {
           <div className="flex items-center gap-2 lg:gap-4">
             {/* Desktop Search */}
             <div className="hidden lg:flex items-center gap-3" ref={searchRef}>
-              {/* Search */}
+              {/* Search - Integrated button inside input */}
               <div className="relative">
-                {showSearch && (
-                  <div className="absolute right-12 top-1/2 -translate-y-1/2">
-                    <Input
-                      type="text"
-                      placeholder="Search..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-64 h-10"
-                      autoFocus
-                    />
+                {showSearch ? (
+                  <div className="relative">
+                    <div className="relative flex items-center">
+                      <Search className="absolute left-3 w-4 h-4 text-muted-foreground pointer-events-none" />
+                      <Input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-48 h-9 pl-9 pr-9 text-sm"
+                        autoFocus
+                      />
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => {
+                          setShowSearch(false)
+                          setSearchQuery("")
+                        }}
+                        className="absolute right-1 h-7 w-7 p-0 cursor-pointer hover:bg-accent"
+                        aria-label="Close search"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </Button>
+                    </div>
 
                     {searchResults.length > 0 && (
-                      <Card className="absolute top-full mt-2 w-full bg-popover shadow-xl border">
+                      <Card className="absolute top-full mt-2 w-64 bg-popover shadow-xl border z-50">
                         <CardContent className="p-0 max-h-80 overflow-y-auto">
                           {searchResults.map((result) => {
                             const Icon = TYPE_ICONS[result.type as keyof typeof TYPE_ICONS] || Search
@@ -807,16 +822,17 @@ export default function Header() {
                       </Card>
                     )}
                   </div>
+                ) : (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowSearch(true)}
+                    className="h-9 w-9 cursor-pointer"
+                    aria-label="Open search"
+                  >
+                    <Search className="w-4 h-4" />
+                  </Button>
                 )}
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowSearch(!showSearch)}
-                  className="h-10 w-10 cursor-pointer"
-                >
-                  {showSearch ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
-                </Button>
               </div>
 
               {/* CTA Button */}

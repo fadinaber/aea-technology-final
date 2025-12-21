@@ -147,6 +147,7 @@
   /* CLS Prevention: Reserve space for images before they load */
   img {
     content-visibility: auto;
+    height: auto;
   }
 
   /* CLS Prevention: Ensure Next.js Image components have proper aspect ratio */
@@ -157,11 +158,23 @@
   /* CLS Prevention: Fixed header height to prevent layout shifts */
   header {
     height: var(--header-height, 4rem);
+    min-height: var(--header-height, 4rem);
   }
   
   @media (min-width: 1024px) {
     header {
       height: var(--header-height, 5rem);
+      min-height: var(--header-height, 5rem);
     }
+  }
+
+  /* Prevent layout shift from font loading */
+  body {
+    font-display: swap;
+  }
+
+  /* Ensure containers maintain aspect ratios */
+  [class*="aspect-"] {
+    position: relative;
   }
 }
