@@ -188,15 +188,35 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
               </Button>
             ) : (
               <Button className="w-full min-h-[44px] text-sm cursor-pointer" asChild>
-                <a 
-                  href={resource.downloadUrl || "#"} 
-                  download={resource.downloadUrl && resource.downloadUrl !== "#" && !resource.downloadUrl.startsWith("http") ? undefined : false}
-                  target={resource.downloadUrl && resource.downloadUrl !== "#" && resource.downloadUrl.startsWith("http") ? "_blank" : undefined}
-                  rel={resource.downloadUrl && resource.downloadUrl !== "#" && resource.downloadUrl.startsWith("http") ? "noopener noreferrer" : undefined}
-                >
-                  Download
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
+                {(() => {
+                  const isExternal = resource.downloadUrl && resource.downloadUrl.startsWith("http")
+                  const isLocalFile = resource.downloadUrl && resource.downloadUrl !== "#" && !isExternal
+                  
+                  if (isLocalFile) {
+                    // Extract filename from path for download attribute
+                    const filename = resource.downloadUrl.split("/").pop() || undefined
+                    return (
+                      <a 
+                        href={resource.downloadUrl} 
+                        download={filename}
+                      >
+                        Download
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </a>
+                    )
+                  }
+                  
+                  return (
+                    <a 
+                      href={resource.downloadUrl || "#"} 
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                    >
+                      Download
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </a>
+                  )
+                })()}
               </Button>
             )}
           </div>

@@ -59,13 +59,31 @@ const nextConfig = {
           },
         ],
       },
-      // PDF documents - long cache
+      // PDF documents and software files - long cache with proper content disposition
       {
         source: '/documents/:path*',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=2592000, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      // Software files (.exe, .msi, .zip) - force download
+      {
+        source: '/documents/software/:path*',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/octet-stream',
+          },
+          {
+            key: 'Content-Disposition',
+            value: 'attachment',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000',
           },
         ],
       },
