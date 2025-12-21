@@ -821,6 +821,56 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                     </p>
                   </CardContent>
                 </Card>
+
+                {/* Software Download Section */}
+                {(() => {
+                  const softwareResource = productResources.find((r) => r.type === "software")
+                  if (!softwareResource) return null
+                  
+                  const downloadUrl = getResourceDownloadUrl(softwareResource)
+                  const filename = downloadUrl.split("/").pop() || undefined
+                  const isLocalFile = downloadUrl && !downloadUrl.startsWith("http") && downloadUrl !== "#"
+                  
+                  return (
+                    <Card className="mt-6 border-blue-200 bg-blue-50/50">
+                      <CardHeader>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <Download className="w-5 h-5 text-blue-600" />
+                          Download Software
+                        </CardTitle>
+                        <CardDescription>
+                          Download the latest version of {product.softwareInfo.name} for your {product.name}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-gray-900 mb-1">{softwareResource.title}</p>
+                            {softwareResource.description && (
+                              <p className="text-xs text-gray-600 mb-2">{softwareResource.description}</p>
+                            )}
+                            {softwareResource.fileSize && (
+                              <p className="text-xs text-gray-500">File size: {softwareResource.fileSize}</p>
+                            )}
+                          </div>
+                          <Button
+                            size="lg"
+                            className="bg-blue-600 hover:bg-blue-700 text-white min-w-[160px]"
+                            asChild
+                          >
+                            <a
+                              href={downloadUrl}
+                              download={isLocalFile ? filename : undefined}
+                            >
+                              <Download className="mr-2 w-4 h-4" />
+                              Download Now
+                            </a>
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )
+                })()}
               </div>
             </TabsContent>
 

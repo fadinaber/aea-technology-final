@@ -1,3 +1,5 @@
+import { getAllManuals, productDisplayNames } from "@/data/product-resources"
+
 export interface SearchItem {
   id: string
   name: string
@@ -99,64 +101,33 @@ export const getAllSearchContent = (): SearchItem[] => {
     },
   ]
 
-  // Manuals data
-  const manuals: SearchItem[] = [
-    {
-      id: "e20-20b-manual",
-      name: "E20/20B Network TDR User Manual",
-      description: "Complete operating instructions and technical specifications",
-      category: "User Manual",
-      type: "manual",
-      url: "/resources?tab=manuals",
-      keywords: ["e20/20b", "user manual", "operating", "instructions", "specifications"],
-    },
-    {
-      id: "via-bravo-quickstart",
-      name: "VIA Bravo Quick Start Guide",
-      description: "Get up and running quickly with your VIA Bravo analyzer",
-      category: "Quick Start",
-      type: "manual",
-      url: "/resources?tab=manuals",
-      keywords: ["via bravo", "quick start", "guide", "analyzer", "setup"],
-    },
-    {
-      id: "cable-testing-practices",
-      name: "Cable Testing Best Practices",
-      description: "Industry best practices for cable testing and fault location",
-      category: "Application Note",
-      type: "manual",
-      url: "/resources?tab=manuals",
-      keywords: ["cable testing", "best practices", "fault location", "industry"],
-    },
-    {
-      id: "swr-fundamentals",
-      name: "SWR Measurement Fundamentals",
-      description: "Understanding SWR measurements and interpretation",
-      category: "Technical Guide",
-      type: "manual",
-      url: "/resources?tab=manuals",
-      keywords: ["swr", "measurement", "fundamentals", "interpretation", "guide"],
-    },
-    {
-      id: "liberator-operation-manual",
-      name: "LIBERATOR SERIES SWR & VNA Site Analyzer Operation Manual",
-      description:
-        "Instructional guide with concise description of the instrument, keypad, menus, and measurement screens",
-      category: "Operation Manual",
-      type: "manual",
-      url: "/resources?tab=manuals",
-      keywords: ["liberator", "swr", "vna", "site analyzer", "operation", "manual", "keypad", "menus"],
-    },
-    {
-      id: "liberator-quickstart",
-      name: "LIBERATOR SERIES SWR & VNA Site Analyzer Quick Start Guide",
-      description: "Light-weight condensed guide to calibration, measurement functions and menus",
-      category: "Quick Start Guide",
-      type: "manual",
-      url: "/resources?tab=manuals",
-      keywords: ["liberator", "swr", "vna", "quick start", "calibration", "measurement"],
-    },
-  ]
+  // Manuals data - dynamically loaded from product-resources.ts
+  const allManualsData = getAllManuals()
+  const manuals: SearchItem[] = allManualsData.map((manual) => {
+    const productName = productDisplayNames[manual.productSlug] || manual.productSlug
+    const category = manual.type === "training" ? "Training" : manual.type === "guide" ? "Quick Reference" : "User Manual"
+    
+    // Generate keywords from title, description, product name, and type
+    const titleWords = manual.title.toLowerCase().split(/\s+/)
+    const descWords = (manual.description || "").toLowerCase().split(/\s+/)
+    const keywords = [
+      ...titleWords.filter(w => w.length > 2),
+      ...descWords.filter(w => w.length > 2),
+      productName.toLowerCase(),
+      manual.type,
+      category.toLowerCase(),
+    ].filter((v, i, a) => a.indexOf(v) === i) // Remove duplicates
+    
+    return {
+      id: manual.localPath || manual.url || manual.title.toLowerCase().replace(/\s+/g, "-"),
+      name: manual.title,
+      description: manual.description || "",
+      category,
+      type: "manual" as const,
+      url: manual.localPath || manual.url || "/resources?tab=manuals",
+      keywords,
+    }
+  })
 
   // Videos data
   const videos: SearchItem[] = [

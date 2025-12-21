@@ -271,7 +271,8 @@ export default function Header() {
               alt="AEA Technology - Professional RF Test Equipment"
               width={140}
               height={40}
-              className="h-8 w-[112px] lg:h-10 lg:w-[140px]"
+              className="h-8 w-auto lg:h-10"
+              style={{ objectFit: "contain" }}
               priority
             />
           </Link>
@@ -1067,7 +1068,8 @@ export default function Header() {
                         alt="AEA Technology - Professional RF Test Equipment"
                         width={120}
                         height={32}
-                        className="h-8 w-[120px]"
+                        className="h-8 w-auto"
+                        style={{ objectFit: "contain" }}
                       />
                     </div>
 

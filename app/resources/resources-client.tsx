@@ -195,15 +195,21 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                   if (isLocalFile) {
                     // Extract filename from path for download attribute
                     const filename = resource.downloadUrl.split("/").pop() || undefined
-                    return (
-                      <a 
-                        href={resource.downloadUrl} 
-                        download={filename}
-                      >
-                        Download
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </a>
-                    )
+                    // Check if it's a software file (.exe, .msi) or document (.pdf, .ppt, .ppsx)
+                    const isSoftwareFile = filename && /\.(exe|msi|zip)$/i.test(filename)
+                    const isDocumentFile = filename && /\.(pdf|ppt|ppsx)$/i.test(filename)
+                    
+                    if (isSoftwareFile || isDocumentFile) {
+                      return (
+                        <a 
+                          href={resource.downloadUrl} 
+                          download={filename}
+                        >
+                          Download
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </a>
+                      )
+                    }
                   }
                   
                   return (
@@ -211,6 +217,7 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                       href={resource.downloadUrl || "#"} 
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noopener noreferrer" : undefined}
+                      download={isLocalFile ? resource.downloadUrl.split("/").pop() : undefined}
                     >
                       Download
                       <ArrowRight className="w-4 h-4 ml-2" />
