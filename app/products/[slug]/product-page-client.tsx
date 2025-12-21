@@ -230,13 +230,29 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
   // Get resources from centralized data file (CMS-ready structure)
   const productResources = useMemo(() => getProductResources(product.slug), [product.slug])
 
+  // Get the datasheet from resources (prefer this over product.datasheetUrl)
+  const datasheet = useMemo(
+    () => productResources.find((r) => r.type === "datasheet"),
+    [productResources]
+  )
+
+  // Get datasheet URL (prefer from resources, fallback to product.datasheetUrl)
+  const datasheetUrl = useMemo(() => {
+    if (datasheet) {
+      return datasheet.localPath || datasheet.url || product.datasheetUrl
+    }
+    return product.datasheetUrl
+  }, [datasheet, product.datasheetUrl])
+
   // Separate videos from other resources
   const videos = useMemo(
     () => productResources.filter((r) => r.type === "video"),
     [productResources]
   )
+
+  // Documents exclude videos AND datasheets (datasheet has its own button in the hero)
   const documents = useMemo(
-    () => productResources.filter((r) => r.type !== "video"),
+    () => productResources.filter((r) => r.type !== "video" && r.type !== "datasheet"),
     [productResources]
   )
 
@@ -462,7 +478,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   className="w-full border-2 text-sm sm:text-base font-semibold py-2.5 sm:py-3 bg-transparent"
                   asChild
                 >
-                  <a href={product.datasheetUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={datasheetUrl} target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 w-4 h-4" />
                     Download Datasheet
                   </a>
@@ -902,7 +918,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                       </Card>
                     ))}
 
-                    {/* Show message if no documents */}
+                    {/* Show datasheet card if no other documents */}
                     {documents.length === 0 && (
                       <Card className="hover:shadow-md transition-shadow">
                         <CardContent className="pt-6">
@@ -911,12 +927,16 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                               <FileText className="w-5 h-5 text-red-600" />
                             </div>
                             <div>
-                              <h4 className="font-semibold text-gray-900">Datasheet</h4>
-                              <p className="text-xs text-gray-500">PDF Download</p>
+                              <h4 className="font-semibold text-gray-900">
+                                {datasheet?.title || "Datasheet"}
+                              </h4>
+                              <p className="text-xs text-gray-500">
+                                PDF Download{datasheet?.fileSize ? ` • ${datasheet.fileSize}` : ""}
+                              </p>
                             </div>
                           </div>
                           <Button variant="outline" size="sm" className="w-full bg-transparent" asChild>
-                            <a href={product.datasheetUrl} target="_blank" rel="noopener noreferrer">
+                            <a href={datasheetUrl} target="_blank" rel="noopener noreferrer">
                               <Download className="w-4 h-4 mr-2" />
                               Download
                             </a>
