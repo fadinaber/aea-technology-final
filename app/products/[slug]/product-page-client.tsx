@@ -150,14 +150,17 @@ function ProductVideoCard({ video }: { video: ProductResource }) {
 
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow group">
-      {/* Video embed area */}
+      {/* Video embed area - Fixed aspect ratio container prevents CLS */}
       <div className="relative aspect-video bg-gray-100">
         {!isVideoLoaded ? (
           <div className="absolute inset-0 cursor-pointer group/video" onClick={() => setIsVideoLoaded(true)}>
-            <img
+            <Image
               src={video.thumbnailUrl || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-              alt={video.title}
-              className="w-full h-full object-cover"
+              alt={`${video.title} - video thumbnail`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover/video:bg-black/40 transition-colors">
               <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center group-hover/video:bg-primary/90 transition-colors shadow-lg">
@@ -243,20 +246,21 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 ))}
               </div>
 
-              {/* Main Product Image */}
-              <div className="relative bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96">
+              {/* Main Product Image - Fixed height container to prevent CLS */}
+              <div className="relative bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96 overflow-hidden">
                 <Image
                   src={currentImages[selectedImage] || currentImages[0] || "/placeholder.svg"}
-                  alt={product.name}
+                  alt={`AEA Technology ${product.name} - ${product.category === "tdr" ? "Time Domain Reflectometer" : "Vector Network Analyzer"}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                   className="object-contain p-4"
                   priority
                 />
               </div>
 
-              {/* Mini Gallery */}
+              {/* Mini Gallery - Fixed size thumbnails to prevent CLS */}
               {currentImages.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto">
+                <div className="flex gap-2 overflow-x-auto min-h-[48px] sm:min-h-[64px]">
                   {currentImages.map((image, imageIndex) => (
                     <button
                       key={imageIndex}
@@ -269,10 +273,11 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                     >
                       <Image
                         src={image || "/placeholder.svg"}
-                        alt={`${product.name} view ${imageIndex + 1}`}
+                        alt={`${product.name} - view ${imageIndex + 1}`}
                         width={64}
                         height={64}
                         className="w-full h-full object-contain p-1"
+                        loading="lazy"
                       />
                     </button>
                   ))}
@@ -360,10 +365,11 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                             {accessory.image ? (
                               <Image
                                 src={accessory.image || "/placeholder.svg"}
-                                alt={accessory.name}
+                                alt={`${accessory.name} - accessory for ${product.name}`}
                                 width={60}
                                 height={60}
                                 className="w-full h-full object-cover"
+                                loading="lazy"
                               />
                             ) : (
                               <IconComponent className="w-8 h-8 text-gray-400" />
@@ -754,9 +760,11 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                       <div className="aspect-[4/3] sm:aspect-video relative">
                         <Image
                           src={product.softwareInfo.screenshotUrl || "/images/8.png"}
-                          alt={`${product.softwareInfo.name} - Software Interface Screenshot`}
+                          alt={`${product.softwareInfo.name} - Software Interface Screenshot showing real-time measurement analysis`}
                           fill
+                          sizes="(max-width: 768px) 100vw, 800px"
                           className="object-contain p-2 sm:p-4"
+                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -784,7 +792,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-col lg:flex-row gap-6">
-                        {/* Product Image - Restored */}
+                        {/* Product Image - Fixed aspect ratio to prevent CLS */}
                         {(model.includedImage ||
                           (product.modelImages[modelIndex] && product.modelImages[modelIndex][0])) && (
                           <div className="lg:w-1/3 flex-shrink-0">
@@ -794,22 +802,13 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                                   model.includedImage ||
                                   product.modelImages[modelIndex]?.[0] ||
                                   product.modelImages[0]?.[0] ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
-                                  "/placeholder.svg" ||
                                   "/placeholder.svg"
                                 }
-                                alt={model.name}
+                                alt={`${model.name} - kit contents and included accessories`}
                                 fill
+                                sizes="(max-width: 1024px) 100vw, 33vw"
                                 className="object-contain p-4"
+                                loading="lazy"
                               />
                             </div>
                           </div>

@@ -1,6 +1,8 @@
-import dynamic from "next/dynamic"
-
 import Hero from "@/components/hero"
+import FeaturedProducts from "@/components/featured-products"
+import WhyChooseUs from "@/components/why-choose-us"
+import ResourcesTeaser from "@/components/resources-teaser"
+import { SupportCTA } from "@/components/support-cta"
 import { client } from "@/sanity/lib/client"
 import { homepageQuery, siteSettingsQuery } from "@/sanity/lib/queries"
 import type {
@@ -9,19 +11,8 @@ import type {
   ResourcesTeaserSection,
 } from "@/data/homepage"
 
-const FeaturedProducts = dynamic(() => import("@/components/featured-products"), {
-  loading: () => <div className="py-16 bg-background" />,
-})
-
-const WhyChooseUs = dynamic(() => import("@/components/why-choose-us"), {
-  loading: () => <div className="py-16 bg-muted/30" />,
-})
-
-const ResourcesTeaser = dynamic(() => import("@/components/resources-teaser"))
-
-const SupportCTA = dynamic(() => import("@/components/support-cta").then((mod) => ({ default: mod.SupportCTA })))
-
-export const revalidate = 60
+// Increase revalidation time for better TTFB - content doesn't change frequently
+export const revalidate = 3600
 
 type SanityHomepageHero = {
   enabled?: boolean

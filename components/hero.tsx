@@ -1,8 +1,8 @@
 "use client"
-import dynamic from "next/dynamic"
-import { ArrowRight, ExternalLink, Flag, Star, Shield, CheckCircle } from "lucide-react"
+import { ArrowRight, ExternalLink, Flag, Star, Shield, CheckCircle, Search } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { Suspense, lazy } from "react"
 import { getSectionById, type HeroSection } from "@/data/homepage"
 
 // Icon map for dynamic rendering
@@ -12,10 +12,25 @@ const iconMap = {
   CheckCircle,
 }
 
-// Search bar is heavy and interactive; load it on the client only
-const SearchBar = dynamic(() => import("@/components/search-bar"), {
-  ssr: false,
-})
+// Lazy load SearchBar but render a matching skeleton immediately to prevent CLS
+const SearchBar = lazy(() => import("@/components/search-bar"))
+
+// Skeleton that matches SearchBar dimensions exactly to prevent CLS
+function SearchBarSkeleton() {
+  return (
+    <div className="relative w-full max-w-2xl mx-auto h-[56px]">
+      <div className="relative h-full">
+        <div className="absolute inset-0 bg-white/95 backdrop-blur-xl rounded-xl border-2 border-white/40 shadow-lg"></div>
+        <div className="relative flex items-center h-full">
+          <Search className="absolute left-4 w-5 h-5 text-gray-400" />
+          <div className="w-full pl-12 pr-12 py-4 text-gray-400 bg-transparent rounded-xl text-base font-medium border border-slate-600 h-[56px] flex items-center">
+            Search products, software, manuals, videos...
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 interface HeroProps {
   data?: HeroSection["data"]
@@ -85,10 +100,12 @@ export default function Hero({ data: overrideData }: HeroProps) {
                 </p>
               </div>
 
-              {/* Search Bar */}
+              {/* Search Bar - Fixed height container to prevent CLS */}
               <div className="flex justify-center lg:justify-start px-2 sm:px-0">
-                <div className="w-full max-w-2xl">
-                  <SearchBar />
+                <div className="w-full max-w-2xl min-h-[56px]">
+                  <Suspense fallback={<SearchBarSkeleton />}>
+                    <SearchBar />
+                  </Suspense>
                 </div>
               </div>
 
@@ -122,12 +139,13 @@ export default function Hero({ data: overrideData }: HeroProps) {
                   </div>
 
                   <div className="relative p-6 sm:p-8 pt-14 pb-24 sm:pb-28">
-                    <div className="relative h-[240px] sm:h-[300px] lg:h-[360px] w-full">
+                    <div className="relative h-[240px] sm:h-[300px] lg:h-[360px] w-full overflow-hidden">
                       <Image
                         src={data.featuredProduct.image || "/placeholder.svg"}
-                        alt={`AEA Technology ${data.featuredProduct.name}`}
+                        alt={`AEA Technology ${data.featuredProduct.name} - Professional RF and Cable Testing Equipment`}
                         fill
                         priority
+                        fetchPriority="high"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                         className="object-contain group-hover:scale-[1.02] transition-transform duration-500 drop-shadow-lg"
                       />

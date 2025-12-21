@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Download, Play, Filter, BookOpen, HelpCircle, Package, ArrowRight, ExternalLink, Clock } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import SearchBar from "@/components/search-bar"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import FAQSchema from "@/components/seo/faq-schema"
@@ -99,19 +100,22 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
       </CardHeader>
 
       <CardContent className="flex flex-col flex-1 !pt-1">
-        {/* Lazy-loaded YouTube embed for video resources */}
+        {/* Lazy-loaded YouTube embed for video resources - Fixed aspect ratio prevents CLS */}
         {resource.type === "video" && resource.videoId && (
           <div className="mb-4">
-            <div className="relative w-full rounded-lg overflow-hidden aspect-video">
+            <div className="relative w-full rounded-lg overflow-hidden aspect-video bg-gray-100">
               {!isVideoLoaded ? (
                 <div
                   className="absolute top-0 left-0 w-full h-full cursor-pointer group/video"
                   onClick={handleVideoClick}
                 >
-                  <img
+                  <Image
                     src={`https://img.youtube.com/vi/${resource.videoId}/hqdefault.jpg`}
                     alt={resource.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover/video:bg-black/40 transition-colors">
                     <div className="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center group-hover/video:bg-blue-700 transition-colors">

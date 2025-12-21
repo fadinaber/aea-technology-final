@@ -35,11 +35,11 @@ export function ProductGallery({ images, productName, badges }: ProductGalleryPr
         </div>
       )}
 
-      {/* Main Product Image */}
-      <div className="relative bg-card border border-border rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96">
+      {/* Main Product Image - Fixed height container to prevent CLS */}
+      <div className="relative bg-card border border-border rounded-lg p-4 sm:p-6 lg:p-8 h-64 sm:h-80 lg:h-96 overflow-hidden">
         <Image
           src={images[selectedImage] || images[0] || "/placeholder.svg"}
-          alt={productName}
+          alt={`AEA Technology ${productName} - product image`}
           fill
           className="object-contain p-4"
           priority
@@ -48,8 +48,8 @@ export function ProductGallery({ images, productName, badges }: ProductGalleryPr
         />
       </div>
 
-      {/* Mini Gallery */}
-      <div className="flex gap-2 overflow-x-auto pb-2">
+      {/* Mini Gallery - Fixed size thumbnails to prevent CLS */}
+      <div className="flex gap-2 overflow-x-auto pb-2 min-h-[48px] sm:min-h-[64px]">
         {images.map((image, imageIndex) => (
           <button
             key={imageIndex}
@@ -62,7 +62,7 @@ export function ProductGallery({ images, productName, badges }: ProductGalleryPr
           >
             <Image
               src={image || "/placeholder.svg"}
-              alt={`View ${imageIndex + 1}`}
+              alt={`${productName} - view ${imageIndex + 1}`}
               width={64}
               height={64}
               className="w-full h-full object-contain p-1"

@@ -44,12 +44,14 @@ export default function WhyChooseUs() {
             <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-r from-background via-muted to-background border border-border p-0">
               <div className="grid lg:grid-cols-2">
                 {/* Mobile: Image on top with aspect ratio */}
-                <div className="relative w-full aspect-[2/1] lg:hidden">
+                <div className="relative w-full aspect-[2/1] lg:hidden overflow-hidden">
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
-                    alt="Made in USA Manufacturing"
+                    alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
                     fill
+                    sizes="100vw"
                     className="object-cover object-top"
+                    loading="lazy"
                   />
                 </div>
 
@@ -73,12 +75,14 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Desktop: Image fills right side completely */}
-                <div className="hidden lg:block relative h-full min-h-[400px]">
+                <div className="hidden lg:block relative h-full min-h-[400px] overflow-hidden">
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
-                    alt="Made in USA Manufacturing"
+                    alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
                     fill
+                    sizes="50vw"
                     className="object-cover object-top"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -112,10 +116,11 @@ export default function WhyChooseUs() {
                     >
                       <Image
                         src={cert.image || "/placeholder.svg"}
-                        alt={cert.name}
-                        width={160}
-                        height={160}
-                        className="h-20 w-auto"
+                        alt={`${cert.name} certification badge`}
+                        width={80}
+                        height={80}
+                        className="h-20 w-20 object-contain"
+                        loading="lazy"
                       />
                     </div>
                   )
@@ -157,10 +162,11 @@ export default function WhyChooseUs() {
                   >
                     <Image
                       src={cert.image || "/placeholder.svg"}
-                      alt={cert.name}
-                      width={160}
-                      height={160}
-                      className="h-20 w-auto"
+                      alt={`${cert.name} certification badge`}
+                      width={80}
+                      height={80}
+                      className="h-20 w-20 object-contain"
+                      loading="lazy"
                     />
                   </a>
                 )

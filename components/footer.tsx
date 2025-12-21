@@ -1,6 +1,3 @@
- "use client"
-
-import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Mail, MapPin, Phone, Clock } from "lucide-react"
 import Link from "next/link"
@@ -9,11 +6,6 @@ import { siteConfig } from "@/data/site-config"
 
 export default function Footer() {
   const { contact, footer, logo } = siteConfig
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   return (
     <footer className="bg-slate-950 text-white">
@@ -21,13 +13,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center bg-white rounded-lg p-3 w-fit">
+            <div className="flex items-center bg-white rounded-lg p-3 w-fit h-[64px] sm:h-[72px]">
               <Image
                 src={logo.light || "/placeholder.svg"}
                 alt={logo.alt}
                 width={160}
                 height={48}
-                className="h-10 sm:h-12 w-auto"
+                className="h-10 w-[133px] sm:h-12 sm:w-[160px]"
+                loading="lazy"
               />
             </div>
             <Badge className="bg-green-600 hover:bg-green-700 text-white">Made in USA</Badge>
@@ -104,17 +97,15 @@ export default function Footer() {
         <div className="border-t border-slate-800 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-sm text-slate-400 text-center sm:text-left">{footer.copyright}</div>
           <div className="flex space-x-4 sm:space-x-6">
-            {mounted
-              ? footer.legalLinks.map((link, index) => (
-                  <Link
-                    key={index}
-                    href={link.href}
-                    className="text-sm text-slate-400 hover:text-white transition-colors"
-                  >
+            {footer.legalLinks.map((link, index) => (
+              <Link
+                key={index}
+                href={link.href}
+                className="text-sm text-slate-400 hover:text-white transition-colors"
+              >
                 {link.label}
               </Link>
-                ))
-              : null}
+            ))}
           </div>
         </div>
       </div>

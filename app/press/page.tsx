@@ -3,7 +3,8 @@ import { client } from "@/sanity/lib/client"
 import { allPressReleasesQuery } from "@/sanity/lib/queries"
 import PressPageClient from "./press-page-client"
 
-export const revalidate = 60
+// Increase revalidation time for better TTFB - content doesn't change frequently
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Press Releases & News | AEA Technology",

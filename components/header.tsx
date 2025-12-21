@@ -264,14 +264,15 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
+          {/* Logo - Fixed dimensions to prevent CLS */}
           <Link href="/" className="flex-shrink-0 cursor-pointer" onClick={handleLinkClick}>
             <Image
               src="/images/design-mode/5fecf0649903fbea970aeb38_AEA-Logo-4c.png"
-              alt="AEA Technology"
+              alt="AEA Technology - Professional RF Test Equipment"
               width={140}
-              height={35}
-              className="h-8 lg:h-10 w-auto"
+              height={40}
+              className="h-8 w-[112px] lg:h-10 lg:w-[140px]"
+              priority
             />
           </Link>
 
@@ -1044,13 +1045,13 @@ export default function Header() {
               <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0">
                 <ScrollArea className="h-full">
                   <div className="p-6">
-                    <div className="mb-6">
+                    <div className="mb-6 h-8">
                       <Image
                         src="/images/design-mode/5fecf0649903fbea970aeb38_AEA-Logo-4c.png"
-                        alt="AEA Technology"
+                        alt="AEA Technology - Professional RF Test Equipment"
                         width={120}
-                        height={30}
-                        className="h-8 w-auto"
+                        height={32}
+                        className="h-8 w-[120px]"
                       />
                     </div>
 

@@ -4,7 +4,8 @@ import { aboutPageQuery } from "@/sanity/lib/queries"
 import AboutPageClient from "./about-page-client"
 import { aboutPageData } from "@/data/about"
 
-export const revalidate = 60
+// Increase revalidation time for better TTFB - content doesn't change frequently
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "About AEA Technology - American RF Test Equipment Manufacturer Since 1990",
