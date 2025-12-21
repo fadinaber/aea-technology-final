@@ -114,6 +114,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       localPath: "/documents/manuals/6021/Intoduction to Avionics TDR.ppsx",
       fileSize: "6.2 MB",
     },
+    // Software
+    {
+      type: "software",
+      title: "ETDR PC Vision™ Software",
+      description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
+      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      fileSize: "85 MB",
+    },
     // Datasheet
     {
       type: "datasheet",
@@ -205,6 +213,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       localPath: "/documents/manuals/6021/Intoduction to Avionics TDR.ppsx",
       fileSize: "6.2 MB",
     },
+    // Software
+    {
+      type: "software",
+      title: "ETDR PC Vision™ Software",
+      description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
+      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      fileSize: "85 MB",
+    },
     // Datasheet
     {
       type: "datasheet",
@@ -289,6 +305,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       description: "Basic operation guide covering essential functions and measurements",
       localPath: "/documents/manuals/6021/E2020_Avionics_TDR_Basic_Guide_ Aug 2022.pdf",
       fileSize: "4.8 MB",
+    },
+    // Software
+    {
+      type: "software",
+      title: "ETDR PC Vision™ Software",
+      description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
+      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      fileSize: "85 MB",
     },
     // Datasheet
     {
@@ -375,6 +399,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       localPath: "/documents/manuals/6021/E2020_Avionics_TDR_Basic_Guide_ Aug 2022.pdf",
       fileSize: "4.8 MB",
     },
+    // Software
+    {
+      type: "software",
+      title: "ETDR PC Vision™ Software",
+      description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
+      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      fileSize: "85 MB",
+    },
     // Datasheet
     {
       type: "datasheet",
@@ -412,6 +444,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       description: "Quick reference guide for getting started with your SWR Site Analyzer",
       localPath: "/documents/manuals/6050/SWR Site Analyzer QSG X7_web.pdf",
       fileSize: "2.1 MB",
+    },
+    // Software
+    {
+      type: "software",
+      title: "Site Analyzer PC Vision",
+      description: "Analysis software for SWR, VNA and EX2 instruments",
+      localPath: "/documents/software/Site_Analyzer_PC_Vision/PC-Vision_1_16_1_1.msi",
+      fileSize: "72 MB",
     },
     // Datasheet
     {
@@ -458,6 +498,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       localPath: "/documents/manuals/6053/Bravo ex2 Training PPP Aug 2021.ppsx",
       fileSize: "7.8 MB",
     },
+    // Software
+    {
+      type: "software",
+      title: "Site Analyzer PC Vision",
+      description: "Analysis software for SWR, VNA and EX2 instruments",
+      localPath: "/documents/software/Site_Analyzer_PC_Vision/PC-Vision_1_16_1_1.msi",
+      fileSize: "72 MB",
+    },
     // Datasheet
     {
       type: "datasheet",
@@ -493,6 +541,14 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       description: "Comprehensive training presentation covering MRI coil testing procedures",
       localPath: "/documents/manuals/6055/Bravo MRI-3000 Training PPP Aug 2021.ppsx",
       fileSize: "6.5 MB",
+    },
+    // Software
+    {
+      type: "software",
+      title: "MRI Vision",
+      description: "Remote application software for Bravo MRI 3000",
+      localPath: "/documents/software/MRI_Vision/setup_1_0_1_1.exe",
+      fileSize: "63 MB",
     },
     // Datasheet
     {

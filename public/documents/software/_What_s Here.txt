@@ -1,0 +1,3 @@
+MRI_Vision: Application used with the MRI-3000 (6055-1xxx)
+Site_Analyzer_PC_Vision: Application used with the Liberator VNA, SWR and Bravo Ex2 (6050-1xxx, 6053-1000)
+TDR_PC_Vision: Application for all E2020 TDR's (6021-10xx) 
