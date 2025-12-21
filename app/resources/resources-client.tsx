@@ -14,6 +14,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import FAQSchema from "@/components/seo/faq-schema"
 import { SupportCTA } from "@/components/support-cta"
 import { getApplicationNotePath } from "@/lib/file-helpers"
+import { getAllManuals, productDisplayNames } from "@/data/product-resources"
 
 // Helper to get download URL for application notes (local file or fallback)
 const getAppNoteUrl = (noteId: string): string => {
@@ -245,6 +246,23 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
 
   const noteRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
 
+  // Get all manuals from centralized product-resources.ts (includes PPTs, guides, training materials)
+  const allManualsFromData = useMemo(() => {
+    return getAllManuals().map((manual) => ({
+      id: manual.localPath || manual.url || manual.title.toLowerCase().replace(/\s+/g, "-"),
+      title: manual.title,
+      description: manual.description || "",
+      category: manual.type === "training" ? "Training" : manual.type === "guide" ? "Quick Reference" : "User Manuals",
+      type: "manual" as const,
+      size: manual.fileSize || "",
+      downloads: 0,
+      rating: 4.5,
+      featured: false,
+      tags: [productDisplayNames[manual.productSlug] || manual.productSlug, manual.type === "training" ? "Training" : manual.type === "guide" ? "Quick Start" : "Manual"],
+      downloadUrl: manual.localPath || manual.url || "#",
+    }))
+  }, [])
+
   // Default data if no initialData is provided
   const defaultData = {
     software: [
@@ -292,173 +310,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloadUrl: "#",
       },
     ],
-    manuals: [
-      // ===== E20/20 & Avionics TDR Manuals (6021 folder) =====
-      {
-        id: "avionics-tdr-operator-manual",
-        title: "E20/20 and Avionics TDR Operator Manual",
-        description: "Complete operator manual for E20/20 and Avionics TDR with setup guides, operation instructions, and troubleshooting (May 2025 with LHT Note)",
-        category: "User Manuals",
-        type: "manual",
-        size: "12.4 MB",
-        downloads: 4521,
-        rating: 4.7,
-        featured: true,
-        tags: ["Avionics", "TDR", "Operation", "E20/20", "E20/20N", "E20/20B", "E20/20F"],
-        downloadUrl: "/documents/manuals/6021/E2020_and_Avionics_TDR_Operator_Manual-05 2025 with LHT Note.pdf",
-      },
-      {
-        id: "avionics-tdr-quick-start",
-        title: "E20/20 and Avionics TDR Quick Start Guide",
-        description: "Quick reference guide for getting started with your E20/20 or Avionics TDR (Rev May 2016)",
-        category: "Quick Reference",
-        type: "manual",
-        size: "3.2 MB",
-        downloads: 3245,
-        rating: 4.8,
-        featured: true,
-        tags: ["Avionics", "TDR", "Quick Start", "E20/20", "Getting Started"],
-        downloadUrl: "/documents/manuals/6021/6021-3010 E2020 and Avionics TDR QSG Rev May 2016 WEB.pdf",
-      },
-      {
-        id: "avionics-tdr-basic-guide",
-        title: "E20/20 Avionics TDR Basic Guide",
-        description: "Basic operation guide covering essential functions and measurements (August 2022)",
-        category: "User Manuals",
-        type: "manual",
-        size: "4.8 MB",
-        downloads: 2890,
-        rating: 4.6,
-        tags: ["Avionics", "TDR", "Basic Guide", "E20/20"],
-        downloadUrl: "/documents/manuals/6021/E2020_Avionics_TDR_Basic_Guide_ Aug 2022.pdf",
-      },
-      {
-        id: "avionics-training",
-        title: "Avionics Kit & Avionics TDR Training",
-        description: "Comprehensive training presentation covering product features and testing procedures",
-        category: "Training",
-        type: "manual",
-        size: "8.5 MB",
-        downloads: 2156,
-        rating: 4.5,
-        tags: ["Avionics", "TDR", "Training", "Presentation", "PowerPoint"],
-        downloadUrl: "/documents/manuals/6021/Avionics Kit & Avionics TDR Training.ppt",
-      },
-      {
-        id: "avionics-introduction",
-        title: "Introduction to Avionics TDR",
-        description: "Interactive presentation introducing Avionics TDR capabilities and applications",
-        category: "Training",
-        type: "manual",
-        size: "6.2 MB",
-        downloads: 1890,
-        rating: 4.4,
-        tags: ["Avionics", "TDR", "Introduction", "Overview", "PowerPoint"],
-        downloadUrl: "/documents/manuals/6021/Intoduction to Avionics TDR.ppsx",
-      },
-      // ===== SWR Site Analyzer Manuals (6050 folder) =====
-      {
-        id: "swr-analyzer-manual",
-        title: "SWR Site Analyzer Operation Manual",
-        description: "Complete operation manual for SWR Site Analyzer with setup guides and troubleshooting (Oct 2021)",
-        category: "User Manuals",
-        type: "manual",
-        size: "8.5 MB",
-        downloads: 1834,
-        rating: 4.5,
-        featured: true,
-        tags: ["SWR", "Site Analyzer", "VNA", "Field Testing", "Maintenance"],
-        downloadUrl: "/documents/manuals/6050/SWR Site Analyzer Manual Oct 2021.pdf",
-      },
-      {
-        id: "swr-analyzer-qsg",
-        title: "SWR Site Analyzer Quick Start Guide",
-        description: "Quick reference guide for getting started with your SWR Site Analyzer",
-        category: "Quick Reference",
-        type: "manual",
-        size: "2.1 MB",
-        downloads: 1456,
-        rating: 4.6,
-        tags: ["SWR", "Site Analyzer", "Quick Start", "Getting Started"],
-        downloadUrl: "/documents/manuals/6050/SWR Site Analyzer QSG X7_web.pdf",
-      },
-      // ===== Bravo EX2 Manuals (6053 folder) =====
-      {
-        id: "bravo-ex2-manual",
-        title: "Bravo EX2 Operation Manual",
-        description: "Complete operation manual for Bravo EX2 Analyzer with setup guides and troubleshooting (Oct 2021)",
-        category: "User Manuals",
-        type: "manual",
-        size: "15.3 MB",
-        downloads: 1245,
-        rating: 4.6,
-        featured: true,
-        tags: ["Bravo EX2", "VNA", "Analysis", "Operation", "VIA"],
-        downloadUrl: "/documents/manuals/6053/Bravo EX2 Operation Manual 10 2021.pdf",
-      },
-      {
-        id: "bravo-ex2-qsg",
-        title: "Bravo EX2 Analyzer Quick Start Guide",
-        description: "Quick reference guide for getting started with your Bravo EX2 Analyzer (Ver 3, Oct 2021)",
-        category: "Quick Reference",
-        type: "manual",
-        size: "2.1 MB",
-        downloads: 987,
-        rating: 4.7,
-        tags: ["Bravo EX2", "VNA", "Quick Start", "Getting Started"],
-        downloadUrl: "/documents/manuals/6053/Bravo EX2 Analyzer QSG Ver 3 10 2021.pdf",
-      },
-      {
-        id: "bravo-ex2-training",
-        title: "Bravo EX2 Training Presentation",
-        description: "Comprehensive training presentation covering product features and testing procedures (Aug 2021)",
-        category: "Training",
-        type: "manual",
-        size: "7.8 MB",
-        downloads: 756,
-        rating: 4.5,
-        tags: ["Bravo EX2", "VNA", "Training", "Presentation", "PowerPoint"],
-        downloadUrl: "/documents/manuals/6053/Bravo ex2 Training PPP Aug 2021.ppsx",
-      },
-      // ===== Bravo MRI-3000 Manuals (6055 folder) =====
-      {
-        id: "bravo-mri-manual",
-        title: "Bravo MRI-3000 Operation Manual",
-        description: "Complete operation manual for Bravo MRI-3000 Analyzer for MRI RF coil testing and system alignment (Aug 2023)",
-        category: "User Manuals",
-        type: "manual",
-        size: "10.2 MB",
-        downloads: 2156,
-        rating: 4.8,
-        featured: true,
-        tags: ["Bravo MRI", "MRI-3000", "Medical", "MRI", "RF Coil", "Safety"],
-        downloadUrl: "/documents/manuals/6055/Bravo MRI-3000 Operation Manual 08 2023.pdf",
-      },
-      {
-        id: "bravo-mri-qsg",
-        title: "Bravo MRI-3000 Quick Start Guide",
-        description: "Quick reference guide for getting started with your Bravo MRI-3000 Analyzer (Oct 2021)",
-        category: "Quick Reference",
-        type: "manual",
-        size: "1.8 MB",
-        downloads: 1234,
-        rating: 4.7,
-        tags: ["Bravo MRI", "MRI-3000", "Quick Start", "Getting Started"],
-        downloadUrl: "/documents/manuals/6055/6055-3010 QSG Oct 2021 Bravo MRI-3000.pdf",
-      },
-      {
-        id: "bravo-mri-training",
-        title: "Bravo MRI-3000 Training Presentation",
-        description: "Comprehensive training presentation covering MRI coil testing procedures (Aug 2021)",
-        category: "Training",
-        type: "manual",
-        size: "6.5 MB",
-        downloads: 678,
-        rating: 4.4,
-        tags: ["Bravo MRI", "MRI-3000", "Training", "Presentation", "PowerPoint"],
-        downloadUrl: "/documents/manuals/6055/Bravo MRI-3000 Training PPP Aug 2021.ppsx",
-      },
-    ],
+    manuals: allManualsFromData,
     videos: [
       {
         id: "e20-20-introduction",
@@ -1096,16 +948,17 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
     }
     
     // Merge Sanity data with static data, prioritizing Sanity but keeping static as fallback
+    // For manuals, always use the centralized data from product-resources.ts (includes all PPTs)
     return {
       software: (initialData.software && initialData.software.length > 0) ? initialData.software : defaultData.software,
-      manuals: (initialData.manuals && initialData.manuals.length > 0) ? initialData.manuals : defaultData.manuals,
+      manuals: allManualsFromData, // Always use centralized data for manuals (includes all PPTs, guides, training)
       videos: (initialData.videos && initialData.videos.length > 0) ? initialData.videos : defaultData.videos,
       faqs: (initialData.faqs && initialData.faqs.length > 0) ? initialData.faqs : defaultData.faqs,
       "application-notes": (initialData["application-notes"] && initialData["application-notes"].length > 0) 
         ? initialData["application-notes"] 
         : defaultData["application-notes"],
     }
-  }, [initialData])
+  }, [initialData, allManualsFromData])
 
   const currentResources = useMemo(() => {
     const tab = activeTab as keyof typeof resourcesData
