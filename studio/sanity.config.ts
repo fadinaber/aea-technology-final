@@ -13,7 +13,9 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'jvtqk7fd',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   
-  basePath: '/studio',
+  // basePath is only needed when embedded in Next.js
+  // For standalone deployment, it's not required
+  // basePath: '/studio',
   
   plugins: [
     deskTool({

@@ -452,12 +452,8 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               {/* Trust Signals */}
               <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600">
                 <div className="flex items-center gap-1">
-                  <Truck className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span>Free Shipping</span>
-                </div>
-                <div className="flex items-center gap-1">
                   <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span>2-Year Warranty</span>
+                  <span>Limited 2-Year Warranty</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Award className="w-3 h-3 sm:w-4 sm:h-4" />
