@@ -218,9 +218,15 @@ export default function DistributorLocatorClient({ distributors }: DistributorLo
   }, [distributors])
 
   const internationalDistributors = useMemo(() => {
-    const sanityIntl = distributors.filter((d) => d.region === "international")
+    const sanityIntl = distributors
+      .filter((d) => d.region === "international" && !d.name.toLowerCase().includes("test"))
+      .sort((a, b) => {
+        const countryCompare = (a.country || "").localeCompare(b.country || "")
+        if (countryCompare !== 0) return countryCompare
+        return a.name.localeCompare(b.name)
+      })
     if (sanityIntl.length > 0) return sanityIntl
-    // Fallback to static data
+    // Fallback to static data (already filtered and sorted in data/distributors.ts)
     return staticInternationalDistributors.map((item) => ({
       _id: `static-intl-${item.country}-${item.distributor.id}`,
       name: item.distributor.name,

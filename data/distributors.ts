@@ -550,7 +550,8 @@ export const flattenedDistributors: FlattenedDistributor[] = Object.keys(interna
   .sort()
   .flatMap((country) =>
     internationalDistributorsRaw[country]
-      .filter((d) => !d.isContactFactory)
+      .filter((d) => !d.isContactFactory && !d.name.toLowerCase().includes("test"))
+      .sort((a, b) => a.name.localeCompare(b.name))
       .map((distributor) => ({
         country,
         countryLower: country.toLowerCase(),
