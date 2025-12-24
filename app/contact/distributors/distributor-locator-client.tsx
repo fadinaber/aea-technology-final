@@ -219,7 +219,13 @@ export default function DistributorLocatorClient({ distributors }: DistributorLo
 
   const internationalDistributors = useMemo(() => {
     const sanityIntl = distributors
-      .filter((d) => d.region === "international" && !d.name.toLowerCase().includes("test"))
+      .filter((d) => {
+        if (d.region !== "international") return false
+        const nameLower = d.name.toLowerCase()
+        // Filter out distributors with "test" appearing multiple times (like "test test test")
+        const testMatches = (nameLower.match(/test/g) || []).length
+        return testMatches < 2 && !nameLower.includes("test test")
+      })
       .sort((a, b) => {
         const countryCompare = (a.country || "").localeCompare(b.country || "")
         if (countryCompare !== 0) return countryCompare

@@ -187,37 +187,32 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                 </a>
               </Button>
             ) : (
-              <Button className="w-full min-h-[44px] text-sm cursor-pointer" asChild>
+              <Button 
+                className="w-full min-h-[44px] text-sm cursor-pointer" 
+                asChild
+                disabled={!resource.downloadUrl || resource.downloadUrl === "#"}
+              >
                 {(() => {
-                  const isExternal = resource.downloadUrl && resource.downloadUrl.startsWith("http")
-                  const isLocalFile = resource.downloadUrl && resource.downloadUrl !== "#" && !isExternal
-                  
-                  if (isLocalFile) {
-                    // Extract filename from path for download attribute
-                    const filename = resource.downloadUrl.split("/").pop() || undefined
-                    // Check if it's a software file (.exe, .msi) or document (.pdf, .ppt, .ppsx)
-                    const isSoftwareFile = filename && /\.(exe|msi|zip)$/i.test(filename)
-                    const isDocumentFile = filename && /\.(pdf|ppt|ppsx)$/i.test(filename)
-                    
-                    if (isSoftwareFile || isDocumentFile) {
-                      return (
-                        <a 
-                          href={resource.downloadUrl} 
-                          download={filename}
-                        >
-                          Download
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </a>
-                      )
-                    }
+                  if (!resource.downloadUrl || resource.downloadUrl === "#") {
+                    return (
+                      <span>
+                        Download
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </span>
+                    )
                   }
                   
+                  const isExternal = resource.downloadUrl.startsWith("http")
+                  const filename = resource.downloadUrl.split("/").pop() || undefined
+                  
+                  // For external URLs (like S3), open in new tab - browser will handle download
+                  // For local files, use download attribute
                   return (
                     <a 
-                      href={resource.downloadUrl || "#"} 
+                      href={resource.downloadUrl} 
+                      download={!isExternal ? filename : undefined}
                       target={isExternal ? "_blank" : undefined}
                       rel={isExternal ? "noopener noreferrer" : undefined}
-                      download={isLocalFile ? resource.downloadUrl.split("/").pop() : undefined}
                     >
                       Download
                       <ArrowRight className="w-4 h-4 ml-2" />

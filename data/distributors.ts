@@ -550,7 +550,13 @@ export const flattenedDistributors: FlattenedDistributor[] = Object.keys(interna
   .sort()
   .flatMap((country) =>
     internationalDistributorsRaw[country]
-      .filter((d) => !d.isContactFactory && !d.name.toLowerCase().includes("test"))
+      .filter((d) => {
+        if (d.isContactFactory) return false
+        const nameLower = d.name.toLowerCase()
+        // Filter out distributors with "test" appearing multiple times (like "test test test")
+        const testMatches = (nameLower.match(/test/g) || []).length
+        return testMatches < 2 && !nameLower.includes("test test")
+      })
       .sort((a, b) => a.name.localeCompare(b.name))
       .map((distributor) => ({
         country,
