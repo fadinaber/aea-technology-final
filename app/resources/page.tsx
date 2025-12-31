@@ -41,6 +41,7 @@ export type SanityResource = {
   version?: string
   downloadUrl?: string
   fileUrl?: string
+  localPath?: string
   fileSize?: string
   videoId?: string
   duration?: string
@@ -76,7 +77,7 @@ export default async function ResourcesPage() {
               type: "software" as const,
               version: r.version,
               size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
+              downloadUrl: r.localPath || r.fileUrl || r.downloadUrl || "#",
               tags: r.tags || [],
               featured: r.featured,
             })),
@@ -89,7 +90,7 @@ export default async function ResourcesPage() {
               category: r.category || "Manual",
               type: "manual" as const,
               size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
+              downloadUrl: r.localPath || r.fileUrl || r.downloadUrl || "#",
               tags: r.tags || [],
               featured: r.featured,
             })),
@@ -201,11 +202,10 @@ export default async function ResourcesPage() {
                 noteId = "white-paper-via"
               }
               
-              // Use Sanity file URL if available, otherwise try local file, otherwise fallback
-              const sanityUrl = r.fileUrl || r.downloadUrl
+              // Priority: localPath (from Sanity) > fileUrl (Sanity upload) > downloadUrl (external) > getApplicationNotePath (local file) > fallback
               // Use the dynamic route that automatically finds the file by ID
-              const localPath = getApplicationNotePath(noteId)
-              const downloadUrl = sanityUrl || localPath || "#"
+              const localFilePath = getApplicationNotePath(noteId)
+              const downloadUrl = r.localPath || r.fileUrl || r.downloadUrl || localFilePath || "#"
               
               return {
                 id: noteId, // Use extracted note ID instead of Sanity _id
