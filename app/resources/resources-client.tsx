@@ -202,17 +202,15 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                     )
                   }
                   
-                  const isExternal = resource.downloadUrl.startsWith("http")
+                  const isLocalFile = resource.downloadUrl && !resource.downloadUrl.startsWith("http") && resource.downloadUrl !== "#"
                   const filename = resource.downloadUrl.split("/").pop() || undefined
                   
-                  // For external URLs (like S3), open in new tab - browser will handle download
+                  // For external URLs (like S3), browser will handle download naturally
                   // For local files, use download attribute
                   return (
                     <a 
                       href={resource.downloadUrl} 
-                      download={!isExternal ? filename : undefined}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      download={isLocalFile ? filename : undefined}
                     >
                       Download
                       <ArrowRight className="w-4 h-4 ml-2" />
