@@ -8,10 +8,10 @@ export default defineType({
   title: "Resource",
   type: "document",
   groups: [
-    { name: "basic", title: "Basic Info" },
-    { name: "file", title: "File & Links" },
-    { name: "content", title: "Content & Details" },
-    { name: "associations", title: "Product Associations" },
+    { name: "basic", title: "📋 Basic Info", default: true },
+    { name: "file", title: "📁 File & Links" },
+    { name: "content", title: "📝 Details" },
+    { name: "associations", title: "🔗 Product Links" },
   ],
   fields: [
     // ========== BASIC INFO ==========
@@ -22,17 +22,16 @@ export default defineType({
       group: "basic",
       options: {
         list: [
-          { title: "💾 Software", value: "software" },
-          { title: "📄 Manual", value: "manual" },
+          { title: "💾 Software Download", value: "software" },
+          { title: "📄 Manual / User Guide", value: "manual" },
           { title: "📋 Quick Start Guide", value: "guide" },
-          { title: "🎥 Video", value: "video" },
-          { title: "❓ FAQ", value: "faq" },
+          { title: "🎥 Video Tutorial", value: "video" },
           { title: "📝 Application Note", value: "application-note" },
           { title: "🎓 Training Material", value: "training" },
         ],
       },
       validation: (Rule) => Rule.required(),
-      description: "Select the type of resource",
+      description: "What type of resource is this?",
     }),
     defineField({
       name: "title",
@@ -44,10 +43,11 @@ export default defineType({
     }),
     defineField({
       name: "slug",
-      title: "Slug",
+      title: "URL Slug",
       type: "slug",
       group: "basic",
       options: { source: "title", maxLength: 96 },
+      description: "Auto-generated from title. Click 'Generate' to create.",
     }),
     defineField({
       name: "description",

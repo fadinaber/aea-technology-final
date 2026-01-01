@@ -54,7 +54,7 @@ export type SanityResource = {
 export type SanityFaq = {
   _id: string
   question: string
-  answer: string
+  answer: string | any[] // Can be plain text or rich text blocks
   category?: string
 }
 
@@ -127,15 +127,30 @@ export default async function ResourcesPage() {
             })),
           faqs:
             faqs.length > 0
-              ? faqs.map((f) => ({
-                  id: f._id,
-                  title: f.question,
-                  description: f.question,
-                  category: f.category || "General",
-                  type: "faq" as const,
-                  content: f.answer,
-                  tags: [],
-                }))
+              ? faqs.map((f) => {
+                  // Handle both plain text and rich text answers
+                  let answerText = ""
+                  if (typeof f.answer === "string") {
+                    answerText = f.answer
+                  } else if (Array.isArray(f.answer)) {
+                    // Extract text from rich text blocks
+                    answerText = f.answer
+                      .map((block: any) => 
+                        block.children?.map((child: any) => child.text || "").join("") || ""
+                      )
+                      .join("\n")
+                  }
+                  
+                  return {
+                    id: f._id,
+                    title: f.question,
+                    description: f.question,
+                    category: f.category || "General",
+                    type: "faq" as const,
+                    content: answerText,
+                    tags: [],
+                  }
+                })
               : resources
                   .filter((r) => r.type === "faq")
                   .map((r) => ({

@@ -158,7 +158,10 @@ export default defineType({
           type: "object",
           title: "Custom Featured Product (Advanced)",
           description: "Only use this if you want to manually enter product info instead of selecting a product above.",
-          collapsed: true,
+          options: {
+            collapsible: true,
+            collapsed: true,
+          },
           fields: [
             { name: "slug", type: "string", title: "Page URL Slug", description: "e.g., 'e20-20-avionics'" },
             { name: "name", type: "string", title: "Product Name" },
@@ -218,7 +221,9 @@ export default defineType({
           type: "array",
           title: "Manual Products (Advanced)",
           description: "Only use this if you need to manually enter product info instead of selecting products above.",
-          collapsed: true,
+          options: {
+            sortable: true,
+          },
           hidden: ({ parent }) => parent?.products?.length > 0,
           of: [
             {
