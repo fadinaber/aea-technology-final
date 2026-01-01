@@ -188,14 +188,14 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
               </Button>
             ) : (
               <Button 
-                className="w-full min-h-[44px] text-sm cursor-pointer" 
+                className="w-full min-h-[44px] text-sm cursor-pointer text-white" 
                 asChild
                 disabled={!resource.downloadUrl || resource.downloadUrl === "#"}
               >
                 {(() => {
                   if (!resource.downloadUrl || resource.downloadUrl === "#") {
                     return (
-                      <span>
+                      <span className="text-white">
                         Download
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </span>
@@ -225,7 +225,7 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                       download={isLocalFile ? filename : undefined}
                       target={isLocalFile ? undefined : "_blank"}
                       rel={isLocalFile ? undefined : "noopener noreferrer"}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                      className="text-white no-underline"
                     >
                       Download
                       <ArrowRight className="w-4 h-4 ml-2" />

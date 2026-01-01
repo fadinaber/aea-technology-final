@@ -119,7 +119,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "ETDR PC Vision™ Software",
       description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
-      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      localPath: "/documents/software/TDR_PC_Vision.zip",
       fileSize: "85 MB",
     },
     // Datasheet
@@ -218,7 +218,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "ETDR PC Vision™ Software",
       description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
-      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      localPath: "/documents/software/TDR_PC_Vision.zip",
       fileSize: "85 MB",
     },
     // Datasheet
@@ -311,7 +311,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "ETDR PC Vision™ Software",
       description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
-      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      localPath: "/documents/software/TDR_PC_Vision.zip",
       fileSize: "85 MB",
     },
     // Datasheet
@@ -404,7 +404,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "ETDR PC Vision™ Software",
       description: "Complete analysis software for TDR measurements with graphical display and reporting capabilities",
-      localPath: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+      localPath: "/documents/software/TDR_PC_Vision.zip",
       fileSize: "85 MB",
     },
     // Datasheet
@@ -450,7 +450,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "Site Analyzer PC Vision",
       description: "Analysis software for SWR, VNA and EX2 instruments",
-      localPath: "/documents/software/Site_Analyzer_PC_Vision/PC-Vision_1_16_1_1.msi",
+      localPath: "/documents/software/Site_Analyzer_PC_Vision.zip",
       fileSize: "72 MB",
     },
     // Datasheet
@@ -503,7 +503,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "Site Analyzer PC Vision",
       description: "Analysis software for SWR, VNA and EX2 instruments",
-      localPath: "/documents/software/Site_Analyzer_PC_Vision/PC-Vision_1_16_1_1.msi",
+      localPath: "/documents/software/Site_Analyzer_PC_Vision.zip",
       fileSize: "72 MB",
     },
     // Datasheet
@@ -547,7 +547,7 @@ export const productResourcesMap: Record<string, ProductResourceItem[]> = {
       type: "software",
       title: "MRI Vision",
       description: "Remote application software for Bravo MRI 3000",
-      localPath: "/documents/software/MRI_Vision/setup_1_0_1_1.exe",
+      localPath: "/documents/software/MRI_Vision.zip",
       fileSize: "63 MB",
     },
     // Datasheet
