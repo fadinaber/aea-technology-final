@@ -22,11 +22,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aeatechnology.com"),
   title: {
-    default: "AEA Technology - TDR, VNA & SWR Test Equipment | Made in USA",
+    default: "AEA Technology - TDR, VNA & SWR Test Equipment | American Made",
     template: "%s | AEA Technology",
   },
   description:
-    "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment made in USA since 1990. Trusted by aviation, military, and medical industries.",
+    "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment American Made since 1990. Trusted by aviation, military, and medical industries.",
   keywords: [
     "TDR",
     "Time Domain Reflectometer",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "E20/20 TDR",
     "Bravo MRI analyzer",
     "cable testing equipment",
-    "made in USA test equipment",
+    "American Made test equipment",
     "AEA Technology",
   ],
   authors: [{ name: "AEA Technology, Inc.", url: "https://aeatechnology.com" }],
@@ -65,14 +65,14 @@ export const metadata: Metadata = {
     siteName: "AEA Technology",
     title: "AEA Technology - Professional RF & Cable Test Equipment",
     description:
-      "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF testing equipment made in USA since 1990.",
+      "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF testing equipment American Made since 1990.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "AEA Technology" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AEA Technology - TDR, VNA & SWR Test Equipment",
     description:
-      "Professional RF and cable testing equipment. Time Domain Reflectometers, Vector Network Analyzers, and SWR meters made in USA.",
+      "Professional RF and cable testing equipment. Time Domain Reflectometers, Vector Network Analyzers, and SWR meters American Made.",
     images: ["/opengraph-image"],
     creator: "@aeatech",
   },

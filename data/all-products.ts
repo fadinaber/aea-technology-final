@@ -100,7 +100,7 @@ export const allProducts: Product[] = [
       "The enhanced version of the 20/20 Step TDR is ideal for troubleshooting all types of coax, OSP cables, twisted pairs Cat2 to Cat6A and single wires in bundle/harness. Perfect for broadcast transmission line testing and network analysis.",
     category: "tdr",
     badges: [
-      { text: "Made in USA", variant: "green" },
+      { text: "American Made", variant: "green" },
       { text: "Broadcast Grade", variant: "blue" },
     ],
     modelImages: {
@@ -178,7 +178,7 @@ export const allProducts: Product[] = [
       { name: "CE Certified", description: "European Conformity marking" },
       { name: "EMC Compliance", description: "EN/IEC 61326-1:2013/2020" },
       { name: "Safety Certified", description: "EN/IEC 61010-1:2010 +A1:2016 + C1:2019" },
-      { name: "Made in USA", description: "Designed and manufactured in the United States" },
+      { name: "American Made", description: "Designed and manufactured in the United States" },
       { name: "ISO 9001", description: "Registered to ISO 9001 quality standards" },
     ],
     models: [
@@ -396,7 +396,7 @@ export const allProducts: Product[] = [
       "Complete testing solution with rugged case and additional test leads. The Avionics TDR Kit is specifically configured for aviation applications with comprehensive test accessories.",
     category: "tdr",
     badges: [
-      { text: "Made in USA", variant: "green" },
+      { text: "American Made", variant: "green" },
       { text: "Boeing Approved", variant: "blue" },
     ],
     modelImages: {
@@ -711,7 +711,7 @@ export const allProducts: Product[] = [
       "The enhanced version of the 20/20 Step TDR is ideal for troubleshooting all types of coax, OSP cables, twisted pairs Cat2 to Cat6A and single wires in bundle/harness. Perfect for VDV/RF network testing and maintenance.",
     category: "tdr",
     badges: [
-      { text: "Made in USA", variant: "green" },
+      { text: "American Made", variant: "green" },
       { text: "Network Grade", variant: "blue" },
     ],
     modelImages: {
@@ -780,7 +780,7 @@ export const allProducts: Product[] = [
       { name: "CE Certified", description: "European Conformity marking" },
       { name: "EMC Compliance", description: "EN/IEC 61326-1:2013/2020" },
       { name: "Safety Certified", description: "EN/IEC 61010-1:2010 +A1:2016 + C1:2019" },
-      { name: "Made in USA", description: "Designed and manufactured in the United States" },
+      { name: "American Made", description: "Designed and manufactured in the United States" },
       { name: "ISO 9001", description: "Registered to ISO 9001 quality standards" },
     ],
     models: [
@@ -950,7 +950,7 @@ export const allProducts: Product[] = [
       {
         title: "Quality Assured",
         icon: "award",
-        items: ["Made in USA.", "ISO 9001 manufactured.", "2-year warranty."],
+        items: ["American Made.", "ISO 9001 manufactured.", "2-year warranty."],
       },
     ],
     softwareInfo: {
@@ -974,7 +974,7 @@ export const allProducts: Product[] = [
       "The enhanced version of the 20/20 Step TDR is ideal for troubleshooting all types of coax, OSP cables, twisted pairs Cat2 to Cat6A and single wires in bundle/harness. Perfect for CATV network maintenance and analysis.",
     category: "tdr",
     badges: [
-      { text: "Made in USA", variant: "green" },
+      { text: "American Made", variant: "green" },
       { text: "CATV Grade", variant: "blue" },
     ],
     modelImages: {
@@ -1052,7 +1052,7 @@ export const allProducts: Product[] = [
       { name: "CE Certified", description: "European Conformity marking" },
       { name: "EMC Compliance", description: "EN/IEC 61326-1:2013/2020" },
       { name: "Safety Certified", description: "EN/IEC 61010-1:2010 +A1:2016 + C1:2019" },
-      { name: "Made in USA", description: "Designed and manufactured in the United States" },
+      { name: "American Made", description: "Designed and manufactured in the United States" },
       { name: "ISO 9001", description: "Registered to ISO 9001 quality standards" },
     ],
     models: [
@@ -1230,7 +1230,7 @@ export const allProducts: Product[] = [
       {
         title: "Quality Assured",
         icon: "award",
-        items: ["Made in USA.", "ISO 9001 manufactured.", "2-year warranty."],
+        items: ["American Made.", "ISO 9001 manufactured.", "2-year warranty."],
       },
     ],
     softwareInfo: {
@@ -1255,7 +1255,7 @@ export const allProducts: Product[] = [
       "Single port unit with easy to use FDR (Frequency Domain Reflectometer), SWR and Return loss measurements. Featuring full color back-lit display with excellent daylight readability.",
     category: "vna-swr",
     badges: [
-      { text: "Made in USA", variant: "green" },
+      { text: "American Made", variant: "green" },
       { text: "Professional Grade", variant: "blue" },
     ],
     modelImages: {
@@ -1308,7 +1308,7 @@ export const allProducts: Product[] = [
       { name: "EMC Compliance", description: "EN/IEC 61326-1:2013/2020" },
       { name: "Safety Certified", description: "EN/IEC 61010-1:2010 +A1:2016 + C1:2019" },
       { name: "ISO 9001", description: "Registered to ISO 9001 quality standards" },
-      { name: "Made in USA", description: "Made in USA with US and global parts" },
+      { name: "American Made", description: "American Made with US and global parts" },
     ],
     models: [
       {
@@ -1430,7 +1430,7 @@ export const allProducts: Product[] = [
       {
         title: "Quality Assured",
         icon: "award",
-        items: ["Made in USA.", "ISO 9001 manufactured.", "2-year warranty."],
+        items: ["American Made.", "ISO 9001 manufactured.", "2-year warranty."],
       },
     ],
     softwareInfo: {
@@ -1453,7 +1453,7 @@ export const allProducts: Product[] = [
     shortDescription:
       "Network Analyzer and Antenna Analyzer with comprehensive RF testing capabilities including SWR and VNA measurements.",
     category: "vna-swr",
-    badges: [{ text: "Made in USA", variant: "green" }],
+    badges: [{ text: "American Made", variant: "green" }],
     modelImages: {
       0: [
         "/images/products/bravo-ex2/device-with-stand.png",
@@ -1516,7 +1516,7 @@ export const allProducts: Product[] = [
       { name: "CE Certified", description: "European Conformity marking" },
       { name: "EMC Compliance", description: "EN/IEC 61326-1:2013/2020" },
       { name: "Safety Certified", description: "EN/IEC 61010-1:2010 +A1:2016 + C1:2019" },
-      { name: "Made in USA", description: "With US and global parts" },
+      { name: "American Made", description: "With US and global parts" },
       { name: "ISO 9001", description: "Registered to ISO 9001 quality standards" },
     ],
     models: [
@@ -1627,7 +1627,7 @@ export const allProducts: Product[] = [
       {
         title: "Quality",
         icon: "award",
-        items: ["Made in USA.", "ISO 9001 certified.", "2-year warranty."],
+        items: ["American Made.", "ISO 9001 certified.", "2-year warranty."],
       },
     ],
     softwareInfo: {
@@ -1650,7 +1650,7 @@ export const allProducts: Product[] = [
     shortDescription:
       "The Bravo MRI-3000 Analyzer is a Network Analyzer that accurately measures Impedances from 0 to 2000 Ohms, Resistance, Impedance Angle, X, Q, Return Loss, and SWR. Designed specifically for MRI System Alignment with its ultra low-magnetic signature.",
     category: "vna-swr",
-    badges: [{ text: "Made in USA", variant: "green" }],
+    badges: [{ text: "American Made", variant: "green" }],
     modelImages: {
       0: ["/images/featured/bravo-mri.jpg", "/images/bravo-mri-in-case.png"],
       1: ["/images/featured/bravo-mri.jpg", "/images/bravo-mri-in-case.png"],

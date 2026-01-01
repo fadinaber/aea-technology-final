@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "Carlsbad California",
     "George Naber",
     "ISO 9001 certified",
-    "made in USA",
+    "American Made",
     "cable test equipment history",
   ],
   openGraph: {

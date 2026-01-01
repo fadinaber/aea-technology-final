@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "AEA Technology - TDR, VNA & SWR Test Equipment",
     short_name: "AEA Technology",
-    description: "Professional RF and cable testing equipment. Time Domain Reflectometers, Vector Network Analyzers, and SWR meters made in USA.",
+    description: "Professional RF and cable testing equipment. Time Domain Reflectometers, Vector Network Analyzers, and SWR meters American Made.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

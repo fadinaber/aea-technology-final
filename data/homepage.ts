@@ -195,13 +195,13 @@ export const homepageData: {
       order: 1,
       data: {
         badges: [
-          { text: "Made in USA", icon: "Flag", variant: "default" },
+          { text: "American Made", icon: "Flag", variant: "default" },
           { text: "ISO 9001", icon: "Shield", variant: "primary" },
         ],
         headline: {
           line1: "Professional",
           line2: "RF & Cable Testing",
-          line3: "Equipment Made in USA",
+          line3: "Equipment American Made",
         },
         description:
           "Trusted by aviation, military, and telecommunications professionals for over 30 years. Precision testing instruments designed and manufactured in the USA for critical applications.",
@@ -298,7 +298,7 @@ export const homepageData: {
         description:
           "Three decades of innovation, precision testing, and unwavering commitment to quality have made AEA Technology the trusted choice for professionals worldwide.",
         mainFeature: {
-          title: "Made in USA",
+          title: "American Made",
           badge: "American Made",
           description:
             "Every AEA Technology instrument is proudly designed, manufactured, and assembled in the United States. This commitment ensures the highest quality standards while supporting American manufacturing excellence and providing you with equipment you can trust.",

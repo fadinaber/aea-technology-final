@@ -25,7 +25,7 @@ export default function Footer() {
                 loading="lazy"
               />
             </div>
-            <Badge className="bg-green-600 hover:bg-green-700 text-white">Made in USA</Badge>
+            <Badge className="bg-green-600 hover:bg-green-700 text-white">American Made</Badge>
             <p className="text-slate-300 text-sm leading-relaxed">{siteConfig.description}</p>
           </div>
 

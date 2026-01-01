@@ -118,7 +118,7 @@ export const aboutPageData: AboutPageData = {
       title: "American Manufacturing Excellence",
       description:
         "Every product designed, manufactured, and assembled in the United States with premium components and rigorous quality control.",
-      highlight: "Made in USA",
+      highlight: "American Made",
     },
     {
       id: "quality-reliability",
@@ -213,7 +213,7 @@ export const aboutPageData: AboutPageData = {
       },
       {
         id: "made-in-usa",
-        name: "Made in USA",
+        name: "American Made",
         image: "/images/design-mode/made%20in%20usa.jpg.jpeg",
         link: null,
         width: 100,

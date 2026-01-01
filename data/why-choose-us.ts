@@ -20,7 +20,7 @@ export interface Certification {
 
 export const mainFeature = {
   id: "made-in-usa",
-  title: "Made in USA",
+  title: "American Made",
   badge: "American Made",
   description:
     "Every AEA Technology instrument is proudly designed, manufactured, and assembled in the United States. This commitment ensures the highest quality standards while supporting American manufacturing excellence and providing you with equipment you can trust.",

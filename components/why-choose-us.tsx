@@ -39,7 +39,7 @@ export default function WhyChooseUs() {
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto">
-          {/* Made in USA - Hero Feature */}
+          {/* American Made - Hero Feature */}
           <div className="mb-8 sm:mb-10 lg:mb-12">
             <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-r from-background via-muted to-background border border-border p-0">
               <div className="grid lg:grid-cols-2">
@@ -47,7 +47,7 @@ export default function WhyChooseUs() {
                 <div className="relative w-full lg:hidden overflow-hidden bg-slate-100" style={{ aspectRatio: '2/1' }}>
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
-                    alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
+                    alt="AEA Technology - American Made Manufacturing facility in Carlsbad, California"
                     fill
                     sizes="100vw"
                     className="object-contain"
@@ -80,7 +80,7 @@ export default function WhyChooseUs() {
                 <div className="hidden lg:block relative min-h-[400px] overflow-hidden bg-slate-100" style={{ aspectRatio: '2/1' }}>
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
-                    alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
+                    alt="AEA Technology - American Made Manufacturing facility in Carlsbad, California"
                     fill
                     sizes="50vw"
                     className="object-contain"

@@ -43,12 +43,12 @@ export default defineType({
           name: "badges",
           type: "array",
           title: "Trust Badges",
-          description: "Small badges that appear above the headline (e.g., 'Made in USA', 'ISO 9001')",
+          description: "Small badges that appear above the headline (e.g., 'American Made', 'ISO 9001')",
           of: [
             {
               type: "object",
               fields: [
-                { name: "text", type: "string", title: "Badge Text", description: "e.g., 'Made in USA'" },
+                { name: "text", type: "string", title: "Badge Text", description: "e.g., 'American Made'" },
                 { name: "icon", type: "string", title: "Icon Name", description: "Optional: Flag, Shield, CheckCircle" },
                 {
                   name: "variant",

@@ -6,7 +6,7 @@ export default function WebsiteSchema() {
     alternateName: ["AEA Tech", "AEA Technology Inc"],
     url: "https://aeatechnology.com",
     description:
-      "Leading manufacturer of Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Professional RF and cable testing equipment made in USA.",
+      "Leading manufacturer of Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Professional RF and cable testing equipment American Made.",
     publisher: {
       "@type": "Organization",
       name: "AEA Technology, Inc.",

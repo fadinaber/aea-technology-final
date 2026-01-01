@@ -259,7 +259,7 @@ export default function AboutPageClient({ data }: AboutPageClientProps) {
                 )
               }
 
-              // Non-clickable badge (like Made in USA)
+              // Non-clickable badge (like American Made)
               return (
                 <div
                   key={cert.id}
