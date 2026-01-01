@@ -24,7 +24,21 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    // Optimize imports for smaller bundles and faster FCP
+    optimizePackageImports: [
+      'lucide-react',
+      '@radix-ui/react-icons',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-navigation-menu',
+      '@radix-ui/react-popover',
+      '@radix-ui/react-scroll-area',
+      '@radix-ui/react-select',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-tooltip',
+      'date-fns',
+    ],
   },
   compress: true,
   // Enable powered by header removal for security and smaller response
@@ -87,13 +101,15 @@ const nextConfig = {
           },
         ],
       },
-      // HTML pages - short cache with stale-while-revalidate for better TTFB
+      // HTML pages - optimized cache with longer edge cache for better TTFB
+      // Uses ISR revalidation + on-demand revalidation for updates
       {
         source: '/((?!api|_next|documents).*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
+            // Edge cache for 12 hours, serve stale while revalidating for 7 days
+            value: 'public, max-age=0, s-maxage=43200, stale-while-revalidate=604800',
           },
           {
             key: 'X-Content-Type-Options',

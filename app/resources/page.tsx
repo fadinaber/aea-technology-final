@@ -5,7 +5,8 @@ import ResourcesClient from "./resources-client"
 import { getApplicationNotePath } from "@/lib/file-helpers"
 
 // Increase revalidation time for better TTFB - content doesn't change frequently
-export const revalidate = 3600
+// 12 hours cache for better TTFB - content changes monthly
+export const revalidate = 43200
 
 export const metadata: Metadata = {
   title: "Resources - Manuals, Software, Videos & FAQs | AEA Technology",

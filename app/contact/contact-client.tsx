@@ -206,9 +206,9 @@ function ContactPageClient({ products }: ContactPageClientProps) {
           </Card>
         </div>
 
-        {/* Contact Forms */}
+        {/* Contact Forms - Fixed min-height to prevent CLS when switching form types */}
         <div className="lg:col-span-2">
-          <Card>
+          <Card className="min-h-[800px]">
             <CardHeader>
               <div className="flex gap-2 mb-4 flex-wrap">
                 <Button
@@ -384,8 +384,9 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                     </Select>
                   </div>
 
+                  {/* Quote products section - fixed min-height to prevent CLS */}
                   {formType === "quote" && (
-                    <div className="space-y-3">
+                    <div className="space-y-3 min-h-[180px]">
                       <div>
                         <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-1">
                           What types of products are you interested in?
@@ -412,8 +413,9 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                     </div>
                   )}
 
+                  {/* Support product section - fixed min-height to prevent CLS */}
                   {formType === "support" && (
-                    <div className="space-y-2">
+                    <div className="space-y-2 min-h-[80px]">
                       <Label htmlFor="product" className="text-sm sm:text-base">
                         Which product do you need help with? *
                       </Label>

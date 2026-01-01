@@ -13,7 +13,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Company Info */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center bg-white rounded-lg p-3 w-fit h-[64px] sm:h-[72px]">
+            {/* Fixed dimensions container to prevent CLS */}
+            <div className="flex items-center bg-white rounded-lg p-3 w-[157px] h-16 sm:w-[184px] sm:h-[72px]">
               <Image
                 src={logo.light || "/placeholder.svg"}
                 alt={logo.alt}

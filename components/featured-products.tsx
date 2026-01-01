@@ -39,18 +39,21 @@ export default function FeaturedProducts({ data: overrideData }: FeaturedProduct
               <CardHeader className="p-0 relative">
                 <Link href={`/products/${product.id}`} className="cursor-pointer">
                   <div className="relative overflow-hidden bg-gradient-to-br from-background to-muted/50">
-                    <div className="h-48 sm:h-56 lg:h-64 flex items-center justify-center p-4 sm:p-6 relative aspect-[4/3]">
-                      <Image
-                        src={product.image || "/placeholder.svg"}
-                        alt={`AEA Technology ${product.name} - ${product.category}`}
-                        width={300}
-                        height={225}
-                        loading={product.id === data.products[0]?.id ? "eager" : "lazy"}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                        decoding="async"
-                        quality={85}
-                      />
+                    {/* Fixed aspect ratio container to prevent CLS */}
+                    <div className="relative p-4 sm:p-6" style={{ aspectRatio: '4/3' }}>
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <Image
+                          src={product.image || "/placeholder.svg"}
+                          alt={`AEA Technology ${product.name} - ${product.category}`}
+                          width={300}
+                          height={225}
+                          loading={product.id === data.products[0]?.id ? "eager" : "lazy"}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                          decoding="async"
+                          quality={80}
+                        />
+                      </div>
                     </div>
                     <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
                       <Badge className="bg-primary text-primary-foreground shadow-lg text-xs sm:text-sm">

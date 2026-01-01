@@ -102,12 +102,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* DNS prefetch and preconnect for external resources */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Preload LCP image - hero featured product image */}
-        <link rel="preload" href="/images/products/avionics/full-kit.png" as="image" type="image/png" fetchPriority="high" />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        {/* Preload LCP image - hero featured product image with high priority */}
+        <link 
+          rel="preload" 
+          href="/images/products/avionics/full-kit.png" 
+          as="image" 
+          type="image/png"
+          fetchPriority="high"
+        />
         <OrganizationSchema />
         <WebsiteSchema />
       </head>

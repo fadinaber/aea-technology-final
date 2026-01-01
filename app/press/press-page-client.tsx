@@ -24,6 +24,13 @@ export default function PressPageClient({ pressReleases }: PressPageClientProps)
         }))
       : pressPageData.pressReleases.filter((release) => release.id !== "new-website-launch")
 
+  // Sort to ensure featured items are at the top (fallback sorting if query doesn't handle it)
+  const sortedReleases = [...releases].sort((a, b) => {
+    if (a.featured && !b.featured) return -1
+    if (!a.featured && b.featured) return 1
+    return 0
+  })
+
   const { headline, subheadline, mediaContact } = pressPageData
 
   return (
@@ -34,7 +41,7 @@ export default function PressPageClient({ pressReleases }: PressPageClientProps)
       </div>
 
       <div className="max-w-4xl mx-auto space-y-6">
-        {releases.map((release) => (
+        {sortedReleases.map((release) => (
           <Card
             key={release.id}
             className={`p-0 overflow-hidden transition-all duration-300 hover:shadow-lg ${

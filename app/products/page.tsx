@@ -4,7 +4,8 @@ import { allProductsQuery } from "@/sanity/lib/queries"
 import ProductsPageClient from "./products-page-client"
 
 // Increase revalidation time for better TTFB - content doesn't change frequently
-export const revalidate = 3600
+// 12 hours cache for better TTFB - content changes monthly
+export const revalidate = 43200
 
 export const metadata: Metadata = {
   title: "TDR, VNA & SWR Test Equipment - RF & Cable Testing Products",

@@ -4,7 +4,8 @@ import { allDistributorsQuery } from "@/sanity/lib/queries"
 import DistributorLocatorClient from "./distributor-locator-client"
 
 // Increase revalidation time for better TTFB - content doesn't change frequently
-export const revalidate = 3600
+// 12 hours cache for better TTFB - content changes monthly
+export const revalidate = 43200
 
 export const metadata: Metadata = {
   title: "Find a Distributor | AEA Technology",

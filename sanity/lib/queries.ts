@@ -46,7 +46,7 @@ export const productSlugsQuery = groq`
 
 // Press Releases
 export const allPressReleasesQuery = groq`
-  *[_type == "pressRelease"] | order(date desc) {
+  *[_type == "pressRelease"] | order(featured desc, date desc) {
     _id,
     title,
     "slug": slug.current,
@@ -264,7 +264,7 @@ export const aboutPageQuery = groq`
   }
 `
 
-// Homepage (Singleton)
+// Homepage (Singleton) - Optimized query with minimal projections for faster TTFB
 export const homepageQuery = groq`
   *[_type == "homepage"][0] {
     hero {
@@ -276,12 +276,17 @@ export const homepageQuery = groq`
       cta,
       stats,
       featuredProductSlug,
-      featuredProductData {
-        ...,
+      // Only fetch needed fields from featuredProductData
+      "featuredProductData": featuredProductData {
+        slug,
+        name,
+        description,
+        badge,
         "imageAssetUrl": image.asset->url
       },
+      // Optimized: only fetch essential product fields
       "featuredProduct": featuredProduct-> {
-        slug,
+        "slug": slug.current,
         name,
         shortDescription,
         "imageUrl": modelImages[0].images[0].asset->url
@@ -292,21 +297,29 @@ export const homepageQuery = groq`
       badge,
       headline,
       description,
-      productsList[] {
-        ...,
+      // Only fetch needed fields from productsList
+      "productsList": productsList[] {
+        productId,
+        name,
+        description,
+        category,
+        features,
         "imageAssetUrl": image.asset->url
       },
+      // Optimized: limit fields from product references
       "products": products[]-> {
         _id,
-        slug,
+        "slug": slug.current,
         name,
+        category,
         shortDescription,
         "imageUrl": modelImages[0].images[0].asset->url,
         keyFeatures[0...3]
       },
       cta
     },
-    whyChooseUs {
+    // Only fetch if enabled
+    "whyChooseUs": whyChooseUs {
       enabled,
       badge,
       headline,
@@ -325,8 +338,6 @@ export const homepageQuery = groq`
       description,
       resourceTypes,
       cta
-    },
-    seoTitle,
-    seoDescription
+    }
   }
 `

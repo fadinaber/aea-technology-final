@@ -43,17 +43,17 @@ export default function WhyChooseUs() {
           <div className="mb-8 sm:mb-10 lg:mb-12">
             <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-r from-background via-muted to-background border border-border p-0">
               <div className="grid lg:grid-cols-2">
-                {/* Mobile: Image on top with aspect ratio */}
-                <div className="relative w-full aspect-[2/1] lg:hidden overflow-hidden">
+                {/* Mobile: Image on top with fixed aspect ratio to prevent CLS */}
+                <div className="relative w-full lg:hidden overflow-hidden bg-slate-100" style={{ aspectRatio: '2/1' }}>
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
                     alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
                     fill
                     sizes="100vw"
-                    className="object-cover object-top"
+                    className="object-contain"
                     loading="lazy"
                     decoding="async"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
 
@@ -76,17 +76,17 @@ export default function WhyChooseUs() {
                   </p>
                 </div>
 
-                {/* Desktop: Image fills right side completely */}
-                <div className="hidden lg:block relative h-full min-h-[400px] overflow-hidden aspect-[2/1]">
+                {/* Desktop: Image fills right side with fixed aspect ratio to prevent CLS */}
+                <div className="hidden lg:block relative min-h-[400px] overflow-hidden bg-slate-100" style={{ aspectRatio: '2/1' }}>
                   <Image
                     src={mainFeature.image || "/placeholder.svg"}
                     alt="AEA Technology - Made in USA Manufacturing facility in Carlsbad, California"
                     fill
                     sizes="50vw"
-                    className="object-cover object-top"
+                    className="object-contain"
                     loading="lazy"
                     decoding="async"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
               </div>

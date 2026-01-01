@@ -92,10 +92,11 @@ export default function SearchBar() {
   }
 
   return (
-    <div ref={searchRef} className="relative w-full max-w-2xl mx-auto">
-      <div className="relative">
+    <div ref={searchRef} className="relative w-full max-w-2xl mx-auto h-14">
+      {/* Fixed height container matching skeleton to prevent CLS */}
+      <div className="relative h-14">
         <div className="absolute inset-0 bg-white/95 backdrop-blur-xl rounded-xl border-2 border-white/40 shadow-lg"></div>
-        <div className="relative flex items-center">
+        <div className="relative flex items-center h-full">
           <Search className="absolute left-4 w-5 h-5 text-gray-500" />
           <Input
             type="text"
@@ -106,7 +107,7 @@ export default function SearchBar() {
               setIsOpen(true)
             }}
             onFocus={() => setIsOpen(true)}
-            className="w-full pl-12 pr-12 py-4 text-gray-900 placeholder:text-gray-500 bg-transparent focus:ring-2 focus:ring-blue-500/50 rounded-xl text-base font-medium border border-slate-600"
+            className="w-full h-full pl-12 pr-12 py-4 text-gray-900 placeholder:text-gray-500 bg-transparent focus:ring-2 focus:ring-blue-500/50 rounded-xl text-base font-medium border border-slate-600"
           />
           {query && (
             <button

@@ -98,7 +98,8 @@ function mergeSanityProduct(base: Product | undefined, sanity: SanityProduct | n
 }
 
 // Increase revalidation time for better TTFB - product content doesn't change frequently
-export const revalidate = 3600
+// 12 hours cache for better TTFB - content changes monthly
+export const revalidate = 43200
 
 // Generate static params for all products
 export async function generateStaticParams() {

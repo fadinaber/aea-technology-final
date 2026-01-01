@@ -4,15 +4,16 @@ import WhyChooseUs from "@/components/why-choose-us"
 import ResourcesTeaser from "@/components/resources-teaser"
 import { SupportCTA } from "@/components/support-cta"
 import { client } from "@/sanity/lib/client"
-import { homepageQuery, siteSettingsQuery } from "@/sanity/lib/queries"
+import { homepageQuery } from "@/sanity/lib/queries"
 import type {
   FeaturedProductsSection,
   HeroSection,
   ResourcesTeaserSection,
 } from "@/data/homepage"
 
-// Increase revalidation time for better TTFB - content doesn't change frequently
-export const revalidate = 3600
+// Increase revalidation time for better TTFB - content changes monthly
+// 12 hours cache with stale-while-revalidate for instant responses
+export const revalidate = 43200
 
 type SanityHomepageHero = {
   enabled?: boolean
@@ -191,11 +192,8 @@ function mapResourcesTeaserFromSanity(
 }
 
 export default async function Home() {
-  const [homepage] = await Promise.all([
-    client.fetch<SanityHomepage | null>(homepageQuery),
-    // Site settings are fetched via Sanity but currently used at layout level.
-    client.fetch(siteSettingsQuery).catch(() => null),
-  ])
+  // Single optimized query - removed unused siteSettingsQuery for faster TTFB
+  const homepage = await client.fetch<SanityHomepage | null>(homepageQuery)
 
   const heroData = mapHeroFromSanity(homepage?.hero)
   const featuredProductsData = mapFeaturedProductsFromSanity(homepage?.featuredProducts)

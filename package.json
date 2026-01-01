@@ -6,7 +6,9 @@
     "build": "next build",
     "dev": "node scripts/dev-no-turbo-safe.mjs",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "fix-faqs": "node scripts/fix-faq-answers.mjs",
+    "fix-faqs:dry": "node scripts/fix-faq-answers.mjs --dry-run"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
