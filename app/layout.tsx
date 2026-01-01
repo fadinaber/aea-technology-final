@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     "Bravo MRI analyzer",
     "cable testing equipment",
     "American Made test equipment",
+    "Made in USA test equipment",
     "AEA Technology",
   ],
   authors: [{ name: "AEA Technology, Inc.", url: "https://aeatechnology.com" }],
