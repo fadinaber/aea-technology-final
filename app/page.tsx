@@ -132,6 +132,32 @@ function mapHeroFromSanity(hero?: SanityHomepageHero): HeroSection["data"] | und
   }
 }
 
+// Helper function to get featured product image from local folder
+function getFeaturedProductImage(slug: string | undefined, name: string | undefined, imageUrl?: string): string {
+  // If we have a valid Sanity image URL, use it
+  if (imageUrl && imageUrl.trim() !== "" && imageUrl !== "null" && !imageUrl.includes("null")) {
+    return imageUrl
+  }
+  
+  // Otherwise, map to local featured images based on slug or name
+  const identifier = (slug || name || "").toLowerCase()
+  
+  if (identifier.includes("avionics") || identifier.includes("avionics-tdr")) {
+    return "/images/featured/avionics-tdr-kit.png"
+  }
+  if (identifier.includes("mri") || identifier.includes("bravo")) {
+    return "/images/featured/bravo-mri.jpg"
+  }
+  if (identifier.includes("e20") || identifier.includes("e2020") || identifier.includes("tdr")) {
+    return "/images/featured/e20-20-tdr.png"
+  }
+  if (identifier.includes("swr") || identifier.includes("site") || identifier.includes("analyzer")) {
+    return "/images/featured/swr-analyzer.png"
+  }
+  
+  return "/placeholder.svg"
+}
+
 function mapFeaturedProductsFromSanity(
   featured?: SanityHomepageFeaturedProducts,
 ): FeaturedProductsSection["data"] | undefined {
@@ -152,9 +178,7 @@ function mapFeaturedProductsFromSanity(
             id: p.slug ?? p._id ?? "",
             name: p.name ?? "Product",
             description: p.shortDescription ?? "",
-            image: (p.imageUrl && p.imageUrl.trim() !== "" && p.imageUrl !== "null") 
-              ? p.imageUrl 
-              : "/placeholder.svg",
+            image: getFeaturedProductImage(p.slug, p.name, p.imageUrl),
             category: p.category ?? "Product",
             features: p.keyFeatures ?? [],
           }))
@@ -162,11 +186,7 @@ function mapFeaturedProductsFromSanity(
             id: p.productId ?? "",
             name: p.name ?? "Product",
             description: p.description ?? "",
-            image: (p.imageAssetUrl && p.imageAssetUrl.trim() !== "" && p.imageAssetUrl !== "null") 
-              ? p.imageAssetUrl 
-              : (p.imageUrl && p.imageUrl.trim() !== "" && p.imageUrl !== "null") 
-                ? p.imageUrl 
-                : "/placeholder.svg",
+            image: getFeaturedProductImage(p.productId, p.name, p.imageAssetUrl || p.imageUrl),
             category: p.category ?? "Product",
             features: p.features ?? [],
           }))) ?? [],

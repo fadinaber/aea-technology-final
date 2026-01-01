@@ -70,18 +70,35 @@ export default async function ResourcesPage() {
       ? {
           software: resources
             .filter((r) => r.type === "software")
-            .map((r) => ({
-              id: r._id,
-              title: r.title,
-              description: r.description || "",
-              category: r.category || "Software",
-              type: "software" as const,
-              version: r.version,
-              size: r.fileSize,
-              downloadUrl: r.localPath || r.fileUrl || r.downloadUrl || "#",
-              tags: r.tags || [],
-              featured: r.featured,
-            })),
+            .map((r) => {
+              // Map software titles to zip files
+              let downloadUrl = r.localPath || r.fileUrl || r.downloadUrl || "#"
+              
+              // If no download URL set, map by title
+              if (downloadUrl === "#" || !downloadUrl) {
+                const titleLower = r.title?.toLowerCase() || ""
+                if (titleLower.includes("tdr") || titleLower.includes("etdr")) {
+                  downloadUrl = "/documents/software/TDR_PC_Vision.zip"
+                } else if (titleLower.includes("site analyzer")) {
+                  downloadUrl = "/documents/software/Site_Analyzer_PC_Vision.zip"
+                } else if (titleLower.includes("mri")) {
+                  downloadUrl = "/documents/software/MRI_Vision.zip"
+                }
+              }
+              
+              return {
+                id: r._id,
+                title: r.title,
+                description: r.description || "",
+                category: r.category || "Software",
+                type: "software" as const,
+                version: r.version,
+                size: r.fileSize,
+                downloadUrl: downloadUrl,
+                tags: r.tags || [],
+                featured: r.featured,
+              }
+            }),
           manuals: resources
             .filter((r) => r.type === "manual")
             .map((r) => ({
