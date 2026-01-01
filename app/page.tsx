@@ -42,7 +42,7 @@ type SanityHomepageHero = {
 
 type SanityHomepageFeaturedProductsProduct = {
   _id?: string
-  slug?: { current?: string }
+  slug?: string  // Query returns slug.current directly as string
   name?: string
   shortDescription?: string
   imageUrl?: string
@@ -149,7 +149,7 @@ function mapFeaturedProductsFromSanity(
     products:
       (hasRefs
         ? featured.products?.map((p) => ({
-            id: p.slug?.current ?? p._id ?? "",
+            id: p.slug ?? p._id ?? "",
             name: p.name ?? "Product",
             description: p.shortDescription ?? "",
             image: (p.imageUrl && p.imageUrl.trim() !== "" && p.imageUrl !== "null") 
