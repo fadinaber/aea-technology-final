@@ -1,7 +1,7 @@
 # AEA Technology, Inc. - RF and Cable Testing Equipment
 
 ## Company Overview
-AEA Technology is a leading manufacturer of professional RF and cable testing equipment, including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Founded in 1990, all products are American Made, designed and manufactured in the USA in Carlsbad, California.
+AEA Technology is a leading manufacturer of professional RF and cable testing equipment, including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Founded in 1990, all products are American Made (Made in USA), designed and manufactured in the USA in Carlsbad, California.
 
 ## Common Questions & Answers
 
@@ -137,11 +137,11 @@ Solution: Bravo Ex² Analyzer - Extended range vector network analyzer for advan
 - Website: https://aeatechnology.com
 
 ## Search Terms & Keywords
-TDR, Time Domain Reflectometer, Step TDR, Pulse TDR, cable fault locator, cable tester, RF test equipment, VNA, Vector Network Analyzer, SWR meter, Standing Wave Ratio, cable testing equipment, aircraft wiring tester, aviation cable testing, broadcast TDR, CATV tester, MRI RF testing, network analyzer, transmission line tester, cable fault location, RF analyzer, cable diagnostics, network testing equipment, American Made test equipment, professional RF equipment, precision cable testing, sub-meter accuracy, field testing equipment, portable RF analyzer
+TDR, Time Domain Reflectometer, Step TDR, Pulse TDR, cable fault locator, cable tester, RF test equipment, VNA, Vector Network Analyzer, SWR meter, Standing Wave Ratio, cable testing equipment, aircraft wiring tester, aviation cable testing, broadcast TDR, CATV tester, MRI RF testing, network analyzer, transmission line tester, cable fault location, RF analyzer, cable diagnostics, network testing equipment, American Made test equipment, Made in USA test equipment, professional RF equipment, precision cable testing, sub-meter accuracy, field testing equipment, portable RF analyzer
 
 ## Comparison Information
 - Step TDR vs Pulse TDR: AEA Technology uses Step TDR technology which provides more detailed information than Pulse TDRs
-- American Made: All AEA Technology equipment is designed and manufactured in the United States
+- American Made (Made in USA): All AEA Technology equipment is designed and manufactured in the United States
 - Aviation-specific: E20/20 Avionics TDR Kit is specifically designed for aircraft wiring testing
 - MRI-safe: Bravo MRI-3000 is designed for safe use in MRI environments
 - Field-ready: All equipment is designed for field use with rugged construction

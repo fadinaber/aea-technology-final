@@ -36,7 +36,7 @@ export default function OrganizationSchema() {
       addressCountry: "US",
     },
     description:
-      "AEA Technology is a leading manufacturer of RF and cable test equipment including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. American Made since 1990.",
+      "AEA Technology is a leading manufacturer of RF and cable test equipment including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. American Made (Made in USA) since 1990.",
     foundingDate: "1990",
     founders: [
       {

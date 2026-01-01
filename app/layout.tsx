@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | AEA Technology",
   },
   description:
-    "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment American Made since 1990. Trusted by aviation, military, and medical industries.",
+    "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment American Made (Made in USA) since 1990. Trusted by aviation, military, and medical industries.",
   keywords: [
     "TDR",
     "Time Domain Reflectometer",
@@ -65,14 +65,14 @@ export const metadata: Metadata = {
     siteName: "AEA Technology",
     title: "AEA Technology - Professional RF & Cable Test Equipment",
     description:
-      "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF testing equipment American Made since 1990.",
+      "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF testing equipment American Made (Made in USA) since 1990.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "AEA Technology" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AEA Technology - TDR, VNA & SWR Test Equipment",
     description:
-      "Professional RF and cable testing equipment. Time Domain Reflectometers, Vector Network Analyzers, and SWR meters American Made.",
+      "Professional RF and cable testing equipment. Time Domain Reflectometers, Vector Network Analyzers, and SWR meters American Made (Made in USA).",
     images: ["/opengraph-image"],
     creator: "@aeatech",
   },
