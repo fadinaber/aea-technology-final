@@ -199,9 +199,9 @@ export const homepageData: {
           { text: "ISO 9001", icon: "Shield", variant: "primary" },
         ],
         headline: {
-          line1: "Professional",
-          line2: "RF & Cable Testing",
-          line3: "Equipment American Made",
+          line1: "Professional RF",
+          line2: "Testing Equipment",
+          line3: "Products & Support",
         },
         description:
           "Trusted by aviation, military, and telecommunications professionals for over 30 years. Precision testing instruments designed and manufactured in the USA for critical applications.",

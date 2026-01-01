@@ -22,11 +22,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://aeatechnology.com"),
   title: {
-    default: "AEA Technology - TDR, VNA & SWR Test Equipment | American Made",
+    default: "AEA Technology - RF Testing Equipment, Products & Support | American Made",
     template: "%s | AEA Technology",
   },
   description:
-    "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment American Made (Made in USA) since 1990. Trusted by aviation, military, and medical industries.",
+    "AEA Technology: Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment, products, and support. American Made (Made in USA) since 1990.",
   keywords: [
     "TDR",
     "Time Domain Reflectometer",
