@@ -7,6 +7,7 @@ import "./globals.css"
 import ClientLayout from "./client-layout"
 import OrganizationSchema from "@/components/seo/organization-schema"
 import WebsiteSchema from "@/components/seo/website-schema"
+import LocalBusinessSchema from "@/components/seo/local-business-schema"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -136,6 +137,7 @@ export default function RootLayout({
         />
         <OrganizationSchema />
         <WebsiteSchema />
+        <LocalBusinessSchema />
       </head>
       <body className={`${inter.className} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
