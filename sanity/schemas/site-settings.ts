@@ -42,7 +42,30 @@ export default defineType({
       group: "general",
     }),
 
-    // Contact
+    // Contact - Legacy top-level fields (for backward compatibility)
+    defineField({
+      name: "email",
+      title: "Sales Email (Legacy)",
+      type: "string",
+      group: "contact",
+      description: "Legacy field - use Contact Information below for new entries",
+    }),
+    defineField({
+      name: "phone",
+      title: "Phone (Legacy)",
+      type: "string",
+      group: "contact",
+      description: "Legacy field - use Contact Information below for new entries",
+    }),
+    defineField({
+      name: "supportEmail",
+      title: "Support Email (Legacy)",
+      type: "string",
+      group: "contact",
+      description: "Legacy field - use Contact Information below for new entries",
+    }),
+
+    // Contact - Structured contact information (preferred)
     defineField({
       name: "contact",
       title: "Contact Information",

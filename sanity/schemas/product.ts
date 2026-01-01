@@ -225,6 +225,16 @@ export default defineType({
     }),
 
     // ========== MEDIA ==========
+    // Legacy imageUrl field (for backward compatibility with existing data)
+    defineField({
+      name: "imageUrl",
+      title: "Image URL (Legacy)",
+      type: "string",
+      group: "media",
+      description: "Legacy field - use Model Images below for new entries. This field is kept for backward compatibility.",
+      hidden: true, // Hide from UI but keep in schema to prevent warnings
+    }),
+    
     defineField({
       name: "modelImages",
       title: "Model Images",
