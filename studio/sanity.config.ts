@@ -27,6 +27,16 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  
+  // Document actions configuration
+  // In Sanity Studio v4, delete should be available by default
+  // The delete button is typically found in the document menu (three dots) in the top-right
+  // or accessible via keyboard shortcut: Ctrl+K (Windows) or Cmd+K (Mac), then type "delete"
+  document: {
+    // Return all default actions including delete
+    // This ensures delete functionality is available for all document types
+    actions: (prev) => prev,
+  },
 })
 
 
