@@ -1,7 +1,47 @@
 # AEA Technology, Inc. - RF and Cable Testing Equipment
 
 ## Company Overview
-AEA Technology is a leading manufacturer of professional RF and cable testing equipment, including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Founded in 1990, all products are designed and manufactured in the USA in Carlsbad, California.
+AEA Technology is a leading manufacturer of professional RF and cable testing equipment, including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Founded in 1990, all products are American Made, designed and manufactured in the USA in Carlsbad, California.
+
+## Common Questions & Answers
+
+### What is a TDR and what is it used for?
+A Time Domain Reflectometer (TDR) is used to locate faults in cables, measure cable length, and analyze transmission line characteristics. AEA Technology manufactures Step TDRs (superior to Pulse TDRs) for aviation, broadcast, CATV, and telecommunications applications. Products: E20/20 Avionics TDR Kit, E20/20N TDR, E20/20F CATV TDR, E20/20B Network TDR.
+
+### How do I test aircraft wiring?
+Use AEA Technology's E20/20 Avionics TDR Kit for testing single-wire aircraft wiring harnesses. It provides sub-meter accuracy for fault location in aviation cables. More info: https://aeatechnology.com/products/e20-20-avionics
+
+### What equipment is needed for MRI facility RF testing?
+The Bravo MRI-3000 Analyzer is specifically designed for MRI facility compliance testing and RF coil testing. It's MRI-safe and used for system alignment. More info: https://aeatechnology.com/products/via-bravo-mri-3000
+
+### How do I measure SWR (Standing Wave Ratio)?
+AEA Technology's SWR Site Analyzer provides comprehensive SWR measurement for field testing. It's portable and offers real-time analysis. More info: https://aeatechnology.com/products/swr-site-analyzer
+
+### Where can I buy TDR equipment?
+AEA Technology products are available through authorized distributors worldwide. Contact sales at 1-(800) 258-7805 or visit https://aeatechnology.com/contact/distributors
+
+### What software is available for TDR analysis?
+ETDR PC Vision Software provides complete TDR analysis with graphical display and reporting. Download: https://aeatechnology.com/resources?tab=software
+
+## Problem-Solution Pairs
+
+### Problem: Need to locate cable faults in aircraft wiring
+Solution: E20/20 Avionics TDR Kit - Designed specifically for aviation cable testing with precision fault location. https://aeatechnology.com/products/e20-20-avionics
+
+### Problem: MRI facility needs RF compliance testing
+Solution: Bravo MRI-3000 Analyzer - Specialized for MRI environments with MRI-safe design. https://aeatechnology.com/products/via-bravo-mri-3000
+
+### Problem: Broadcast transmission line testing required
+Solution: E20/20N TDR - Enhanced Step TDR for broadcast applications with high resolution. https://aeatechnology.com/products/e20-20n
+
+### Problem: CATV network analysis needed
+Solution: E20/20F CATV Network TDR - Specifically designed for cable TV network testing. https://aeatechnology.com/products/e20-20f-catv
+
+### Problem: Need to measure SWR in the field
+Solution: SWR Site Analyzer - Portable field-ready analyzer for comprehensive site testing. https://aeatechnology.com/products/swr-site-analyzer
+
+### Problem: Extended range VNA analysis required
+Solution: Bravo Ex² Analyzer - Extended range vector network analyzer for advanced RF testing. https://aeatechnology.com/products/via-bravo-ex2
 
 ## Main Pages
 - Homepage: https://aeatechnology.com/
@@ -17,30 +57,75 @@ AEA Technology is a leading manufacturer of professional RF and cable testing eq
 
 ### Time Domain Reflectometers (TDRs)
 - E20/20 Avionics TDR Kit: https://aeatechnology.com/products/e20-20-avionics
+  - Use case: Aircraft wiring harness testing, aviation cable fault location
+  - Features: Sub-meter accuracy, aviation-specific connectors, rugged field design
 - E20/20N TDR: https://aeatechnology.com/products/e20-20n
+  - Use case: Broadcast transmission line testing, network diagnostics
+  - Features: High resolution, fast fault location, network analysis
 - E20/20F CATV Network TDR: https://aeatechnology.com/products/e20-20f-catv
+  - Use case: Cable TV network testing and analysis
+  - Features: CATV-specific testing, network diagnostics
 - E20/20B Network TDR: https://aeatechnology.com/products/e20-20b
+  - Use case: VDV/RF network testing, general RF applications
+  - Features: Versatile network testing, field-proven reliability
 
 ### Network Analyzers (VNAs) & SWR Meters
 - Bravo MRI-3000 Analyzer: https://aeatechnology.com/products/via-bravo-mri-3000
+  - Use case: MRI facility RF testing, medical RF environment compliance
+  - Features: MRI-safe design, MRI system alignment, precision analysis
 - Bravo Ex² Analyzer: https://aeatechnology.com/products/via-bravo-ex2
+  - Use case: Extended range RF analysis, advanced VNA testing
+  - Features: Wide frequency range, advanced analysis capabilities
 - SWR Site Analyzer: https://aeatechnology.com/products/swr-site-analyzer
+  - Use case: Field SWR measurement, site testing, antenna analysis
+  - Features: Portable design, real-time analysis, field-ready
 
 ## Resources
 - Software Downloads: https://aeatechnology.com/resources?tab=software
+  - ETDR PC Vision Software (TDR analysis and reporting)
+  - Site Analyzer PC Vision (SWR/VNA analysis)
+  - MRI Vision (MRI-3000 remote application)
 - Manuals & Guides: https://aeatechnology.com/resources?tab=manuals
+  - Operator manuals, quick start guides, training materials
 - Training Videos: https://aeatechnology.com/resources?tab=videos
+  - How TDRs work, cable testing procedures, product tutorials
 - Application Notes: https://aeatechnology.com/resources?tab=application-notes
+  - 40+ technical application notes covering TDR and VNA topics
 - FAQs: https://aeatechnology.com/resources?tab=faqs
+  - Common questions about products, calibration, software, warranty
 
-## Key Products & Applications
-- Aviation cable testing equipment
-- Broadcast transmission line testing
-- CATV network analysis
-- Medical RF environment testing (MRI facilities)
-- Telecommunications cable fault location
-- RF testing and analysis
-- SWR (Standing Wave Ratio) measurement
+## Key Applications & Use Cases
+- Aviation cable testing and aircraft wiring harness fault location
+- Broadcast transmission line testing and network diagnostics
+- CATV (Cable TV) network analysis and maintenance
+- Medical RF environment testing (MRI facility compliance)
+- Telecommunications cable fault location and network testing
+- RF testing and analysis for industrial applications
+- SWR (Standing Wave Ratio) measurement for antennas
+- Vector Network Analysis (VNA) for RF components
+- Cable fault location with sub-meter accuracy
+- Network diagnostics and transmission line analysis
+
+## Technical Specifications & Capabilities
+- Sub-meter accuracy for cable fault location
+- Step TDR technology (superior to Pulse TDR)
+- Field-proven reliability in harsh environments
+- Professional-grade RF testing equipment
+- American Made since 1990
+- ISO 9001:2015 Certified
+- ANAB Accredited
+- 30+ years of manufacturing experience
+- Expert technical support available
+- Comprehensive warranties
+
+## Industries & Markets
+- Aviation & Aerospace: Aircraft wiring testing, avionics cable fault location
+- Military & Defense: Critical RF testing, field-deployable equipment
+- Medical: MRI facility RF compliance, medical RF environment testing
+- Telecommunications: Network cable testing, fault location, maintenance
+- Broadcast & Media: Transmission line testing, broadcast network analysis
+- CATV (Cable TV): Cable network testing, maintenance, diagnostics
+- Industrial RF Testing: General RF analysis, component testing
 
 ## Contact Information
 - Address: 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010, United States
@@ -49,35 +134,27 @@ AEA Technology is a leading manufacturer of professional RF and cable testing eq
 - Sales Email: SALES@AEATECHNOLOGY.COM
 - Technical Support Email: TECHSUPPORT@AEATECHNOLOGY.COM
 - Business Hours: Monday-Friday, 7:30 am – 4:30 pm PST
+- Website: https://aeatechnology.com
 
-## Key Features
-- Made in USA since 1990
-- ISO 9001:2015 Certified
-- Sub-meter accuracy
-- Field-proven reliability
-- Expert technical support
-- Comprehensive warranties
-- Professional RF testing equipment
-- Precision cable fault location
-- 30+ years of experience
+## Search Terms & Keywords
+TDR, Time Domain Reflectometer, Step TDR, Pulse TDR, cable fault locator, cable tester, RF test equipment, VNA, Vector Network Analyzer, SWR meter, Standing Wave Ratio, cable testing equipment, aircraft wiring tester, aviation cable testing, broadcast TDR, CATV tester, MRI RF testing, network analyzer, transmission line tester, cable fault location, RF analyzer, cable diagnostics, network testing equipment, American Made test equipment, professional RF equipment, precision cable testing, sub-meter accuracy, field testing equipment, portable RF analyzer
 
-## Industries Served
-- Aviation & Aerospace
-- Military & Defense
-- Medical (MRI facilities)
-- Telecommunications
-- Broadcast & Media
-- CATV (Cable TV)
-- Industrial RF Testing
+## Comparison Information
+- Step TDR vs Pulse TDR: AEA Technology uses Step TDR technology which provides more detailed information than Pulse TDRs
+- American Made: All AEA Technology equipment is designed and manufactured in the United States
+- Aviation-specific: E20/20 Avionics TDR Kit is specifically designed for aircraft wiring testing
+- MRI-safe: Bravo MRI-3000 is designed for safe use in MRI environments
+- Field-ready: All equipment is designed for field use with rugged construction
 
 ## Software & Downloads
-- ETDR PC Vision Software (TDR analysis)
-- Site Analyzer PC Vision (SWR/VNA analysis)
-- MRI Vision (MRI-3000 remote application)
+- ETDR PC Vision Software: Complete TDR analysis software with graphical display and reporting. Download: https://aeatechnology.com/resources?tab=software
+- Site Analyzer PC Vision: Analysis software for SWR, VNA and EX2 instruments. Download: https://aeatechnology.com/resources?tab=software
+- MRI Vision: Remote application software for Bravo MRI-3000. Download: https://aeatechnology.com/resources?tab=software
 
 ## Certifications & Standards
 - ISO 9001:2015 Certified
 - ANAB Accredited
-- Made in USA
+- American Made
 - Professional grade equipment
-
+- 30+ years of experience
+- Trusted by 1000+ global customers
