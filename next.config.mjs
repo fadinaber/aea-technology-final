@@ -137,8 +137,9 @@ const nextConfig = {
         permanent: true,
       },
 
-      // Legacy index variants
+      // Legacy index variants - prevent duplicate content issues
       { source: "/index", destination: "/", permanent: true },
+      { source: "/index.html", destination: "/", permanent: true },
       { source: "/index.htm", destination: "/", permanent: true },
       { source: "/index.php", destination: "/", permanent: true },
 
