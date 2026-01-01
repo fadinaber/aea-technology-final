@@ -86,17 +86,18 @@ export default defineType({
     // Datasheet
     defineField({
       name: "datasheetUrl",
-      title: "Datasheet URL (External)",
+      title: "Datasheet URL (External - Alternative)",
       type: "url",
       group: "files",
-      description: "External link to datasheet. Leave empty if uploading a file.",
+      description: "External link to datasheet (e.g., hosted on S3, Google Drive). Only use if not uploading a file below.",
+      placeholder: "https://example.com/datasheet.pdf",
     }),
     defineField({
       name: "datasheetFile",
-      title: "Datasheet File (Upload PDF)",
+      title: "Datasheet File (Upload PDF - Alternative)",
       type: "file",
       group: "files",
-      description: "Upload datasheet PDF directly. This will be used if no external URL is provided.",
+      description: "Upload datasheet PDF directly to Sanity. Use this if the file is NOT already in your /public folder. If the file is in /public/documents/datasheets/, use a Product Resource below instead.",
       options: {
         accept: ".pdf",
         storeOriginalFilename: true,
@@ -106,10 +107,10 @@ export default defineType({
     // ========== PRODUCT RESOURCES (Manuals, Guides, etc.) ==========
     defineField({
       name: "resources",
-      title: "Product Resources (Manuals, Guides, Videos)",
+      title: "Product Resources (Manuals, Guides, Videos, etc.)",
       type: "array",
       group: "files",
-      description: "Add manuals, guides, training materials, and videos for this product. These appear in the Resources tab on the product page.",
+      description: "Add manuals, guides, training materials, videos, and other resources for this product. These appear in the Resources tab on the product page. IMPORTANT: Use 'Local File Path' to link to files in /public/documents/ - this is the PRIMARY method.",
       of: [
         {
           type: "object",
@@ -151,8 +152,8 @@ export default defineType({
             {
               name: "file",
               type: "file",
-              title: "Upload File (PDF, PPT, etc.)",
-              description: "Upload the resource file directly. Supports PDF, PowerPoint, and other document formats.",
+              title: "Upload File (Alternative - if file not in /public folder)",
+              description: "Upload the resource file directly to Sanity (PDF, PPT, ZIP, etc.). Use this ONLY if the file is NOT already in your /public folder. If you use 'Local File Path' above, you don't need to upload here.",
               options: {
                 accept: ".pdf,.ppt,.pptx,.ppsx,.doc,.docx,.zip,.exe",
                 storeOriginalFilename: true,
@@ -163,15 +164,17 @@ export default defineType({
             { 
               name: "url", 
               type: "url", 
-              title: "External URL",
-              description: "For external links or YouTube videos. Leave empty if uploading a file above.",
+              title: "External URL (For videos or external links)",
+              description: "For YouTube videos or external links. For videos, paste the full YouTube URL. For other resources, use 'Local File Path' or 'Upload File' instead.",
+              placeholder: "https://www.youtube.com/watch?v=... or https://example.com/file.pdf",
             },
             // Local file path (for existing files in /public/documents)
             {
               name: "localPath",
               type: "string",
-              title: "Local File Path",
-              description: "Path to file in public folder (e.g., /documents/manuals/6021/filename.pdf). Use this for existing files.",
+              title: "Local File Path (PRIMARY - Use this for existing files)",
+              description: "Path to file in public folder (e.g., /documents/manuals/6021/filename.pdf). This is the PRIMARY way to link to files that are already in your /public folder. If you use this, you don't need to upload a file above.",
+              placeholder: "/documents/manuals/6021/filename.pdf",
               hidden: ({ parent }) => parent?.type === "video",
             },
             // Video-specific fields
@@ -200,8 +203,11 @@ export default defineType({
               title: "title",
               type: "type",
               file: "file",
+              localPath: "localPath",
+              url: "url",
+              fileSize: "fileSize",
             },
-            prepare({ title, type, file }) {
+            prepare({ title, type, file, localPath, url, fileSize }) {
               const typeEmoji: Record<string, string> = {
                 manual: "📄",
                 guide: "📋",
@@ -213,10 +219,28 @@ export default defineType({
                 training: "🎓",
                 faq: "❓",
               }
-              const hasFile = !!file?.asset
+              
+              // Show file information
+              let fileInfo = ""
+              if (localPath) {
+                fileInfo = `📁 ${localPath.split("/").pop()}`
+              } else if (url) {
+                if (url.includes("youtube.com") || url.includes("youtu.be")) {
+                  fileInfo = "🎥 YouTube"
+                } else {
+                  fileInfo = "🔗 External"
+                }
+              } else if (file?.asset) {
+                fileInfo = "📎 Uploaded"
+              }
+              
+              if (fileSize) {
+                fileInfo += fileInfo ? ` • ${fileSize}` : fileSize
+              }
+              
               return {
                 title: title || "Untitled Resource",
-                subtitle: `${typeEmoji[type] || "📁"} ${type}${hasFile ? " (file uploaded)" : ""}`,
+                subtitle: `${typeEmoji[type] || "📁"} ${type}${fileInfo ? ` • ${fileInfo}` : ""}`,
               }
             },
           },
