@@ -212,13 +212,23 @@ export default async function Home() {
   const featuredProductsData = mapFeaturedProductsFromSanity(homepage?.featuredProducts)
   const resourcesTeaserData = mapResourcesTeaserFromSanity(homepage?.resourcesTeaser)
   
-  // Debug logging (remove in production)
-  if (process.env.NODE_ENV === "development") {
-    console.log("Homepage data:", {
-      hero: heroData?.featuredProduct,
-      featuredProducts: featuredProductsData?.products?.map(p => ({ name: p.name, image: p.image }))
-    })
-  }
+  // Debug logging - always log to help diagnose image issues
+  console.log("Homepage data:", {
+    hero: heroData?.featuredProduct,
+    featuredProducts: featuredProductsData?.products?.map(p => ({ 
+      id: p.id, 
+      name: p.name, 
+      image: p.image,
+      hasImage: !!p.image && p.image !== "/placeholder.svg"
+    })),
+    rawSanityData: {
+      featuredProductsEnabled: homepage?.featuredProducts?.enabled,
+      hasProductsRefs: (homepage?.featuredProducts?.products?.length ?? 0) > 0,
+      hasProductsList: (homepage?.featuredProducts?.productsList?.length ?? 0) > 0,
+      productsCount: homepage?.featuredProducts?.products?.length ?? 0,
+      productsListCount: homepage?.featuredProducts?.productsList?.length ?? 0,
+    }
+  })
 
   return (
     <main className="min-h-screen">

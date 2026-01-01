@@ -207,9 +207,17 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                   
                   // For external URLs (like S3), browser will handle download naturally
                   // For local files, use download attribute and ensure proper path
-                  const downloadUrl = isLocalFile && !resource.downloadUrl.startsWith("/") 
-                    ? `/${resource.downloadUrl}` 
-                    : resource.downloadUrl
+                  let downloadUrl = resource.downloadUrl
+                  if (isLocalFile && !resource.downloadUrl.startsWith("/")) {
+                    downloadUrl = `/${resource.downloadUrl}`
+                  }
+                  
+                  // Ensure local files have proper path
+                  if (isLocalFile && downloadUrl.startsWith("/documents/")) {
+                    // Already correct path
+                  } else if (isLocalFile) {
+                    downloadUrl = downloadUrl.startsWith("/") ? downloadUrl : `/${downloadUrl}`
+                  }
                   
                   return (
                     <a 
@@ -217,6 +225,7 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                       download={isLocalFile ? filename : undefined}
                       target={isLocalFile ? undefined : "_blank"}
                       rel={isLocalFile ? undefined : "noopener noreferrer"}
+                      style={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Download
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -310,7 +319,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.8,
         featured: true,
         tags: ["TDR", "Analysis", "Reporting", "Windows"],
-        downloadUrl: "/documents/software/TDR_PC_Vision/setup_2023_2.exe",
+        downloadUrl: "/documents/software/TDR_PC_Vision.zip",
       },
       {
         id: "site-analyzer-pc-vision",
@@ -324,7 +333,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.7,
         featured: true,
         tags: ["SWR", "VNA", "EX2", "Analysis"],
-        downloadUrl: "/documents/software/Site_Analyzer_PC_Vision/PC-Vision_1_16_1_1.msi",
+        downloadUrl: "/documents/software/Site_Analyzer_PC_Vision.zip",
       },
       {
         id: "mri-vision",
@@ -338,7 +347,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.6,
         featured: true,
         tags: ["MRI", "Analysis"],
-        downloadUrl: "/documents/software/MRI_Vision/setup_1_0_1_1.exe",
+        downloadUrl: "/documents/software/MRI_Vision.zip",
       },
     ],
     manuals: allManualsFromData,

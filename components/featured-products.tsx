@@ -43,7 +43,7 @@ export default function FeaturedProducts({ data: overrideData }: FeaturedProduct
                     <div className="relative p-4 sm:p-6" style={{ aspectRatio: '4/3' }}>
                       <div className="relative w-full h-full flex items-center justify-center">
                         <Image
-                          src={product.image && product.image !== "/placeholder.svg" && product.image.trim() !== "" 
+                          src={product.image && product.image !== "/placeholder.svg" && product.image.trim() !== "" && !product.image.includes("null")
                             ? product.image 
                             : "/placeholder.svg"}
                           alt={`AEA Technology ${product.name} - ${product.category}`}
@@ -54,10 +54,11 @@ export default function FeaturedProducts({ data: overrideData }: FeaturedProduct
                           className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
                           decoding="async"
                           quality={80}
+                          unoptimized={product.image?.startsWith("http") ? false : false}
                           onError={(e) => {
                             // Fallback to placeholder if image fails to load
                             const target = e.target as HTMLImageElement
-                            if (target.src !== "/placeholder.svg") {
+                            if (target.src && !target.src.includes("placeholder.svg")) {
                               target.src = "/placeholder.svg"
                             }
                           }}
