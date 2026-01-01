@@ -8,23 +8,24 @@ export default defineType({
   title: "Product",
   type: "document",
   groups: [
-    { name: "basic", title: "Basic Info" },
-    { name: "files", title: "Files & Downloads" },
-    { name: "media", title: "Media" },
-    { name: "specs", title: "Specifications" },
-    { name: "models", title: "Models & Accessories" },
-    { name: "content", title: "Content" },
-    { name: "seo", title: "SEO" },
+    { name: "basic", title: "📝 Basic Info", default: true },
+    { name: "files", title: "📁 Files & Downloads" },
+    { name: "media", title: "🖼️ Images" },
+    { name: "specs", title: "📊 Specifications" },
+    { name: "models", title: "📦 Models & Accessories" },
+    { name: "content", title: "✏️ Content" },
+    { name: "seo", title: "🔍 SEO" },
   ],
   fields: [
     // Basic Info
     defineField({
       name: "slug",
-      title: "Slug",
+      title: "URL Slug",
       type: "slug",
       group: "basic",
       options: { source: "name", maxLength: 96 },
       validation: (Rule) => Rule.required(),
+      description: "This creates the product page URL. Click 'Generate' to create from product name.",
     }),
     defineField({
       name: "name",
@@ -32,6 +33,7 @@ export default defineType({
       type: "string",
       group: "basic",
       validation: (Rule) => Rule.required(),
+      description: "The full product name as it appears on the website",
     }),
     defineField({
       name: "tagline",

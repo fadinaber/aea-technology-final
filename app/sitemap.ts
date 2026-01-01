@@ -15,7 +15,8 @@ const resourceCategories = ["software", "manuals", "videos", "faqs", "applicatio
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://aeatechnology.com"
-  const lastModified = new Date("2025-01-13")
+  // Use current date for dynamic lastModified - Vercel will regenerate on each build
+  const lastModified = new Date()
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
