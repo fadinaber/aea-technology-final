@@ -85,7 +85,7 @@ export const deskStructure = (S: StructureBuilder) => {
                 .child(
                   S.documentTypeList('resource')
                     .title('Application Notes')
-                    .filter('type == "application-note"')
+                    .filter('_type == "resource" && type == "application-note"')
                     .defaultOrdering([{ field: 'title', direction: 'asc' }])
                 ),
               

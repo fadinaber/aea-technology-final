@@ -29,13 +29,17 @@ export default defineConfig({
   },
   
   // Document actions configuration
-  // In Sanity Studio v4, delete should be available by default
-  // The delete button is typically found in the document menu (three dots) in the top-right
-  // or accessible via keyboard shortcut: Ctrl+K (Windows) or Cmd+K (Mac), then type "delete"
+  // Delete action should be available by default in Sanity Studio v4
+  // It appears in the document menu (three dots) in the top-right corner
+  // Keyboard shortcut: Ctrl+K (Windows) or Cmd+K (Mac), then type "delete"
+  // If delete is not visible, check user permissions in Sanity Management Console:
+  // https://www.sanity.io/manage/project/jvtqk7fd/members
   document: {
-    // Return all default actions including delete
-    // This ensures delete functionality is available for all document types
-    actions: (prev) => prev,
+    actions: (prev) => {
+      // Return all default actions including delete
+      // Delete requires appropriate permissions set in Sanity Management Console
+      return prev
+    },
   },
 })
 
