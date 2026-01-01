@@ -152,7 +152,7 @@ function mapFeaturedProductsFromSanity(
             id: p.slug?.current ?? p._id ?? "",
             name: p.name ?? "Product",
             description: p.shortDescription ?? "",
-            image: (p.imageUrl && p.imageUrl.trim() !== "") 
+            image: (p.imageUrl && p.imageUrl.trim() !== "" && p.imageUrl !== "null") 
               ? p.imageUrl 
               : "/placeholder.svg",
             category: p.category ?? "Product",
@@ -162,9 +162,9 @@ function mapFeaturedProductsFromSanity(
             id: p.productId ?? "",
             name: p.name ?? "Product",
             description: p.description ?? "",
-            image: (p.imageAssetUrl && p.imageAssetUrl.trim() !== "") 
+            image: (p.imageAssetUrl && p.imageAssetUrl.trim() !== "" && p.imageAssetUrl !== "null") 
               ? p.imageAssetUrl 
-              : (p.imageUrl && p.imageUrl.trim() !== "") 
+              : (p.imageUrl && p.imageUrl.trim() !== "" && p.imageUrl !== "null") 
                 ? p.imageUrl 
                 : "/placeholder.svg",
             category: p.category ?? "Product",

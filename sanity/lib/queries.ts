@@ -313,6 +313,7 @@ export const homepageQuery = groq`
         name,
         category,
         shortDescription,
+        // Safe image URL access - will be null if modelImages is empty
         "imageUrl": modelImages[0].images[0].asset->url,
         keyFeatures[0...3]
       },
