@@ -206,11 +206,17 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
                   const filename = resource.downloadUrl.split("/").pop() || undefined
                   
                   // For external URLs (like S3), browser will handle download naturally
-                  // For local files, use download attribute
+                  // For local files, use download attribute and ensure proper path
+                  const downloadUrl = isLocalFile && !resource.downloadUrl.startsWith("/") 
+                    ? `/${resource.downloadUrl}` 
+                    : resource.downloadUrl
+                  
                   return (
                     <a 
-                      href={resource.downloadUrl} 
+                      href={downloadUrl} 
                       download={isLocalFile ? filename : undefined}
+                      target={isLocalFile ? undefined : "_blank"}
+                      rel={isLocalFile ? undefined : "noopener noreferrer"}
                     >
                       Download
                       <ArrowRight className="w-4 h-4 ml-2" />
