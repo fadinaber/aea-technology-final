@@ -406,11 +406,72 @@ async function importTeamMembers(dryRun: boolean) {
   return { message: "Team member imported", id: doc._id }
 }
 
+// Mapping of Application Note IDs to actual PDF files
+const applicationNotePdfMap: Record<string, string> = {
+  "an100": "/documents/application-notes/63dc1c2e6af3bb9543250363_AN100 What SWR Does Not Show.pdf",
+  "an101": "/documents/application-notes/63dc1c2e1de85ccbfd02e035_AN101 When to Use Cable Null.pdf",
+  "an102": "/documents/application-notes/63dc1c2f75b1b97e0bd53262_AN102 Understanding Vector Network Analysis.pdf",
+  "an103": "/documents/application-notes/63dc1c2ef0e3a9b366b4fe89_AN103 Relationships of Impedance.pdf",
+  "an104": "/documents/application-notes/63dc1c31f15c5b090cfb1704_AN104 Smith Chart 101.pdf",
+  "an110": "/documents/application-notes/63dc1c2e8a7ef2d82e81ec6e_AN110 Coaxial StubTuning.pdf",
+  "an111": "/documents/application-notes/63dc1c2e8a3bf475d13d9c80_AN111 Find Charactoristics of an Unknown Cable.pdf",
+  "an112": "/documents/application-notes/63dc1c2e3520187f364321e8_AN112 Tuning an Antenna.pdf",
+  "an113": "/documents/application-notes/63dc1c2f677f580f858b4e9d_AN113 Measuring Descrete Components.pdf",
+  "an114": "/documents/application-notes/63dc1c2fd459afb18ddebf2c_AN114 Tower Site Tips.pdf",
+  "an120": "/documents/application-notes/63dc1c2f76dfcf02be38aec4_AN120 Measuring Amplifier Gain.pdf",
+  "an121": "/documents/application-notes/63dc1c2fd459af0534debf2d_AN121 Measuring Group Delay.pdf",
+  "an122": "/documents/application-notes/63dc1c30cfbac0ddd6316375_AN122 Measuring Gain Compression.pdf",
+  "an124": "/documents/application-notes/63dc1c30682caa8e17590cad_AN124 Measuring Differential Amplifiers.pdf",
+  "an125": "/documents/application-notes/63dc1c3098f895a00f9d469a_AN125 Measuring AM to PM Distortion.pdf",
+  "an131": "/documents/application-notes/63dc1c30e06cc200834239f2_AN131 Using the Network Analyzer as a Signal Source.pdf",
+  "an132": "/documents/application-notes/63dc1c319bcb4b3312ed5794_AN132 Using the Network Analyzer as a Grid Dip Oscillator.pdf",
+  "an150": "/documents/application-notes/63dc1c2f9fa0e941ec65a257_AN150 Using batteries in AEA Technology equitment.pdf",
+  "an152": "/documents/application-notes/63dc1c3075b1b930dcd53263_AN152 Troubleshooting Serial Port Operation on AEA Equipment.pdf",
+  "an153": "/documents/application-notes/63dc1c317ff5a8f1c3cbc9eb_Cold Weather Operation of AEA Technology Instruments.pdf",
+  "an200": "/documents/application-notes/63dc1cd2a86f8d0f4605c9a7_AN200 Basic Theory of TDR Operation.pdf",
+  "an201": "/documents/application-notes/63dc1cd2f0e3a97f42b50787_AN201 Step vs Pulse TDR Technology.pdf",
+  "an203": "/documents/application-notes/63dc1cd37ff5a85fbccbd4f0_AN203 Getting the Most From Your TDR.pdf",
+  "an204": "/documents/application-notes/63dc1cd3eb55e64d961e2c84_AN204 Impedance Shifts.pdf",
+  "an205": "/documents/application-notes/63dc1cd4f62b371d9e0ce770_AN205 FDR Comparison to TDR.pdf",
+  "an210": "/documents/application-notes/63dc1cd3d459af7415decf64_AN210 Coax Cable Resistance.pdf",
+  "an211": "/documents/application-notes/63dc1cd3677f58c31c8b582c_AN211 Poor Coax Splice.pdf",
+  "an212": "/documents/application-notes/63dc1cd27ff5a8f0e6cbd4bf_AN212 Crushed or Pinched Coaxial Cable.pdf",
+  "an213": "/documents/application-notes/63dc1cd36796f79d61f010c9_AN213 Wet Coaxial Cable.pdf",
+  "an214": "/documents/application-notes/63dc1cd2cfbac061c6316ad3_AN214 Coaxial Cable Terminations (3).pdf",
+  "an215": "/documents/application-notes/63dc1cd4352018849c432ae5_AN215 Mixed Cable Types (1).pdf",
+  "an216": "/documents/application-notes/63dc1cd3523f1e2f3ba3a07a_AN216 Coaxial Cable Tee.pdf",
+  "an220": "/documents/application-notes/63dc1cd4f9242a9a0a2c16b4_AN220 Twisted Pair Cable Resistance.pdf",
+  "an221": "/documents/application-notes/63dc1cd37cc2a635f4a23a4f_AN221 Poor Splice in Twisted Pair Cables.pdf",
+  "an222": "/documents/application-notes/63dc1cd5e06cc22d90424370_AN222 Telco Style Alligator Clips.pdf",
+  "an223": "/documents/application-notes/63dc1cd65087fb49823da037_AN223 Wet Twisted Pair Cable.pdf",
+  "an224": "/documents/application-notes/63dc1cd4bb0d90580e26ad1e_AN224 Twisted Pair Cable Terminations.pdf",
+  "an225": "/documents/application-notes/63dc1cd66796f78aa3f010e1_AN225 Split Pairs and Resplit pairs.pdf",
+  "an226": "/documents/application-notes/63dc1cd5682caa188c592050_AN226 Bridged Taps.pdf",
+  "an227": "/documents/application-notes/63dc1cd4f62b37073a0ce771_AN227 Testing Premise Telco Pairs.pdf",
+  "an228": "/documents/application-notes/5fecf0649903fb798c0aebd9_AN228 Testing Network Cable Shields.pdf",
+  "an250": "/documents/application-notes/63dc1cd56af3bb78552511bb_AN250 Measuring a Cable From Both Ends.pdf",
+  "an254": "/documents/application-notes/63dc1cd5bdd5eab79ad1d452_AN254 Intermittent Cable Operations.pdf",
+  "an255": "/documents/application-notes/63dc1cd5d459af7a06decfb0_AN255 Removing Test Leads Length from Measurments.pdf",
+  "an256": "/documents/application-notes/63dc1cd47ff5a8aa15cbd5bb_AN256 Sampling a Cables Velocity.pdf",
+  "an257": "/documents/application-notes/63dc295f44067b74c2536d28_AN257 TDR Soft Reset and Battery Charging.pdf",
+  "an258": "/documents/application-notes/63dc295f5032918ac9873629_AN258 USB-to-Serial Communications.pdf",
+  "an259": "/documents/application-notes/63dc1cd64df18565366867e1_AN259 Testing Single-Wires in a Harness.pdf",
+  "white-paper-via": "/documents/application-notes/63dc1c3098f895de399d469b_VIA Analyzer vs the VIA Bravo.pdf",
+}
+
+// Software download mappings
+const softwareDownloadMap: Record<string, string> = {
+  "etdr-pc-vision": "/documents/software/TDR_PC_Vision.zip",
+  "site-analyzer-pc-vision": "/documents/software/Site_Analyzer_PC_Vision.zip",
+  "mri-vision": "/documents/software/MRI_Vision.zip",
+}
+
 async function importResources(dryRun: boolean) {
   const results = []
 
-  // Import software
+  // Import software with correct download paths
   for (const item of resourcesContent.software || []) {
+    const downloadPath = softwareDownloadMap[item.id] || item.downloadUrl
     const doc = {
       _type: "resource",
       _id: `resource-${item.id}`,
@@ -420,7 +481,8 @@ async function importResources(dryRun: boolean) {
       type: "software",
       version: item.version,
       fileSize: item.size,
-      downloadUrl: item.downloadUrl,
+      localPath: downloadPath.startsWith("/") ? downloadPath : undefined,
+      downloadUrl: downloadPath.startsWith("/") ? undefined : (downloadPath !== "#" ? downloadPath : undefined),
       tags: item.tags || [],
       featured: item.featured || false,
     }
@@ -433,12 +495,13 @@ async function importResources(dryRun: boolean) {
         results.push({ id: item.id, error: error.message })
       }
     } else {
-      results.push({ id: item.id, wouldCreate: true })
+      results.push({ id: item.id, type: "software", wouldCreate: true })
     }
   }
 
   // Import manuals
   for (const item of resourcesContent.manuals || []) {
+    const downloadPath = item.downloadUrl
     const doc = {
       _type: "resource",
       _id: `resource-${item.id}`,
@@ -447,7 +510,8 @@ async function importResources(dryRun: boolean) {
       category: item.category,
       type: "manual",
       fileSize: item.size,
-      downloadUrl: item.downloadUrl,
+      localPath: downloadPath.startsWith("/") ? downloadPath : undefined,
+      downloadUrl: downloadPath.startsWith("/") ? undefined : (downloadPath !== "#" ? downloadPath : undefined),
       tags: item.tags || [],
       featured: item.featured || false,
     }
@@ -460,7 +524,7 @@ async function importResources(dryRun: boolean) {
         results.push({ id: item.id, error: error.message })
       }
     } else {
-      results.push({ id: item.id, wouldCreate: true })
+      results.push({ id: item.id, type: "manual", wouldCreate: true })
     }
   }
 
@@ -486,7 +550,7 @@ async function importResources(dryRun: boolean) {
         results.push({ id: item.id, error: error.message })
       }
     } else {
-      results.push({ id: item.id, wouldCreate: true })
+      results.push({ id: item.id, type: "video", wouldCreate: true })
     }
   }
 
@@ -509,7 +573,76 @@ async function importResources(dryRun: boolean) {
         results.push({ id: item.id, error: error.message })
       }
     } else {
-      results.push({ id: item.id, wouldCreate: true })
+      results.push({ id: item.id, type: "faq", wouldCreate: true })
+    }
+  }
+
+  // Import Application Notes with correct type and file paths
+  for (const item of resourcesContent["application-notes"] || []) {
+    const pdfPath = applicationNotePdfMap[item.id] || item.downloadUrl
+    const doc = {
+      _type: "resource",
+      _id: `resource-${item.id}`,
+      title: item.title,
+      description: item.description,
+      category: item.category,
+      type: "application-note", // Use correct type!
+      localPath: pdfPath.startsWith("/") ? pdfPath : undefined,
+      downloadUrl: pdfPath.startsWith("/") ? undefined : (pdfPath !== "#" ? pdfPath : undefined),
+      tags: item.tags || [],
+      featured: false,
+    }
+
+    if (!dryRun) {
+      try {
+        await writeClient.createOrReplace(doc)
+        results.push({ id: item.id, type: "application-note", imported: true })
+      } catch (error: any) {
+        results.push({ id: item.id, error: error.message })
+      }
+    } else {
+      results.push({ id: item.id, type: "application-note", wouldCreate: true })
+    }
+  }
+
+  // Import Training Materials from product resources
+  const trainingMaterials = [
+    {
+      id: "training-bravo-mri-3000",
+      title: "Bravo MRI-3000 Training Presentation",
+      description: "Comprehensive training presentation covering MRI coil testing procedures",
+      category: "Training",
+      localPath: "/documents/manuals/6055/Bravo MRI-3000 Training PPP Aug 2021.ppsx",
+      fileSize: "6.5 MB",
+      tags: ["MRI", "Training", "Bravo MRI-3000"],
+      productSlugs: ["via-bravo-mri-3000"],
+    },
+  ]
+
+  for (const item of trainingMaterials) {
+    const doc = {
+      _type: "resource",
+      _id: `resource-${item.id}`,
+      title: item.title,
+      description: item.description,
+      category: item.category,
+      type: "training",
+      localPath: item.localPath,
+      fileSize: item.fileSize,
+      tags: item.tags || [],
+      productSlugs: item.productSlugs || [],
+      featured: false,
+    }
+
+    if (!dryRun) {
+      try {
+        await writeClient.createOrReplace(doc)
+        results.push({ id: item.id, type: "training", imported: true })
+      } catch (error: any) {
+        results.push({ id: item.id, error: error.message })
+      }
+    } else {
+      results.push({ id: item.id, type: "training", wouldCreate: true })
     }
   }
 
