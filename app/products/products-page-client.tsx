@@ -183,8 +183,9 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                 <CardHeader className="p-0 relative">
                   <Link href={`/products/${product.id}`} onClick={handleProductClick} className="cursor-pointer">
                     <div className="relative overflow-hidden bg-gradient-to-br from-white to-slate-50">
-                      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4/3' }}>
-                        <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+                      {/* Fixed aspect ratio container to prevent CLS */}
+                      <div className="relative p-4 sm:p-6" style={{ aspectRatio: '4/3' }}>
+                        <div className="relative w-full h-full flex items-center justify-center">
                           <Image
                             src={product.image || "/placeholder.svg"}
                             alt={product.name}
