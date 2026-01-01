@@ -1,0 +1,83 @@
+# AEA Technology, Inc. - RF and Cable Testing Equipment
+
+## Company Overview
+AEA Technology is a leading manufacturer of professional RF and cable testing equipment, including Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Founded in 1990, all products are designed and manufactured in the USA in Carlsbad, California.
+
+## Main Pages
+- Homepage: https://aeatechnology.com/
+- Products: https://aeatechnology.com/products
+- About: https://aeatechnology.com/about
+- Contact: https://aeatechnology.com/contact
+- Resources: https://aeatechnology.com/resources
+- Press Releases: https://aeatechnology.com/press
+- Distributors: https://aeatechnology.com/contact/distributors
+- Privacy Policy: https://aeatechnology.com/privacy-policy
+
+## Product Categories
+
+### Time Domain Reflectometers (TDRs)
+- E20/20 Avionics TDR Kit: https://aeatechnology.com/products/e20-20-avionics
+- E20/20N TDR: https://aeatechnology.com/products/e20-20n
+- E20/20F CATV Network TDR: https://aeatechnology.com/products/e20-20f-catv
+- E20/20B Network TDR: https://aeatechnology.com/products/e20-20b
+
+### Network Analyzers (VNAs) & SWR Meters
+- Bravo MRI-3000 Analyzer: https://aeatechnology.com/products/via-bravo-mri-3000
+- Bravo Ex² Analyzer: https://aeatechnology.com/products/via-bravo-ex2
+- SWR Site Analyzer: https://aeatechnology.com/products/swr-site-analyzer
+
+## Resources
+- Software Downloads: https://aeatechnology.com/resources?tab=software
+- Manuals & Guides: https://aeatechnology.com/resources?tab=manuals
+- Training Videos: https://aeatechnology.com/resources?tab=videos
+- Application Notes: https://aeatechnology.com/resources?tab=application-notes
+- FAQs: https://aeatechnology.com/resources?tab=faqs
+
+## Key Products & Applications
+- Aviation cable testing equipment
+- Broadcast transmission line testing
+- CATV network analysis
+- Medical RF environment testing (MRI facilities)
+- Telecommunications cable fault location
+- RF testing and analysis
+- SWR (Standing Wave Ratio) measurement
+
+## Contact Information
+- Address: 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010, United States
+- Phone (Local): (760) 931-8979
+- Phone (Toll-Free): 1-(800) 258-7805
+- Sales Email: SALES@AEATECHNOLOGY.COM
+- Technical Support Email: TECHSUPPORT@AEATECHNOLOGY.COM
+- Business Hours: Monday-Friday, 7:30 am – 4:30 pm PST
+
+## Key Features
+- Made in USA since 1990
+- ISO 9001:2015 Certified
+- Sub-meter accuracy
+- Field-proven reliability
+- Expert technical support
+- Comprehensive warranties
+- Professional RF testing equipment
+- Precision cable fault location
+- 30+ years of experience
+
+## Industries Served
+- Aviation & Aerospace
+- Military & Defense
+- Medical (MRI facilities)
+- Telecommunications
+- Broadcast & Media
+- CATV (Cable TV)
+- Industrial RF Testing
+
+## Software & Downloads
+- ETDR PC Vision Software (TDR analysis)
+- Site Analyzer PC Vision (SWR/VNA analysis)
+- MRI Vision (MRI-3000 remote application)
+
+## Certifications & Standards
+- ISO 9001:2015 Certified
+- ANAB Accredited
+- Made in USA
+- Professional grade equipment
+
