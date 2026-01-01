@@ -77,8 +77,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://aeatechnology.com",
   },
+  manifest: "/manifest",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon", type: "image/png", sizes: "32x32" },
+      { url: "/icon", type: "image/png", sizes: "192x192" },
+      { url: "/icon", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/icon", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
   },
   category: "Technology",
   generator: "v0.app",
@@ -109,6 +119,13 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        {/* Favicon and icons for search engines - Google uses these for search results */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icon" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icon" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/icon" />
+        <link rel="manifest" href="/manifest" />
         {/* Preload LCP image - hero featured product image with high priority */}
         <link 
           rel="preload" 
