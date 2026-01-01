@@ -256,6 +256,81 @@ const nextConfig = {
       // Military & industry redirects
       { source: "/military-products", destination: "/products", permanent: true },
       { source: "/catv-support", destination: "/resources", permanent: true },
+
+      // Additional legacy URL patterns (commonly causing 404s)
+      // Old product detail page formats
+      { source: "/product/:path*", destination: "/products", permanent: true },
+      { source: "/products-page/:path*", destination: "/products", permanent: true },
+      
+      // Old blog/news patterns
+      { source: "/blog/:path*", destination: "/press", permanent: true },
+      { source: "/news/:path*", destination: "/press", permanent: true },
+      { source: "/article/:path*", destination: "/press", permanent: true },
+      { source: "/posts/:path*", destination: "/press", permanent: true },
+      
+      // Old category patterns
+      { source: "/category/:path*", destination: "/products", permanent: true },
+      { source: "/categories/:path*", destination: "/products", permanent: true },
+      
+      // Old documentation patterns
+      { source: "/docs/:path*", destination: "/resources", permanent: true },
+      { source: "/documentation/:path*", destination: "/resources", permanent: true },
+      { source: "/downloads/:path*", destination: "/resources", permanent: true },
+      { source: "/files/:path*", destination: "/resources", permanent: true },
+      
+      // Old service/support patterns  
+      { source: "/service/:path*", destination: "/contact", permanent: true },
+      { source: "/services/:path*", destination: "/contact", permanent: true },
+      { source: "/help/:path*", destination: "/resources", permanent: true },
+      { source: "/faq/:path*", destination: "/resources?tab=faqs", permanent: true },
+      { source: "/faqs/:path*", destination: "/resources?tab=faqs", permanent: true },
+      
+      // Old page extensions
+      { source: "/:path*.html", destination: "/:path*", permanent: true },
+      { source: "/:path*.htm", destination: "/:path*", permanent: true },
+      { source: "/:path*.php", destination: "/:path*", permanent: true },
+      { source: "/:path*.asp", destination: "/:path*", permanent: true },
+      { source: "/:path*.aspx", destination: "/:path*", permanent: true },
+      
+      // Old asset paths that might be crawled
+      { source: "/assets/:path*", destination: "/", permanent: true },
+      { source: "/static/:path*", destination: "/", permanent: true },
+      { source: "/media/:path*", destination: "/", permanent: true },
+      { source: "/images-old/:path*", destination: "/", permanent: true },
+      
+      // Common legacy CMS patterns
+      { source: "/wp-content/:path*", destination: "/", permanent: true },
+      { source: "/wp-includes/:path*", destination: "/", permanent: true },
+      { source: "/wp-admin/:path*", destination: "/", permanent: true },
+      
+      // Old info pages
+      { source: "/info/:path*", destination: "/about", permanent: true },
+      { source: "/company/:path*", destination: "/about", permanent: true },
+      { source: "/about-us/:path*", destination: "/about", permanent: true },
+      { source: "/who-we-are/:path*", destination: "/about", permanent: true },
+      
+      // Legacy store/cart patterns (if old site had e-commerce)
+      { source: "/store/:path*", destination: "/products", permanent: true },
+      { source: "/shop/:path*", destination: "/products", permanent: true },
+      { source: "/cart/:path*", destination: "/contact", permanent: true },
+      { source: "/checkout/:path*", destination: "/contact", permanent: true },
+      
+      // Legacy search patterns
+      { source: "/search/:path*", destination: "/products", permanent: true },
+      { source: "/find/:path*", destination: "/products", permanent: true },
+      
+      // Old PDF patterns that might be deep-linked
+      { source: "/pdf/:path*", destination: "/resources", permanent: true },
+      { source: "/pdfs/:path*", destination: "/resources", permanent: true },
+      
+      // Legacy industry pages
+      { source: "/industries/:path*", destination: "/products", permanent: true },
+      { source: "/markets/:path*", destination: "/products", permanent: true },
+      { source: "/solutions/:path*", destination: "/products", permanent: true },
+      
+      // Old video patterns
+      { source: "/videos/:path*", destination: "/resources?tab=videos", permanent: true },
+      { source: "/video/:path*", destination: "/resources?tab=videos", permanent: true },
     ]
   },
 }
