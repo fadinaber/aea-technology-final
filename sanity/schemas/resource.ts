@@ -9,7 +9,7 @@ export default defineType({
   type: "document",
   groups: [
     { name: "basic", title: "📋 Basic Info", default: true },
-    { name: "file", title: "📁 File & Links" },
+    { name: "file", title: "📁 File & Links (Check here for file paths!)", default: false },
     { name: "content", title: "📝 Details" },
     { name: "associations", title: "🔗 Product Links" },
   ],
@@ -60,10 +60,10 @@ export default defineType({
     // ========== FILE & LINKS ==========
     defineField({
       name: "file",
-      title: "Upload File",
+      title: "Upload File (Alternative)",
       type: "file",
       group: "file",
-      description: "Upload the resource file directly (PDF, PPT, ZIP, etc.)",
+      description: "Upload the resource file directly to Sanity (PDF, PPT, ZIP, etc.). Use this if the file is NOT already in your /public folder. If you use 'Local File Path' above, you don't need to upload here.",
       options: {
         accept: ".pdf,.ppt,.pptx,.ppsx,.doc,.docx,.zip,.exe",
         storeOriginalFilename: true,
@@ -75,15 +75,17 @@ export default defineType({
       title: "Local File Path",
       type: "string",
       group: "file",
-      description: "Path to existing file in public folder (e.g., /documents/manuals/6021/filename.pdf)",
+      description: "Path to existing file in public folder (e.g., /documents/manuals/6021/filename.pdf). This is the PRIMARY way to link to files that are already in your /public folder.",
+      placeholder: "/documents/software/TDR_PC_Vision.zip",
       hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
     defineField({
       name: "downloadUrl",
-      title: "External Download URL",
+      title: "External Download URL (Alternative)",
       type: "url",
       group: "file",
-      description: "Only use if the file is hosted elsewhere (Google Drive, S3, etc.)",
+      description: "Only use if the file is hosted elsewhere (Google Drive, S3, etc.). If you use 'Local File Path' above, you don't need this.",
+      placeholder: "https://example.com/file.pdf",
       hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
     }),
 
@@ -228,8 +230,11 @@ export default defineType({
       type: "type",
       category: "category",
       media: "file",
+      localPath: "localPath",
+      downloadUrl: "downloadUrl",
+      fileSize: "fileSize",
     },
-    prepare({ title, type, category, media }) {
+    prepare({ title, type, category, media, localPath, downloadUrl, fileSize }) {
       const typeIcons: Record<string, string> = {
         software: "💾",
         manual: "📄",
@@ -239,9 +244,26 @@ export default defineType({
         "application-note": "📝",
         training: "🎓",
       }
+      
+      // Show file information in subtitle
+      let fileInfo = ""
+      if (localPath) {
+        fileInfo = `📁 ${localPath.split("/").pop()}`
+      } else if (downloadUrl && !downloadUrl.startsWith("http")) {
+        fileInfo = `🔗 ${downloadUrl.split("/").pop()}`
+      } else if (downloadUrl) {
+        fileInfo = "🔗 External"
+      } else if (media?.asset) {
+        fileInfo = "📎 Uploaded"
+      }
+      
+      if (fileSize) {
+        fileInfo += fileInfo ? ` • ${fileSize}` : fileSize
+      }
+      
       return {
         title,
-        subtitle: `${typeIcons[type] || "📁"} ${type}${category ? ` • ${category}` : ""}`,
+        subtitle: `${typeIcons[type] || "📁"} ${type}${category ? ` • ${category}` : ""}${fileInfo ? ` • ${fileInfo}` : ""}`,
         media: media?.asset || undefined,
       }
     },
