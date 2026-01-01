@@ -97,7 +97,7 @@ function mapHeroFromSanity(hero?: SanityHomepageHero): HeroSection["data"] | und
           slug: featuredManual.slug || hero.featuredProductSlug,
           name: featuredManual.name,
           shortDescription: featuredManual.description,
-          imageUrl: featuredManual.imageAssetUrl || featuredManual.imageUrl,
+          imageUrl: featuredManual.imageAssetUrl || featuredManual.imageUrl || undefined,
         }
       : undefined)
 
@@ -124,7 +124,9 @@ function mapHeroFromSanity(hero?: SanityHomepageHero): HeroSection["data"] | und
       name: featured?.name ?? "Featured Product",
       description:
         featured?.shortDescription ?? "Explore our professional RF and cable testing solutions.",
-      image: featured?.imageUrl ?? "/placeholder.svg",
+      image: featured?.imageUrl && featured.imageUrl.trim() !== "" 
+        ? featured.imageUrl 
+        : "/images/products/avionics/full-kit.png",
       badge: "Featured",
     },
   }
@@ -150,7 +152,9 @@ function mapFeaturedProductsFromSanity(
             id: p.slug?.current ?? p._id ?? "",
             name: p.name ?? "Product",
             description: p.shortDescription ?? "",
-            image: p.imageUrl ?? "/placeholder.svg",
+            image: (p.imageUrl && p.imageUrl.trim() !== "") 
+              ? p.imageUrl 
+              : "/placeholder.svg",
             category: p.category ?? "Product",
             features: p.keyFeatures ?? [],
           }))
@@ -158,7 +162,11 @@ function mapFeaturedProductsFromSanity(
             id: p.productId ?? "",
             name: p.name ?? "Product",
             description: p.description ?? "",
-            image: p.imageAssetUrl || p.imageUrl || "/placeholder.svg",
+            image: (p.imageAssetUrl && p.imageAssetUrl.trim() !== "") 
+              ? p.imageAssetUrl 
+              : (p.imageUrl && p.imageUrl.trim() !== "") 
+                ? p.imageUrl 
+                : "/placeholder.svg",
             category: p.category ?? "Product",
             features: p.features ?? [],
           }))) ?? [],
@@ -193,11 +201,24 @@ function mapResourcesTeaserFromSanity(
 
 export default async function Home() {
   // Single optimized query - removed unused siteSettingsQuery for faster TTFB
-  const homepage = await client.fetch<SanityHomepage | null>(homepageQuery)
+  let homepage: SanityHomepage | null = null
+  try {
+    homepage = await client.fetch<SanityHomepage | null>(homepageQuery)
+  } catch (error) {
+    console.error("Error fetching homepage from Sanity:", error)
+  }
 
   const heroData = mapHeroFromSanity(homepage?.hero)
   const featuredProductsData = mapFeaturedProductsFromSanity(homepage?.featuredProducts)
   const resourcesTeaserData = mapResourcesTeaserFromSanity(homepage?.resourcesTeaser)
+  
+  // Debug logging (remove in production)
+  if (process.env.NODE_ENV === "development") {
+    console.log("Homepage data:", {
+      hero: heroData?.featuredProduct,
+      featuredProducts: featuredProductsData?.products?.map(p => ({ name: p.name, image: p.image }))
+    })
+  }
 
   return (
     <main className="min-h-screen">
