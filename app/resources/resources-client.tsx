@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Download, Play, Filter, BookOpen, HelpCircle, Package, ArrowRight, ExternalLink, Clock } from "lucide-react"
+import { Download, Play, Filter, BookOpen, HelpCircle, ArrowRight, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import SearchBar from "@/components/search-bar"
@@ -146,23 +146,6 @@ const ResourceCard = React.memo(({ resource }: { resource: any }) => {
         {/* Resource metadata */}
         <div className="flex-1 flex flex-col justify-between">
           <div className="space-y-2 mb-4">
-            {(resource.size || resource.duration) && (
-              <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                {resource.size && (
-                  <div className="flex items-center gap-1">
-                    <Package className="w-3 h-3" />
-                    <span>{resource.size}</span>
-                  </div>
-                )}
-                {resource.duration && (
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    <span>{resource.duration}</span>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Tags */}
             <div className="flex flex-wrap gap-1">
               {resource.tags.slice(0, 3).map((tag: string, index: number) => (
