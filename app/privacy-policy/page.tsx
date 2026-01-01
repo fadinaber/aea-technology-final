@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import ObfuscatedEmailServer from "@/components/obfuscated-email-server"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -42,7 +43,7 @@ export default function PrivacyPolicyPage() {
         <p>
           We also have a Data Privacy Department accountable for overseeing questions regarding this privacy notice. If
           you have any questions about this privacy policy, including requests to exercise your legal rights, please
-          contact us through our Contact page or email us at <strong>SALES@AEATECHNOLOGY.COM</strong>.
+          contact us through our Contact page or email us at <strong><ObfuscatedEmailServer email="SALES@AEATECHNOLOGY.COM" /></strong>.
         </p>
         <p>
           It is crucial that the personal information we collect about you is accurate and updated so that we continue

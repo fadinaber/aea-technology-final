@@ -200,11 +200,11 @@ export const homepageData: {
         ],
         headline: {
           line1: "Professional",
-          line2: "RF Testing",
-          line3: "Equipment",
+          line2: "RF & Cable Testing",
+          line3: "Equipment Made in USA",
         },
         description:
-          "Trusted by aviation, military, and telecommunications professionals for over 30 years. Precision instruments designed and manufactured in the USA for critical applications.",
+          "Trusted by aviation, military, and telecommunications professionals for over 30 years. Precision testing instruments designed and manufactured in the USA for critical applications.",
         valuePropositions: [
           { text: "Sub-meter accuracy", icon: "CheckCircle" },
           { text: "Field-proven reliability", icon: "CheckCircle" },
@@ -240,9 +240,9 @@ export const homepageData: {
       order: 2,
       data: {
         badge: "Featured Products",
-        headline: "Professional Testing Solutions",
+        headline: "Professional RF Testing Products & Solutions",
         description:
-          "Discover our most popular testing instruments, each designed for specific applications and built to deliver exceptional performance in demanding environments.",
+          "Discover our most popular RF and cable testing products, each designed for specific applications and built to deliver exceptional performance in demanding environments.",
         products: [
           {
             id: "e20-20-avionics",
@@ -293,10 +293,10 @@ export const homepageData: {
         badge: "Why Choose AEA Technology",
         headline: {
           line1: "The Standard for",
-          line2: "RF Testing Excellence",
+          line2: "Precision RF Testing Excellence",
         },
         description:
-          "Three decades of innovation, precision, and unwavering commitment to quality have made us the trusted choice for professionals worldwide.",
+          "Three decades of innovation, precision testing, and unwavering commitment to quality have made AEA Technology the trusted choice for professionals worldwide.",
         mainFeature: {
           title: "Made in USA",
           badge: "American Made",

@@ -39,6 +39,7 @@ import Link from "next/link"
 import { useState, useMemo } from "react"
 import type { Product } from "@/data/all-products"
 import { getProductResources, type ProductResourceItem } from "@/data/product-resources"
+import ObfuscatedEmail from "@/components/obfuscated-email"
 
 // Icon mapping for capability cards
 const iconMap: Record<string, React.ElementType> = {
@@ -488,7 +489,9 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-blue-600" />
-                    <span>Email: sales@aeatechnology.com</span>
+                    <span>
+                      Email: <ObfuscatedEmail email="sales@aeatechnology.com" />
+                    </span>
                   </div>
                 </div>
               </div>

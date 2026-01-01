@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Mail, MapPin, Phone, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import ObfuscatedEmail from "@/components/obfuscated-email"
 import { siteConfig } from "@/data/site-config"
 
 export default function Footer() {
@@ -64,11 +65,15 @@ export default function Footer() {
                 <div className="text-slate-300 space-y-2">
                   <div>
                     <div className="text-xs text-slate-400">Sales</div>
-                    <div className="break-all">{contact.emails.sales}</div>
+                    <div className="break-all">
+                      <ObfuscatedEmail email={contact.emails.sales} className="text-slate-300" />
+                    </div>
                   </div>
                   <div>
                     <div className="text-xs text-slate-400">Tech Support</div>
-                    <div className="break-all">{contact.emails.support}</div>
+                    <div className="break-all">
+                      <ObfuscatedEmail email={contact.emails.support} className="text-slate-300" />
+                    </div>
                   </div>
                 </div>
               </div>

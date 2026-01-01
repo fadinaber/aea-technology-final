@@ -8,6 +8,7 @@ import ClientLayout from "./client-layout"
 import OrganizationSchema from "@/components/seo/organization-schema"
 import WebsiteSchema from "@/components/seo/website-schema"
 import LocalBusinessSchema from "@/components/seo/local-business-schema"
+import GoogleAnalytics from "@/components/analytics/google-analytics"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -142,38 +143,8 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
 
-        {/* 
-          ============================================
-          GOOGLE ANALYTICS & ADS TRACKING
-          ============================================
-          To enable Google Analytics and Ads tracking:
-          
-          1. Replace G-PLACEHOLDER with your Google Analytics 4 Measurement ID
-             - Format: G-XXXXXXXXXX
-             - Get it from: Google Analytics → Admin → Data Streams
-          
-          2. Replace AW-PLACEHOLDER with your Google Ads Conversion ID
-             - Format: AW-XXXXXXXXX
-             - Get it from: Google Ads → Tools & Settings → Conversions
-          
-          Then uncomment the Script tags below:
-
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=YOUR-GA4-ID`}
-        />
-        <Script id="google-analytics-config" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'YOUR-GA4-ID');
-            gtag('config', 'YOUR-AW-ID');
-          `}
-        </Script>
-          ============================================
-        */}
+        {/* Google Analytics - Add NEXT_PUBLIC_GA_ID to your .env.local or Vercel environment variables */}
+        <GoogleAnalytics />
 
         {/* Vercel Speed Insights */}
         <SpeedInsights />

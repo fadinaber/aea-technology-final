@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Mail, MapPin, Phone, Clock, Globe, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 import { useState } from "react"
 import { SupportCTA } from "@/components/support-cta"
+import ObfuscatedEmail from "@/components/obfuscated-email"
 
 type FormType = "contact" | "quote" | "support"
 type SubmitStatus = "idle" | "loading" | "success" | "error"
@@ -137,11 +138,15 @@ function ContactPageClient({ products }: ContactPageClientProps) {
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <p className="font-medium text-slate-900">SALES@AEATECHNOLOGY.COM</p>
+                  <p className="font-medium text-slate-900">
+                    <ObfuscatedEmail email="SALES@AEATECHNOLOGY.COM" />
+                  </p>
                   <p className="text-sm sm:text-base text-slate-600">Sales & Product Inquiries</p>
                 </div>
                 <div>
-                  <p className="font-medium text-slate-900">TECHSUPPORT@AEATECHNOLOGY.COM</p>
+                  <p className="font-medium text-slate-900">
+                    <ObfuscatedEmail email="TECHSUPPORT@AEATECHNOLOGY.COM" />
+                  </p>
                   <p className="text-sm sm:text-base text-slate-600">Technical Support</p>
                 </div>
               </div>
