@@ -184,14 +184,14 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                   <Link href={`/products/${product.id}`} onClick={handleProductClick} className="cursor-pointer">
                     <div className="relative overflow-hidden bg-gradient-to-br from-white to-slate-50">
                       {/* Fixed aspect ratio container to prevent CLS */}
-                      <div className="relative p-4 sm:p-6" style={{ aspectRatio: '4/3' }}>
+                      <div className="relative p-2 sm:p-3" style={{ aspectRatio: '4/3' }}>
                         <div className="relative w-full h-full flex items-center justify-center">
                           <Image
                             src={product.image || "/placeholder.svg"}
                             alt={product.name}
-                            width={400}
-                            height={300}
-                            className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                            width={500}
+                            height={375}
+                            className="w-[90%] h-[90%] object-contain group-hover:scale-110 transition-transform duration-500"
                             loading={categoryIndex === 0 && category.products.indexOf(product) < 4 ? "eager" : "lazy"}
                             priority={categoryIndex === 0 && category.products.indexOf(product) < 4}
                             quality={85}

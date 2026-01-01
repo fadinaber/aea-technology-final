@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | AEA Technology",
   },
   description:
-    "Leading manufacturer of Time Domain Reflectometers (TDRs), Vector Network Analyzers (VNAs), and SWR meters. Professional RF and cable testing equipment designed and manufactured in the USA since 1990. Trusted by aviation, military, medical, and telecommunications industries.",
+    "Leading manufacturer of TDRs, VNAs, and SWR meters. Professional RF and cable testing equipment made in USA since 1990. Trusted by aviation, military, and medical industries.",
   keywords: [
     "TDR",
     "Time Domain Reflectometer",
