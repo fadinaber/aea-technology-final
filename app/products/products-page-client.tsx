@@ -189,7 +189,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
                           alt={product.name}
                           width={400}
                           height={300}
-                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                          className="max-w-full max-h-full object-contain mx-auto group-hover:scale-110 transition-transform duration-500"
                           loading={categoryIndex === 0 && category.products.indexOf(product) < 4 ? "eager" : "lazy"}
                           priority={categoryIndex === 0 && category.products.indexOf(product) < 4}
                           quality={85}
