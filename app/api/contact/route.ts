@@ -10,9 +10,9 @@ const RATE_LIMIT_MAX = 5 // 5 requests per window per IP
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 
 // Single main email address for all contact form submissions
-const MAIN_EMAIL = "info@aeatechnology.com"
+const MAIN_EMAIL = "TECHSUPPORT@AEATECHNOLOGY.COM"
 
-// Backup email (your email) - will always receive copies
+// Backup email - will always receive copies
 const BACKUP_EMAIL = "fadiwnaber@gmail.com"
 
 type FormType = "quote" | "contact" | "support"
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "Email service not configured. Set RESEND_API_KEY in your project root .env.local and restart `npm run dev`.",
+            "Error: Email service not configured. Please contact support.",
         },
         { status: 500 }
       )
