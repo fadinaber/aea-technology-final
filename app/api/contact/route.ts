@@ -228,13 +228,16 @@ AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010
     const clientEmailResult = await resend.emails.send({
       from: "AEA Technology <contact@aeatechnology.com>",
       to: [mainEmail],
-      replyTo: mainEmail,
+      replyTo: email, // Use form submitter's email for replyTo so they can reply directly
       subject: subjects[formType],
       html: emailBody,
       text: textBody,
       headers: {
         "X-Entity-Ref-ID": uniqueId,
         "X-Mailer": "AEA Technology Contact Form",
+        "Precedence": "bulk",
+        "Auto-Submitted": "no",
+        "List-Id": "AEA Technology Contact Form <contact.aeatechnology.com>",
       },
       tags: [
         { name: "category", value: "contact-form" },
