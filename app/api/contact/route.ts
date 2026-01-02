@@ -93,68 +93,154 @@ export async function POST(request: Request) {
       support: `[SUPPORT] Technical Support Request from ${firstName} ${lastName} - ${company}`,
     }
 
-    // Build email body
-    let emailBody = `
-      <h2>${formType === "quote" ? "Quote Request" : formType === "support" ? "Technical Support Request" : "Contact Inquiry"}</h2>
-      
-      <h3>Contact Information</h3>
-      <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-      <p><strong>Company:</strong> ${company}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Country:</strong> ${country}</p>
-    `
-
+    // Build professional HTML email body with proper structure for better deliverability
+    const formTypeTitle = formType === "quote" ? "Quote Request" : formType === "support" ? "Technical Support Request" : "Contact Inquiry"
+    
+    let productsHtml = ""
     if (formType === "quote" && selectedProducts && selectedProducts.length > 0) {
-      emailBody += `
-        <h3>Products of Interest</h3>
-        <ul>
-          ${selectedProducts.map((product) => `<li>${product}</li>`).join("")}
-        </ul>
+      productsHtml = `
+        <tr>
+          <td style="padding: 20px 30px; background-color: #f8fafc;">
+            <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 12px 0;">Products of Interest</h3>
+            <ul style="margin: 0; padding-left: 20px; color: #475569;">
+              ${selectedProducts.map((product) => `<li style="margin-bottom: 4px;">${product}</li>`).join("")}
+            </ul>
+          </td>
+        </tr>
       `
     }
-
+    
+    let supportProductHtml = ""
     if (formType === "support" && supportProduct) {
-      emailBody += `
-        <h3>Product</h3>
-        <p>${supportProduct}</p>
+      supportProductHtml = `
+        <tr>
+          <td style="padding: 20px 30px; background-color: #f8fafc;">
+            <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 8px 0;">Product</h3>
+            <p style="margin: 0; color: #475569;">${supportProduct}</p>
+          </td>
+        </tr>
       `
     }
 
-    emailBody += `
-      <h3>Message</h3>
-      <p>${message.replace(/\n/g, "<br>")}</p>
-    `
+    const emailBody = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${formTypeTitle}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f1f5f9;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f1f5f9; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="padding: 30px; background-color: #1e40af; border-radius: 8px 8px 0 0;">
+              <h1 style="color: #ffffff; font-size: 24px; margin: 0;">AEA Technology</h1>
+              <p style="color: #93c5fd; font-size: 14px; margin: 8px 0 0 0;">${formTypeTitle}</p>
+            </td>
+          </tr>
+          <!-- Contact Info -->
+          <tr>
+            <td style="padding: 30px;">
+              <h2 style="color: #1e293b; font-size: 18px; margin: 0 0 20px 0;">Contact Information</h2>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b; width: 100px;">Name:</td>
+                  <td style="padding: 8px 0; color: #1e293b; font-weight: 500;">${firstName} ${lastName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;">Company:</td>
+                  <td style="padding: 8px 0; color: #1e293b; font-weight: 500;">${company}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;">Email:</td>
+                  <td style="padding: 8px 0; color: #1e293b;"><a href="mailto:${email}" style="color: #2563eb; text-decoration: none;">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;">Phone:</td>
+                  <td style="padding: 8px 0; color: #1e293b;">${phone}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #64748b;">Country:</td>
+                  <td style="padding: 8px 0; color: #1e293b;">${country}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          ${productsHtml}
+          ${supportProductHtml}
+          <!-- Message -->
+          <tr>
+            <td style="padding: 20px 30px; border-top: 1px solid #e2e8f0;">
+              <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 12px 0;">Message</h3>
+              <p style="margin: 0; color: #475569; line-height: 1.6; white-space: pre-wrap;">${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 30px; background-color: #f8fafc; border-radius: 0 0 8px 8px; border-top: 1px solid #e2e8f0;">
+              <p style="margin: 0; color: #64748b; font-size: 12px;">This email was sent from the AEA Technology website contact form.</p>
+              <p style="margin: 8px 0 0 0; color: #64748b; font-size: 12px;">AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `.trim()
 
     // Build plain text version for better deliverability
     const textBody = `
-${formType === "quote" ? "Quote Request" : formType === "support" ? "Technical Support Request" : "Contact Inquiry"}
+AEA TECHNOLOGY - ${formTypeTitle.toUpperCase()}
+${"=".repeat(50)}
 
-Contact Information:
+CONTACT INFORMATION
+-------------------
 Name: ${firstName} ${lastName}
 Company: ${company}
 Email: ${email}
 Phone: ${phone}
 Country: ${country}
-${formType === "quote" && selectedProducts && selectedProducts.length > 0 ? `\nProducts of Interest:\n${selectedProducts.map((p) => `- ${p}`).join("\n")}` : ""}
-${formType === "support" && supportProduct ? `\nProduct: ${supportProduct}` : ""}
+${formType === "quote" && selectedProducts && selectedProducts.length > 0 ? `\nPRODUCTS OF INTEREST\n--------------------\n${selectedProducts.map((p) => `- ${p}`).join("\n")}` : ""}
+${formType === "support" && supportProduct ? `\nPRODUCT\n-------\n${supportProduct}` : ""}
 
-Message:
+MESSAGE
+-------
 ${message}
+
+---
+This email was sent from the AEA Technology website contact form.
+AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010
     `.trim()
 
     // Get the appropriate email address based on form type
     const mainEmail = EMAIL_ADDRESSES[formType] || EMAIL_ADDRESSES.contact
 
+    // Generate unique ID for this email to improve deliverability
+    const uniqueId = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+
     // Send email to both - both are primary recipients so you'll always get it
-    // Use a verified email for replyTo instead of form submitter's email to reduce spam
+    // Includes spam prevention headers and tags for better deliverability
     let { data, error } = await resend.emails.send({
-      from: "AEA Technology Contact Form <contact@aeatechnology.com>",
+      from: "AEA Technology <contact@aeatechnology.com>",
       to: [mainEmail, BACKUP_EMAIL],
-      replyTo: mainEmail, // Use the appropriate email for replyTo based on form type
+      replyTo: mainEmail,
       subject: subjects[formType],
       html: emailBody,
-      text: textBody, // Add plain text version
+      text: textBody,
+      headers: {
+        "X-Entity-Ref-ID": uniqueId,
+        "X-Mailer": "AEA Technology Contact Form",
+      },
+      tags: [
+        { name: "category", value: "contact-form" },
+        { name: "form_type", value: formType },
+      ],
     })
 
     if (error) {
