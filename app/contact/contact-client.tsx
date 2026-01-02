@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Mail, MapPin, Phone, Clock, Globe, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
@@ -369,30 +368,23 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                     <Label htmlFor="country" className="text-sm sm:text-base">
                       Country *
                     </Label>
-                    <Select
+                    <select
+                      id="country"
                       value={formData.country}
-                      onValueChange={(value) => handleSelectChange("country", value)}
+                      onChange={(e) => handleSelectChange("country", e.target.value)}
                       required
+                      className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-[16px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      <SelectTrigger className="w-full min-h-[44px]">
-                        <SelectValue placeholder="Select your country" />
-                      </SelectTrigger>
-                      <SelectContent 
-                        position="popper" 
-                        sideOffset={4}
-                        className="max-h-[200px]"
-                        onWheel={(e) => e.stopPropagation()}
-                      >
-                        <SelectItem value="United States">United States</SelectItem>
-                        <SelectItem value="Canada">Canada</SelectItem>
-                        <SelectItem value="United Kingdom">United Kingdom</SelectItem>
-                        <SelectItem value="Germany">Germany</SelectItem>
-                        <SelectItem value="France">France</SelectItem>
-                        <SelectItem value="Japan">Japan</SelectItem>
-                        <SelectItem value="Australia">Australia</SelectItem>
-                        <SelectItem value="Other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      <option value="" disabled>Select your country</option>
+                      <option value="United States">United States</option>
+                      <option value="Canada">Canada</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="Germany">Germany</option>
+                      <option value="France">France</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
 
                   {/* Quote products section - fixed min-height to prevent CLS */}
@@ -427,29 +419,23 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                   {/* Support product section - fixed min-height to prevent CLS */}
                   {formType === "support" && (
                     <div className="space-y-2 min-h-[80px]">
-                      <Label htmlFor="product" className="text-sm sm:text-base">
+                      <Label htmlFor="supportProduct" className="text-sm sm:text-base">
                         Which product do you need help with? *
                       </Label>
-                      <Select
+                      <select
+                        id="supportProduct"
                         value={formData.supportProduct}
-                        onValueChange={(value) => handleSelectChange("supportProduct", value)}
+                        onChange={(e) => handleSelectChange("supportProduct", e.target.value)}
+                        required
+                        className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-[16px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        <SelectTrigger className="w-full min-h-[44px]">
-                          <SelectValue placeholder="Select a product" />
-                        </SelectTrigger>
-                        <SelectContent 
-                          position="popper" 
-                          sideOffset={4}
-                          className="max-h-[200px]"
-                          onWheel={(e) => e.stopPropagation()}
-                        >
-                          {products.map((product) => (
-                            <SelectItem key={product} value={product}>
-                              {product}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        <option value="" disabled>Select a product</option>
+                        {products.map((product) => (
+                          <option key={product} value={product}>
+                            {product}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   )}
 
