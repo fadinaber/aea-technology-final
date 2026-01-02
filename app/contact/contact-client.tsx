@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Mail, MapPin, Phone, Clock, Globe, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
@@ -368,23 +369,30 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                     <Label htmlFor="country" className="text-sm sm:text-base">
                       Country *
                     </Label>
-                    <select
-                      id="country"
+                    <Select
                       value={formData.country}
-                      onChange={(e) => handleSelectChange("country", e.target.value)}
+                      onValueChange={(value) => handleSelectChange("country", value)}
                       required
-                      className="min-h-[44px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-[16px] text-slate-900 shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [&>option]:bg-white [&>option]:text-slate-900"
                     >
-                      <option value="" disabled className="bg-white text-slate-900">Select your country</option>
-                      <option value="United States" className="bg-white text-slate-900">United States</option>
-                      <option value="Canada" className="bg-white text-slate-900">Canada</option>
-                      <option value="United Kingdom" className="bg-white text-slate-900">United Kingdom</option>
-                      <option value="Germany" className="bg-white text-slate-900">Germany</option>
-                      <option value="France" className="bg-white text-slate-900">France</option>
-                      <option value="Japan" className="bg-white text-slate-900">Japan</option>
-                      <option value="Australia" className="bg-white text-slate-900">Australia</option>
-                      <option value="Other" className="bg-white text-slate-900">Other</option>
-                    </select>
+                      <SelectTrigger className="w-full min-h-[44px] text-[16px]">
+                        <SelectValue placeholder="Select your country" />
+                      </SelectTrigger>
+                      <SelectContent 
+                        position="popper"
+                        sideOffset={4}
+                        className="z-[100] w-[var(--radix-select-trigger-width)] max-h-[200px]"
+                        onOpenAutoFocus={(e) => e.preventDefault()}
+                      >
+                        <SelectItem value="United States">United States</SelectItem>
+                        <SelectItem value="Canada">Canada</SelectItem>
+                        <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+                        <SelectItem value="Germany">Germany</SelectItem>
+                        <SelectItem value="France">France</SelectItem>
+                        <SelectItem value="Japan">Japan</SelectItem>
+                        <SelectItem value="Australia">Australia</SelectItem>
+                        <SelectItem value="Other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   {/* Quote products section - fixed min-height to prevent CLS */}
@@ -422,20 +430,27 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                       <Label htmlFor="supportProduct" className="text-sm sm:text-base">
                         Which product do you need help with? *
                       </Label>
-                      <select
-                        id="supportProduct"
+                      <Select
                         value={formData.supportProduct}
-                        onChange={(e) => handleSelectChange("supportProduct", e.target.value)}
+                        onValueChange={(value) => handleSelectChange("supportProduct", value)}
                         required
-                        className="min-h-[44px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-[16px] text-slate-900 shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [&>option]:bg-white [&>option]:text-slate-900"
                       >
-                        <option value="" disabled className="bg-white text-slate-900">Select a product</option>
-                        {products.map((product) => (
-                          <option key={product} value={product} className="bg-white text-slate-900">
-                            {product}
-                          </option>
-                        ))}
-                      </select>
+                        <SelectTrigger className="w-full min-h-[44px] text-[16px]">
+                          <SelectValue placeholder="Select a product" />
+                        </SelectTrigger>
+                        <SelectContent 
+                          position="popper"
+                          sideOffset={4}
+                          className="z-[100] w-[var(--radix-select-trigger-width)] max-h-[200px]"
+                          onOpenAutoFocus={(e) => e.preventDefault()}
+                        >
+                          {products.map((product) => (
+                            <SelectItem key={product} value={product}>
+                              {product}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                   )}
 
