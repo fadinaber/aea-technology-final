@@ -373,17 +373,17 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                       value={formData.country}
                       onChange={(e) => handleSelectChange("country", e.target.value)}
                       required
-                      className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-[16px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="min-h-[44px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-[16px] text-slate-900 shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [&>option]:bg-white [&>option]:text-slate-900"
                     >
-                      <option value="" disabled>Select your country</option>
-                      <option value="United States">United States</option>
-                      <option value="Canada">Canada</option>
-                      <option value="United Kingdom">United Kingdom</option>
-                      <option value="Germany">Germany</option>
-                      <option value="France">France</option>
-                      <option value="Japan">Japan</option>
-                      <option value="Australia">Australia</option>
-                      <option value="Other">Other</option>
+                      <option value="" disabled className="bg-white text-slate-900">Select your country</option>
+                      <option value="United States" className="bg-white text-slate-900">United States</option>
+                      <option value="Canada" className="bg-white text-slate-900">Canada</option>
+                      <option value="United Kingdom" className="bg-white text-slate-900">United Kingdom</option>
+                      <option value="Germany" className="bg-white text-slate-900">Germany</option>
+                      <option value="France" className="bg-white text-slate-900">France</option>
+                      <option value="Japan" className="bg-white text-slate-900">Japan</option>
+                      <option value="Australia" className="bg-white text-slate-900">Australia</option>
+                      <option value="Other" className="bg-white text-slate-900">Other</option>
                     </select>
                   </div>
 
@@ -427,11 +427,11 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                         value={formData.supportProduct}
                         onChange={(e) => handleSelectChange("supportProduct", e.target.value)}
                         required
-                        className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-[16px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="min-h-[44px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-[16px] text-slate-900 shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [&>option]:bg-white [&>option]:text-slate-900"
                       >
-                        <option value="" disabled>Select a product</option>
+                        <option value="" disabled className="bg-white text-slate-900">Select a product</option>
                         {products.map((product) => (
-                          <option key={product} value={product}>
+                          <option key={product} value={product} className="bg-white text-slate-900">
                             {product}
                           </option>
                         ))}
