@@ -374,10 +374,15 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                       onValueChange={(value) => handleSelectChange("country", value)}
                       required
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full min-h-[44px]">
                         <SelectValue placeholder="Select your country" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent 
+                        position="popper" 
+                        sideOffset={4}
+                        className="max-h-[200px]"
+                        onWheel={(e) => e.stopPropagation()}
+                      >
                         <SelectItem value="United States">United States</SelectItem>
                         <SelectItem value="Canada">Canada</SelectItem>
                         <SelectItem value="United Kingdom">United Kingdom</SelectItem>
@@ -429,10 +434,15 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                         value={formData.supportProduct}
                         onValueChange={(value) => handleSelectChange("supportProduct", value)}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="w-full min-h-[44px]">
                           <SelectValue placeholder="Select a product" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent 
+                          position="popper" 
+                          sideOffset={4}
+                          className="max-h-[200px]"
+                          onWheel={(e) => e.stopPropagation()}
+                        >
                           {products.map((product) => (
                             <SelectItem key={product} value={product}>
                               {product}
