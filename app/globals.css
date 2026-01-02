@@ -121,12 +121,21 @@
   }
   html {
     scrollbar-gutter: stable;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
   }
   body {
     @apply bg-background text-foreground font-sans;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     position: relative;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Prevent Radix UI from modifying body styles */
+  body[style*="padding-right"],
+  body[style*="overflow"] {
+    padding-right: 0 !important;
+    overflow-y: scroll !important;
   }
 
   /* Removed overflow-x: hidden from html/body - it breaks position: sticky */
