@@ -441,7 +441,6 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                           position="popper"
                           sideOffset={4}
                           className="z-[100] w-[var(--radix-select-trigger-width)] max-h-[200px]"
-                          onOpenAutoFocus={(e) => e.preventDefault()}
                         >
                           {products.map((product) => (
                             <SelectItem key={product} value={product}>
