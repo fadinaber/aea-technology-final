@@ -245,54 +245,24 @@ AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010
       ],
     })
 
-    // Log if client email fails (but don't fail the request)
+    // Log if client email fails
     if (clientEmailResult.error) {
       console.error("Failed to send email to client:", mainEmail, clientEmailResult.error)
-    } else {
-      console.log("Successfully sent email to client:", mainEmail, clientEmailResult.data?.id)
-    }
-
-    // Always send backup copy to you
-    const backupEmailResult = await resend.emails.send({
-      from: "AEA Technology <contact@aeatechnology.com>",
-      to: [BACKUP_EMAIL],
-      replyTo: mainEmail,
-      subject: `[BACKUP] ${subjects[formType]}`,
-      html: emailBody,
-      text: textBody,
-      headers: {
-        "X-Entity-Ref-ID": `${uniqueId}-backup`,
-        "X-Mailer": "AEA Technology Contact Form",
-      },
-      tags: [
-        { name: "category", value: "contact-form-backup" },
-        { name: "form_type", value: formType },
-      ],
-    })
-
-    // Log backup email result
-    if (backupEmailResult.error) {
-      console.error("Failed to send backup email:", backupEmailResult.error)
-    } else {
-      console.log("Successfully sent backup email:", backupEmailResult.data?.id)
-    }
-
-    // Return success if at least one email was sent
-    if (clientEmailResult.error && backupEmailResult.error) {
       return NextResponse.json(
         { 
           error: "Failed to send email",
-          details: `Client: ${(clientEmailResult.error as any)?.message}, Backup: ${(backupEmailResult.error as any)?.message}`
+          details: (clientEmailResult.error as any)?.message 
         }, 
         { status: 500 }
       )
     }
 
+    console.log("Successfully sent email to client:", mainEmail, clientEmailResult.data?.id)
+
     return NextResponse.json({ 
       success: true, 
-      messageId: clientEmailResult.data?.id || backupEmailResult.data?.id,
-      clientEmailSent: !clientEmailResult.error,
-      backupEmailSent: !backupEmailResult.error
+      messageId: clientEmailResult.data?.id,
+      clientEmailSent: true
     })
   } catch (error) {
     console.error("Contact form error:", error)
