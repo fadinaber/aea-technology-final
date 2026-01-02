@@ -9,8 +9,12 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000 // 10 min
 const RATE_LIMIT_MAX = 5 // 5 requests per window per IP
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 
-// Single main email address for all contact form submissions
-const MAIN_EMAIL = "TECHSUPPORT@AEATECHNOLOGY.COM"
+// Email addresses based on form type
+const EMAIL_ADDRESSES = {
+  quote: "SALES@AEATECHNOLOGY.COM",
+  contact: "SALES@AEATECHNOLOGY.COM", // General contact goes to sales
+  support: "TECHSUPPORT@AEATECHNOLOGY.COM",
+} as const
 
 // Backup email - will always receive copies
 const BACKUP_EMAIL = "fadiwnaber@gmail.com"
@@ -139,12 +143,15 @@ Message:
 ${message}
     `.trim()
 
+    // Get the appropriate email address based on form type
+    const mainEmail = EMAIL_ADDRESSES[formType] || EMAIL_ADDRESSES.contact
+
     // Send email to both - both are primary recipients so you'll always get it
     // Use a verified email for replyTo instead of form submitter's email to reduce spam
     let { data, error } = await resend.emails.send({
       from: "AEA Technology Contact Form <contact@aeatechnology.com>",
-      to: [MAIN_EMAIL, BACKUP_EMAIL],
-      replyTo: "TECHSUPPORT@AEATECHNOLOGY.COM", // Use verified domain email instead of form submitter
+      to: [mainEmail, BACKUP_EMAIL],
+      replyTo: mainEmail, // Use the appropriate email for replyTo based on form type
       subject: subjects[formType],
       html: emailBody,
       text: textBody, // Add plain text version
