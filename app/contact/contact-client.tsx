@@ -381,7 +381,6 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                         position="popper"
                         sideOffset={4}
                         className="z-[100] w-[var(--radix-select-trigger-width)] max-h-[200px]"
-                        onOpenAutoFocus={(e) => e.preventDefault()}
                       >
                         <SelectItem value="United States">United States</SelectItem>
                         <SelectItem value="Canada">Canada</SelectItem>
