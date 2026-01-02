@@ -1090,9 +1090,10 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
   return (
     <>
       <FAQSchema faqs={faqs} />
-      <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 bg-zinc-50">
-        {/* Header */}
-        <div className="text-center mb-8 sm:mb-12 mt-20">
+      <div className="w-full bg-zinc-50">
+        <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12 mt-20">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:text-4xl">Resource Hub</h1>
           <p className="text-base text-gray-600 max-w-3xl mx-auto sm:text-xl">
             Access comprehensive documentation, software, training materials, and support resources for all AEA
@@ -1239,6 +1240,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
 
         {/* Contact Support Section - Mobile Optimized */}
         <SupportCTA />
+        </div>
       </div>
     </>
   )
