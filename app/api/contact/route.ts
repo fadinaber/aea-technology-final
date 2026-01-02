@@ -122,13 +122,32 @@ export async function POST(request: Request) {
       <p>${message.replace(/\n/g, "<br>")}</p>
     `
 
+    // Build plain text version for better deliverability
+    const textBody = `
+${formType === "quote" ? "Quote Request" : formType === "support" ? "Technical Support Request" : "Contact Inquiry"}
+
+Contact Information:
+Name: ${firstName} ${lastName}
+Company: ${company}
+Email: ${email}
+Phone: ${phone}
+Country: ${country}
+${formType === "quote" && selectedProducts && selectedProducts.length > 0 ? `\nProducts of Interest:\n${selectedProducts.map((p) => `- ${p}`).join("\n")}` : ""}
+${formType === "support" && supportProduct ? `\nProduct: ${supportProduct}` : ""}
+
+Message:
+${message}
+    `.trim()
+
     // Send email to both - both are primary recipients so you'll always get it
+    // Use a verified email for replyTo instead of form submitter's email to reduce spam
     let { data, error } = await resend.emails.send({
       from: "AEA Technology Contact Form <contact@aeatechnology.com>",
       to: [MAIN_EMAIL, BACKUP_EMAIL],
-      replyTo: email,
+      replyTo: "TECHSUPPORT@AEATECHNOLOGY.COM", // Use verified domain email instead of form submitter
       subject: subjects[formType],
       html: emailBody,
+      text: textBody, // Add plain text version
     })
 
     if (error) {
