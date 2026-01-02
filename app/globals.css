@@ -121,9 +121,12 @@
   }
   html {
     scrollbar-gutter: stable;
+    overflow-y: scroll;
   }
   body {
     @apply bg-background text-foreground font-sans;
+    overflow-y: scroll;
+    position: relative;
   }
 
   /* Removed overflow-x: hidden from html/body - it breaks position: sticky */
