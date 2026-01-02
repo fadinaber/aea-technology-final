@@ -377,13 +377,7 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                       <SelectTrigger className="w-full min-h-[44px] text-[16px]">
                         <SelectValue placeholder="Select your country" />
                       </SelectTrigger>
-                      <SelectContent 
-                        position="item-aligned"
-                        sideOffset={4}
-                        className="z-[100] max-h-[200px]"
-                        avoidCollisions={true}
-                        collisionPadding={8}
-                      >
+                      <SelectContent className="z-[100] max-h-[200px]">
                         <SelectItem value="United States">United States</SelectItem>
                         <SelectItem value="Canada">Canada</SelectItem>
                         <SelectItem value="United Kingdom">United Kingdom</SelectItem>
@@ -439,13 +433,7 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                         <SelectTrigger className="w-full min-h-[44px] text-[16px]">
                           <SelectValue placeholder="Select a product" />
                         </SelectTrigger>
-                        <SelectContent 
-                          position="item-aligned"
-                          sideOffset={4}
-                          className="z-[100] max-h-[200px]"
-                          avoidCollisions={true}
-                          collisionPadding={8}
-                        >
+                        <SelectContent className="z-[100] max-h-[200px]">
                           {products.map((product) => (
                             <SelectItem key={product} value={product}>
                               {product}
