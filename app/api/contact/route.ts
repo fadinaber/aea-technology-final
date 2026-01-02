@@ -157,7 +157,7 @@ export async function POST(request: Request) {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #64748b;">Email:</td>
-                  <td style="padding: 8px 0; color: #1e293b;"><a href="mailto:${email}" style="color: #2563eb; text-decoration: none;">${email}</a></td>
+                  <td style="padding: 8px 0; color: #1e293b;">${email}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #64748b;">Phone:</td>
@@ -224,11 +224,10 @@ AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010
     // Generate unique ID for this email to improve deliverability
     const uniqueId = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
 
-    // Send email to both - both are primary recipients so you'll always get it
-    // Includes spam prevention headers and tags for better deliverability
-    let { data, error } = await resend.emails.send({
+    // Send email to client first
+    const clientEmailResult = await resend.emails.send({
       from: "AEA Technology <contact@aeatechnology.com>",
-      to: [mainEmail, BACKUP_EMAIL],
+      to: [mainEmail],
       replyTo: mainEmail,
       subject: subjects[formType],
       html: emailBody,
@@ -243,18 +242,55 @@ AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010
       ],
     })
 
-    if (error) {
-      console.error("Resend error:", error)
+    // Log if client email fails (but don't fail the request)
+    if (clientEmailResult.error) {
+      console.error("Failed to send email to client:", mainEmail, clientEmailResult.error)
+    } else {
+      console.log("Successfully sent email to client:", mainEmail, clientEmailResult.data?.id)
+    }
+
+    // Always send backup copy to you
+    const backupEmailResult = await resend.emails.send({
+      from: "AEA Technology <contact@aeatechnology.com>",
+      to: [BACKUP_EMAIL],
+      replyTo: mainEmail,
+      subject: `[BACKUP] ${subjects[formType]}`,
+      html: emailBody,
+      text: textBody,
+      headers: {
+        "X-Entity-Ref-ID": `${uniqueId}-backup`,
+        "X-Mailer": "AEA Technology Contact Form",
+      },
+      tags: [
+        { name: "category", value: "contact-form-backup" },
+        { name: "form_type", value: formType },
+      ],
+    })
+
+    // Log backup email result
+    if (backupEmailResult.error) {
+      console.error("Failed to send backup email:", backupEmailResult.error)
+    } else {
+      console.log("Successfully sent backup email:", backupEmailResult.data?.id)
+    }
+
+    // Return success if at least one email was sent
+    if (clientEmailResult.error && backupEmailResult.error) {
       return NextResponse.json(
         { 
           error: "Failed to send email",
-          details: (error as any)?.message 
+          details: `Client: ${(clientEmailResult.error as any)?.message}, Backup: ${(backupEmailResult.error as any)?.message}`
         }, 
         { status: 500 }
       )
     }
 
-    return NextResponse.json({ success: true, messageId: data?.id })
+    return NextResponse.json({ 
+      success: true, 
+      messageId: clientEmailResult.data?.id || backupEmailResult.data?.id,
+      clientEmailSent: !clientEmailResult.error,
+      backupEmailSent: !backupEmailResult.error
+    })
   } catch (error) {
     console.error("Contact form error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
