@@ -101,13 +101,18 @@ function mapHeroFromSanity(hero?: SanityHomepageHero): HeroSection["data"] | und
         }
       : undefined)
 
+  // Use Sanity headline directly if it exists, otherwise use fallback
+  const headline = hero.headline && hero.headline.line1 
+    ? hero.headline 
+    : {
+        line1: "Professional RF",
+        line2: "Testing Equipment",
+        line3: "Products & Support",
+      }
+
   return {
     badges: hero.badges ?? [],
-    headline: hero.headline ?? {
-      line1: "Professional RF",
-      line2: "Testing Equipment",
-      line3: "Products & Support",
-    },
+    headline: headline,
     description:
       hero.description ??
       "Trusted by aviation, military, and telecommunications professionals for over 30 years. Precision testing instruments designed and manufactured in the USA for critical applications.",
@@ -233,8 +238,13 @@ export default async function Home() {
   const resourcesTeaserData = mapResourcesTeaserFromSanity(homepage?.resourcesTeaser)
   
   // Debug logging - always log to help diagnose image issues
-  console.log("Homepage data:", {
-    hero: heroData?.featuredProduct,
+  console.log("🔍 HOMEPAGE DEBUG:", {
+    hasHomepage: !!homepage,
+    hasHero: !!homepage?.hero,
+    heroEnabled: homepage?.hero?.enabled,
+    heroHeadline: homepage?.hero?.headline,
+    mappedHeroData: heroData?.headline,
+    heroDataExists: !!heroData,
     featuredProducts: featuredProductsData?.products?.map(p => ({ 
       id: p.id, 
       name: p.name, 
