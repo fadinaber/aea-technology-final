@@ -4,6 +4,9 @@ import ObfuscatedEmailServer from "@/components/obfuscated-email-server"
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "AEA Technology, Inc. privacy policy and how we handle personal data.",
+  alternates: {
+    canonical: "https://aeatechnology.com/privacy-policy",
+  },
 }
 
 export default function PrivacyPolicyPage() {
