@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css"
 import ClientLayout from "./client-layout"
 import OrganizationSchema from "@/components/seo/organization-schema"
@@ -147,7 +148,10 @@ export default function RootLayout({
         {/* Google Analytics - Add NEXT_PUBLIC_GA_ID to your .env.local or Vercel environment variables */}
         <GoogleAnalytics />
 
-        {/* Vercel Speed Insights */}
+        {/* Vercel Analytics - Web analytics for page views and user behavior */}
+        <Analytics />
+
+        {/* Vercel Speed Insights - Performance monitoring */}
         <SpeedInsights />
       </body>
     </html>
