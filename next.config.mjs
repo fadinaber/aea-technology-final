@@ -45,13 +45,50 @@ const nextConfig = {
   poweredByHeader: false,
   async headers() {
     return [
-      // Static assets - immutable for 1 year
+      // Static assets - immutable for 1 year, noindex for non-content images
       {
         source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Prevent indexing of static metadata files
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      },
+      {
+        source: '/icon',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      },
+      {
+        source: '/manifest',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      },
+      {
+        source: '/opengraph-image',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
           },
         ],
       },
