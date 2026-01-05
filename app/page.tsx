@@ -104,13 +104,13 @@ function mapHeroFromSanity(hero?: SanityHomepageHero): HeroSection["data"] | und
   return {
     badges: hero.badges ?? [],
     headline: hero.headline ?? {
-      line1: "Professional",
-      line2: "RF Testing",
-      line3: "Equipment",
+      line1: "Professional RF",
+      line2: "Testing Equipment",
+      line3: "Products & Support",
     },
     description:
       hero.description ??
-      "Trusted by aviation, military, and telecommunications professionals for over 30 years.",
+      "Trusted by aviation, military, and telecommunications professionals for over 30 years. Precision testing instruments designed and manufactured in the USA for critical applications.",
     valuePropositions: hero.valuePropositions ?? [],
     cta:
       hero.cta ??
@@ -168,10 +168,10 @@ function mapFeaturedProductsFromSanity(
 
   return {
     badge: featured.badge ?? "Featured Products",
-    headline: featured.headline ?? "Professional Testing Solutions",
+    headline: featured.headline ?? "Professional RF Testing Products & Solutions",
     description:
       featured.description ??
-      "Discover our most popular testing instruments for demanding environments.",
+      "Discover our most popular RF and cable testing products, each designed for specific applications and built to deliver exceptional performance in demanding environments.",
     products:
       (hasRefs
         ? featured.products?.map((p) => ({
@@ -208,7 +208,7 @@ function mapResourcesTeaserFromSanity(
     headline: resources.headline ?? "Comprehensive Support Resources",
     description:
       resources.description ??
-      "Access downloads, documentation, training videos, and more for your equipment.",
+      "Access everything you need to get the most out of your AEA Technology equipment. From software downloads to training materials, we've got you covered.",
     resourceTypes: resources.resourceTypes ?? [],
     cta:
       resources.cta ??
