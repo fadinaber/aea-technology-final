@@ -84,6 +84,18 @@ function ContactPageClient({ products }: ContactPageClientProps) {
         supportProduct: "",
       })
       setSelectedProducts([])
+
+      // Fire analytics event for successful contact/quote submission
+      if (typeof window !== "undefined") {
+        // Prefer gtag if available, otherwise push to dataLayer
+        const gtagFn = (window as any).gtag
+        if (typeof gtagFn === "function") {
+          gtagFn('event', 'ContactFormSubmission', { send_to: 'G-7XK1S3YLQ7' })
+        } else {
+          ;(window as any).dataLayer = (window as any).dataLayer || []
+          ;(window as any).dataLayer.push({ event: 'ContactFormSubmission', send_to: 'G-7XK1S3YLQ7' })
+        }
+      }
     } catch (error) {
       setSubmitStatus("error")
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong")
@@ -430,11 +442,11 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                         className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-[16px] text-slate-900 shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpolyline points=%226 9 12 15 18 9%22%3E%3C/polyline%3E%3C/svg%3E')] bg-[length:1em] bg-[right_0.75rem_center] bg-no-repeat pr-10"
                       >
                         <option value="" disabled>Select a product</option>
-                        {products.map((product) => (
+                          {products.map((product) => (
                           <option key={product} value={product}>
-                            {product}
+                              {product}
                           </option>
-                        ))}
+                          ))}
                       </select>
                     </div>
                   )}
