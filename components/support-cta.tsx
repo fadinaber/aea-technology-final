@@ -19,7 +19,7 @@ export function SupportCTA() {
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild className="min-h-[48px] text-sm sm:text-base bg-transparent">
-            <a href="tel:1-800-258-7805">Call: 1-(800) 258-7805</a>
+            <a className="google-phone-swap" href="tel:1-800-258-7805">1-(800) 258-7805</a>
           </Button>
         </div>
       </div>

@@ -134,7 +134,7 @@ function ContactPageClient({ products }: ContactPageClientProps) {
               <p className="text-base sm:text-lg font-semibold text-slate-900">
                 Local: (760) 931-8979
                 <br />
-                Toll Free: 1-(800) 258-7805
+                Toll Free: <span className="google-phone-swap">1-(800) 258-7805</span>
               </p>
               <p className="text-slate-600 text-sm sm:text-base">Technical Support & Sales</p>
             </CardContent>

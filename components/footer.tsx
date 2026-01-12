@@ -57,7 +57,7 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                 <div className="text-slate-300">
                   <div>Local: {contact.phone.local}</div>
-                  <div>Toll Free: {contact.phone.tollFree}</div>
+                  <div>Toll Free: <span className="google-phone-swap">{contact.phone.tollFree}</span></div>
                 </div>
               </div>
               <div className="flex items-start gap-3">

@@ -485,7 +485,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 <div className="space-y-1 text-xs sm:text-sm">
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4 text-blue-600" />
-                    <span>Call: 1-(800) 258-7805</span>
+                    <span>Call: <span className="google-phone-swap">1-(800) 258-7805</span></span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-blue-600" />

@@ -155,7 +155,23 @@ gtag('js', new Date());
 gtag('config', 'AW-704832620');
 
 gtag('config', 'AW-704832620/XWIDCP-Lh94bEOzIi9AC', {
-  'phone_conversion_number': '1-(800) 258-7805'
+  'phone_conversion_number': '1-(800) 258-7805',
+  'phone_conversion_callback': function(formatted_number, mobile_number) {
+    try {
+      var els = document.querySelectorAll('.google-phone-swap');
+      els.forEach(function(el) {
+        // Update displayed number
+        el.innerText = formatted_number;
+        // If this element is an anchor, update href to dial the mobile number
+        if (el.tagName && el.tagName.toLowerCase() === 'a') {
+          // Ensure tel: link uses the mobile_number value
+          el.setAttribute('href', 'tel:' + mobile_number);
+        }
+      });
+    } catch (err) {
+      console.error('phone_conversion_callback error', err);
+    }
+  }
 });`}
         </Script>
       </head>
