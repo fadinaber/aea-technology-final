@@ -141,6 +141,23 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebsiteSchema />
         <LocalBusinessSchema />
+
+        {/* Google tag (gtag.js) - Google Call Tracking (AW) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-704832620"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);} 
+gtag('js', new Date());
+
+gtag('config', 'AW-704832620');
+
+gtag('config', 'AW-704832620/XWIDCP-Lh94bEOzIi9AC', {
+  'phone_conversion_number': '1-(800) 258-7805'
+});`}
+        </Script>
       </head>
       <body className={`${inter.className} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
@@ -153,6 +170,21 @@ export default function RootLayout({
 
         {/* Vercel Speed Insights - Performance monitoring */}
         <SpeedInsights />
+
+        {/* Contact form button click tracking - fires gtag event when 'Send Message' is clicked */}
+        <Script id="contact-form-gtag" strategy="afterInteractive">
+          {`window.addEventListener('load', function() {
+  var buttonSelector = document.querySelectorAll('button');
+
+  buttonSelector.forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (link.innerText == 'Send Message') {
+        gtag('event', 'ContactFormSubmission', {'send_to': 'G-7XK1S3YLQ7'});
+      };
+    });
+  });
+});`}
+        </Script>
       </body>
     </html>
   )
