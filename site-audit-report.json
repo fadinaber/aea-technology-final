@@ -1,0 +1,165 @@
+{
+  "timestamp": "2026-01-05T16:39:28.364Z",
+  "summary": {
+    "total": 34,
+    "passed": 33,
+    "warnings": 0,
+    "failed": 1
+  },
+  "issues": [
+    "Sanity: Homepage hero headline is incorrect"
+  ],
+  "warnings": [],
+  "checks": {
+    "Sanity": [
+      {
+        "item": "Homepage hero",
+        "status": "error"
+      },
+      {
+        "item": "Products",
+        "status": "ok"
+      },
+      {
+        "item": "Press Releases",
+        "status": "ok"
+      },
+      {
+        "item": "Resources",
+        "status": "ok"
+      },
+      {
+        "item": "Distributors",
+        "status": "ok"
+      },
+      {
+        "item": "FAQs",
+        "status": "ok"
+      },
+      {
+        "item": "Team Members",
+        "status": "ok"
+      }
+    ],
+    "Config": [
+      {
+        "item": "package.json",
+        "status": "ok"
+      },
+      {
+        "item": "next.config.mjs",
+        "status": "ok"
+      },
+      {
+        "item": "tsconfig.json",
+        "status": "ok"
+      },
+      {
+        "item": ".env.local",
+        "status": "ok"
+      },
+      {
+        "item": "app/layout.tsx",
+        "status": "ok"
+      },
+      {
+        "item": "app/page.tsx",
+        "status": "ok"
+      }
+    ],
+    "Dependencies": [
+      {
+        "item": "next",
+        "status": "ok"
+      },
+      {
+        "item": "react",
+        "status": "ok"
+      },
+      {
+        "item": "react-dom",
+        "status": "ok"
+      },
+      {
+        "item": "@vercel/analytics",
+        "status": "ok"
+      },
+      {
+        "item": "@vercel/speed-insights",
+        "status": "ok"
+      }
+    ],
+    "Code": [
+      {
+        "item": "app/page.tsx",
+        "status": "ok"
+      },
+      {
+        "item": "app/layout.tsx",
+        "status": "ok"
+      },
+      {
+        "item": "app/api/contact/route.ts",
+        "status": "ok"
+      },
+      {
+        "item": "components/hero.tsx",
+        "status": "ok"
+      },
+      {
+        "item": "data/homepage.ts",
+        "status": "ok"
+      },
+      {
+        "item": "sanity/lib/client.ts",
+        "status": "ok"
+      },
+      {
+        "item": "Hero fallbacks",
+        "status": "ok"
+      }
+    ],
+    "Analytics": [
+      {
+        "item": "Vercel Analytics",
+        "status": "ok"
+      },
+      {
+        "item": "Speed Insights",
+        "status": "ok"
+      }
+    ],
+    "SEO": [
+      {
+        "item": "Privacy canonical",
+        "status": "ok"
+      },
+      {
+        "item": "Noindex headers",
+        "status": "ok"
+      },
+      {
+        "item": "robots.txt",
+        "status": "ok"
+      },
+      {
+        "item": "sitemap.ts",
+        "status": "ok"
+      }
+    ],
+    "Email": [
+      {
+        "item": "ReplyTo",
+        "status": "ok"
+      },
+      {
+        "item": "Headers",
+        "status": "ok"
+      },
+      {
+        "item": "No mailto",
+        "status": "ok"
+      }
+    ]
+  }
+}

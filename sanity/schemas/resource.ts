@@ -133,13 +133,6 @@ export default defineType({
       group: "content",
       hidden: ({ document }) => document?.type !== "software",
     }),
-    defineField({
-      name: "fileSize",
-      title: "File Size (e.g., 4.2 MB)",
-      type: "string",
-      group: "content",
-      hidden: ({ document }) => document?.type === "video" || document?.type === "faq",
-    }),
 
     // Video-specific fields
     defineField({
@@ -232,9 +225,8 @@ export default defineType({
       media: "file",
       localPath: "localPath",
       downloadUrl: "downloadUrl",
-      fileSize: "fileSize",
     },
-    prepare({ title, type, category, media, localPath, downloadUrl, fileSize }) {
+    prepare({ title, type, category, media, localPath, downloadUrl }) {
       const typeIcons: Record<string, string> = {
         software: "💾",
         manual: "📄",
@@ -255,10 +247,6 @@ export default defineType({
         fileInfo = "🔗 External"
       } else if (media?.asset) {
         fileInfo = "📎 Uploaded"
-      }
-      
-      if (fileSize) {
-        fileInfo += fileInfo ? ` • ${fileSize}` : fileSize
       }
       
       return {

@@ -104,12 +104,12 @@ export async function POST(request: Request) {
             <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 12px 0;">Products of Interest</h3>
             <ul style="margin: 0; padding-left: 20px; color: #475569;">
               ${selectedProducts.map((product) => `<li style="margin-bottom: 4px;">${product}</li>`).join("")}
-            </ul>
+        </ul>
           </td>
         </tr>
       `
     }
-    
+
     let supportProductHtml = ""
     if (formType === "support" && supportProduct) {
       supportProductHtml = `
@@ -243,8 +243,8 @@ AEA Technology | 5933 Sea Lion Place, Ste 112, Carlsbad, CA 92010
         { name: "category", value: "contact-form" },
         { name: "form_type", value: formType },
       ],
-    })
-
+      })
+      
     // Log if client email fails
     if (clientEmailResult.error) {
       console.error("Failed to send email to client:", mainEmail, clientEmailResult.error)
