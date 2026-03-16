@@ -159,9 +159,9 @@ function ContactPageClient({ products }: ContactPageClientProps) {
               <div className="space-y-2">
                 <p className="font-medium text-slate-900">AEA Technology</p>
                 <p className="text-slate-600 text-sm sm:text-base">
-                  5933 Sea Lion Place, Ste 112
+                  2880 Scott St.  Ste 105
                   <br />
-                  Carlsbad, CA 92010
+                  Carlsbad CA 92081
                   <br />
                   United States
                 </p>
