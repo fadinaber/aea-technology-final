@@ -161,7 +161,7 @@ function ContactPageClient({ products }: ContactPageClientProps) {
                 <p className="text-slate-600 text-sm sm:text-base">
                   2880 Scott St.  Ste 105
                   <br />
-                  Carlsbad CA 92081
+                  Vista, CA 92081
                   <br />
                   United States
                 </p>
