@@ -29,10 +29,10 @@ export default function OrganizationSchema() {
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "5933 Sea Lion Place, Ste 112",
-      addressLocality: "Carlsbad",
+      streetAddress: "2880 Scott St. Ste 105",
+      addressLocality: "Vista",
       addressRegion: "CA",
-      postalCode: "92010",
+      postalCode: "92081",
       addressCountry: "US",
     },
     description:

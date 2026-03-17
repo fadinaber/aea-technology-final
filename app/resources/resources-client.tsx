@@ -221,7 +221,7 @@ const faqs = [
   {
     question: "Are AEA Technology products made in the USA?",
     answer:
-      "Yes, all AEA Technology products are designed, manufactured, and assembled in the United States at our facility in Carlsbad, California.",
+      "Yes, all AEA Technology products are designed, manufactured, and assembled in the United States at our facility in Vista, California.",
   },
   {
     question: "What industries use AEA Technology equipment?",

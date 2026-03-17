@@ -15,7 +15,7 @@ const products = [
 export const metadata: Metadata = {
   title: "Contact AEA Technology - Get a Quote, Sales & Technical Support",
   description:
-    "Contact AEA Technology for RF test equipment quotes, sales inquiries, and technical support. Reach us at 1-800-258-7805. Located in Carlsbad, CA. Open Monday-Friday 7:30am-4:30pm PST.",
+    "Contact AEA Technology for RF test equipment quotes, sales inquiries, and technical support. Reach us at 1-800-258-7805. Located in Vista, CA. Open Monday-Friday 7:30am-4:30pm PST.",
   keywords: [
     "contact AEA Technology",
     "get a quote",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "VNA quote",
     "technical support",
     "sales inquiry",
-    "Carlsbad California",
+    "Vista California",
     "1-800-258-7805",
   ],
   openGraph: {

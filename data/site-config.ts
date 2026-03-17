@@ -132,10 +132,10 @@ export const siteConfig: SiteConfig = {
       support: "TECHSUPPORT@AEATECHNOLOGY.COM",
     },
     address: {
-      street: "5933 Sea Lion Place, Ste 112",
-      city: "Carlsbad",
+      street: "2880 Scott St. Ste 105",
+      city: "Vista",
       state: "CA",
-      zip: "92010",
+      zip: "92081",
       country: "United States",
     },
     hours: {

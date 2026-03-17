@@ -159,7 +159,7 @@ function ContactPageClient({ products }: ContactPageClientProps) {
               <div className="space-y-2">
                 <p className="font-medium text-slate-900">AEA Technology</p>
                 <p className="text-slate-600 text-sm sm:text-base">
-                  2880 Scott St.  Ste 105
+                  2880 Scott St. Ste 105
                   <br />
                   Vista, CA 92081
                   <br />

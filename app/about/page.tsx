@@ -9,12 +9,12 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: "About AEA Technology - American RF Test Equipment Manufacturer Since 1990",
   description:
-    "Learn about AEA Technology, Inc. - America's premier RF and cable test equipment manufacturer. Over 30 years of designing and manufacturing TDRs, VNAs, and SWR meters in Carlsbad, California. ISO 9001 certified, trusted by aviation, military, medical, and telecom industries worldwide.",
+    "Learn about AEA Technology, Inc. - America's premier RF and cable test equipment manufacturer. Over 30 years of designing and manufacturing TDRs, VNAs, and SWR meters in Vista, California. ISO 9001 certified, trusted by aviation, military, medical, and telecom industries worldwide.",
   keywords: [
     "AEA Technology company",
     "RF test equipment manufacturer",
     "American test equipment",
-    "Carlsbad California",
+    "Vista California",
     "George Naber",
     "ISO 9001 certified",
     "made in USA",
