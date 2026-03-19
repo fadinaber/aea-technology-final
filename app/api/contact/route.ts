@@ -13,8 +13,8 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 // Company emails (will work after domain verification in Resend)
 const EMAIL_ADDRESSES = {
   quote: "sales@aeatechnology.com",
-  contact: "info@aeatechnology.com",
-  support: "support@aeatechnology.com",
+  contact: "sales@aeatechnology.com",
+  support: "techsupport@aeatechnology.com",
 } as const
 
 // Fallback test email if domain verification isn't complete
@@ -149,9 +149,11 @@ export async function POST(request: Request) {
     })
 
     // If domain verification isn't complete, fallback to test email
-    if (error && (error as any)?.message?.includes("You can only send testing emails to your own email address") || 
+    if (error && (
+        (error as any)?.message?.includes("You can only send testing emails to your own email address") || 
         (error as any)?.message?.includes("domain") || 
-        (error as any)?.message?.includes("not verified")) {
+        (error as any)?.message?.includes("not verified")
+    )) {
       console.warn("Domain email failed, falling back to test email:", error)
       
       // Fallback to test email
