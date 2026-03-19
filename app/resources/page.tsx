@@ -57,7 +57,7 @@ export type SanityFaq = {
 
 export default async function ResourcesPage() {
   const [resources, faqs] = await Promise.all([
-    client.fetch<SanityResource[]>(allResourcesQuery).catch(() => []),
+    [] as SanityResource[], // Temporarily bypassing Sanity due to API token project mismatch
     client.fetch<SanityFaq[]>(allFaqsQuery).catch(() => []),
   ])
 
@@ -113,7 +113,12 @@ export default async function ResourcesPage() {
                   description: f.question,
                   category: f.category || "General",
                   type: "faq" as const,
-                  content: f.answer,
+                  content: 
+                    typeof f.answer === "string" 
+                      ? f.answer 
+                      : typeof f.answer === "object" && typeof (f.answer as any)?.[0]?.children?.[0]?.text === "string"
+                        ? (f.answer as any)[0].children[0].text
+                        : f.question,
                   tags: [],
                 }))
               : resources

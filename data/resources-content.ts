@@ -132,7 +132,7 @@ export const resourcesContent: ResourcesData = {
       rating: 4.7,
       featured: true,
       tags: ["Avionics", "TDR", "Operation", "Setup"],
-      downloadUrl: "/datasheets/Avionics_TDR_Kit.pdf",
+      downloadUrl: "/documents/datasheets/Avionics Data Sheet 10 2025.pdf",
     },
     {
       id: "via-bravo-manual",
@@ -145,7 +145,7 @@ export const resourcesContent: ResourcesData = {
       downloads: 2156,
       rating: 4.8,
       tags: ["VNA", "MRI", "Medical", "Safety"],
-      downloadUrl: "/datasheets/Bravo_MRI_3000_Analyzer.pdf",
+      downloadUrl: "/documents/datasheets/Bravo MRI 3000 Data Sheet 10 2025.pdf",
     },
     {
       id: "swr-analyzer-manual",
@@ -158,7 +158,7 @@ export const resourcesContent: ResourcesData = {
       downloads: 1834,
       rating: 4.5,
       tags: ["SWR", "Field Testing", "Maintenance"],
-      downloadUrl: "/datasheets/SWR_Site_Analyzer.pdf",
+      downloadUrl: "/documents/datasheets/SWR Data Sheet 10 2025.pdf",
     },
     {
       id: "bravo-ex2-manual",
@@ -171,7 +171,7 @@ export const resourcesContent: ResourcesData = {
       downloads: 1245,
       rating: 4.6,
       tags: ["Bravo EX2", "VNA", "Analysis", "Operation"],
-      downloadUrl: "/datasheets/Bravo_Ex_2_Analyzer.pdf",
+      downloadUrl: "/documents/datasheets/Bravo EX Data Sheet 10 2025.pdf",
     },
     {
       id: "quick-start-guides",

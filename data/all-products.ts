@@ -228,7 +228,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/docs/datasheets/e20-20n-datasheet.pdf",
+    datasheetUrl: "/documents/datasheets/E2020 General Data Sheet Nov 2025.pdf",
     resources: [
       {
         type: "video",
@@ -539,7 +539,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/datasheets/Avionics_TDR_Kit.pdf",
+    datasheetUrl: "/documents/datasheets/Avionics Data Sheet 10 2025.pdf",
     resources: [
       {
         type: "video",
@@ -830,7 +830,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "https://drive.google.com/file/d/18flXvH6TDY_82YEu4Dp8ZwD0Uol1etO5/view",
+    datasheetUrl: "/documents/datasheets/E2020 General Data Sheet Nov 2025.pdf",
     resources: [
       {
         type: "video",
@@ -887,7 +887,7 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "E20/20B Network TDR Datasheet",
-        url: "/docs/datasheets/e20-20b-datasheet.pdf",
+        url: "/documents/datasheets/E2020 General Data Sheet Nov 2025.pdf",
         fileSize: "1.5 MB",
       },
       {
@@ -1102,7 +1102,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "https://drive.google.com/file/d/18flXvH6TDY_82YEu4Dp8ZwD0Uol1etO5/view",
+    datasheetUrl: "/documents/datasheets/E2020 General Data Sheet Nov 2025.pdf",
     resources: [
       {
         type: "video",
@@ -1160,7 +1160,7 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "E20/20F CATV Network TDR Datasheet",
-        url: "/docs/datasheets/e20-20f-catv-datasheet.pdf",
+        url: "/documents/datasheets/E2020 General Data Sheet Nov 2025.pdf",
         fileSize: "1.6 MB",
       },
       {
@@ -1351,7 +1351,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "https://drive.google.com/file/d/1h7ZKAEOBRJxpd4buLqw3LBec1JMSTjXl/view",
+    datasheetUrl: "/documents/datasheets/SWR Data Sheet 10 2025.pdf",
     resources: [
       {
         type: "video",
@@ -1364,7 +1364,7 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "SWR Site Analyzer Datasheet",
-        url: "/docs/datasheets/swr-site-analyzer-datasheet.pdf",
+        url: "/documents/datasheets/SWR Data Sheet 10 2025.pdf",
         fileSize: "1.9 MB",
       },
       {
@@ -1551,7 +1551,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/datasheets/Bravo_Ex_2_Analyzer.pdf",
+    datasheetUrl: "/documents/datasheets/Bravo EX Data Sheet 10 2025.pdf",
     resources: [
       {
         type: "video",
@@ -1564,7 +1564,7 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "VIA Bravo Ex2 Datasheet",
-        url: "/datasheets/Bravo_Ex_2_Analyzer.pdf",
+        url: "/documents/datasheets/Bravo EX Data Sheet 10 2025.pdf",
         fileSize: "2.1 MB",
       },
       {
@@ -1752,12 +1752,12 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/datasheets/Bravo_MRI_3000_Analyzer.pdf",
+    datasheetUrl: "/documents/datasheets/Bravo MRI 3000 Data Sheet 10 2025.pdf",
     resources: [
       {
         type: "datasheet",
         title: "Bravo MRI-3000 Analyzer Datasheet",
-        url: "/datasheets/Bravo_MRI_3000_Analyzer.pdf",
+        url: "/documents/datasheets/Bravo MRI 3000 Data Sheet 10 2025.pdf",
         fileSize: "1.7 MB",
       },
       {
