@@ -13,8 +13,8 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 // Company emails (will work after domain verification in Resend)
 const EMAIL_ADDRESSES = {
   quote: "sales@aeatechnology.com",
-  contact: "info@aeatechnology.com",
-  support: "support@aeatechnology.com",
+  contact: "sales@aeatechnology.com",
+  support: "techsupport@aeatechnology.com",
 } as const
 
 // Fallback test email if domain verification isn't complete
@@ -148,16 +148,29 @@ export async function POST(request: Request) {
       html: emailBody,
     })
 
-    // If domain verification isn't complete, fallback to test email
-    if (error && (error as any)?.message?.includes("You can only send testing emails to your own email address") || 
-        (error as any)?.message?.includes("domain") || 
-        (error as any)?.message?.includes("not verified")) {
-      console.warn("Domain email failed, falling back to test email:", error)
-      
-      // Fallback to test email
+    // Detect errors that require falling back to the test/fallback address
+    const errorMsg = (error as any)?.message ?? ""
+    const isSuppressed = /suppressed|suppression/i.test(errorMsg)
+    const isDomainUnverified =
+      errorMsg.includes("You can only send testing emails to your own email address") ||
+      /domain.*not.*verified|not.*verified.*domain/i.test(errorMsg) ||
+      errorMsg.includes("domain")
+
+    if (error && (isSuppressed || isDomainUnverified)) {
+      if (isSuppressed) {
+        // Suppression means the destination address is on Resend's bounce/spam list.
+        // ACTION REQUIRED: Go to https://resend.com/suppression and remove the address.
+        console.error(
+          `[Resend] Address suppressed: ${finalToEmail}. Remove it at https://resend.com/suppression`,
+          error
+        )
+      } else {
+        console.warn("Domain email failed, falling back to test email:", error)
+      }
+
       fromEmail = "AEA Technology Contact Form <onboarding@resend.dev>"
       finalToEmail = FALLBACK_EMAIL
-      
+
       const fallbackResult = await resend.emails.send({
         from: fromEmail,
         to: [finalToEmail],
@@ -165,18 +178,18 @@ export async function POST(request: Request) {
         subject: subjects[formType],
         html: emailBody,
       })
-      
+
       if (fallbackResult.error) {
         console.error("Resend error (fallback):", fallbackResult.error)
         return NextResponse.json(
-          { 
+          {
             error: "Failed to send email. Please verify your domain in Resend or contact support.",
-            details: (fallbackResult.error as any)?.message 
-          }, 
+            details: (fallbackResult.error as any)?.message,
+          },
           { status: 500 }
         )
       }
-      
+
       data = fallbackResult.data
       error = null
     }
@@ -184,10 +197,10 @@ export async function POST(request: Request) {
     if (error) {
       console.error("Resend error:", error)
       return NextResponse.json(
-        { 
+        {
           error: "Failed to send email",
-          details: (error as any)?.message 
-        }, 
+          details: (error as any)?.message,
+        },
         { status: 500 }
       )
     }
