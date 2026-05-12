@@ -96,7 +96,8 @@ function ContactPageClient({ products }: ContactPageClientProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8 bg-zinc-50">
+    <div className="bg-zinc-50 w-full min-h-screen">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
       <div className="text-center mb-8 sm:mb-12 mt-20">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3 sm:mb-4 px-4">
           Contact AEA Technology
@@ -550,6 +551,7 @@ function ContactPageClient({ products }: ContactPageClientProps) {
 
       {/* SupportCTA section at bottom of contact page */}
       <SupportCTA />
+    </div>
     </div>
   )
 }

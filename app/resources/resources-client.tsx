@@ -1146,7 +1146,8 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
   return (
     <>
       <FAQSchema faqs={faqs} />
-      <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 bg-zinc-50">
+      <div className="bg-zinc-50 w-full min-h-screen">
+      <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 mt-20">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 lg:text-4xl">Resource Hub</h1>
@@ -1295,6 +1296,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
 
         {/* Contact Support Section - Mobile Optimized */}
         <SupportCTA />
+      </div>
       </div>
     </>
   )
