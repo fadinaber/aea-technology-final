@@ -13,8 +13,8 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 // Company emails (will work after domain verification in Resend)
 const EMAIL_ADDRESSES = {
   quote: "sales@aeatechnology.com",
-  contact: "info@aeatechnology.com",
-  support: "support@aeatechnology.com",
+  contact: "sales@aeatechnology.com",
+  support: "techsupport@aeatechnology.com",
 } as const
 
 // Fallback test email if domain verification isn't complete
