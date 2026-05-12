@@ -113,7 +113,17 @@ export default async function ResourcesPage() {
                   description: f.question,
                   category: f.category || "General",
                   type: "faq" as const,
-                  content: f.answer,
+                  content: Array.isArray(f.answer)
+                    ? f.answer
+                        .flatMap((block: any) =>
+                          Array.isArray(block?.children)
+                            ? block.children.map((span: any) => span?.text ?? "")
+                            : []
+                        )
+                        .join(" ")
+                    : typeof f.answer === "string"
+                    ? f.answer
+                    : "",
                   tags: [],
                 }))
               : resources
