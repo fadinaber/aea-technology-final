@@ -102,7 +102,7 @@ export const resourcesContent: ResourcesData = {
       rating: 4.7,
       featured: true,
       tags: ["SWR", "VNA", "EX2", "Analysis"],
-      downloadUrl: "#",
+      downloadUrl: "/software/Site_Analyzer_PC_Vision.zip",
     },
     {
       id: "mri-vision",
@@ -116,7 +116,7 @@ export const resourcesContent: ResourcesData = {
       rating: 4.6,
       featured: true,
       tags: ["MRI", "Analysis"],
-      downloadUrl: "#",
+      downloadUrl: "/software/MRI_Vision.zip",
     },
   ],
   manuals: [
