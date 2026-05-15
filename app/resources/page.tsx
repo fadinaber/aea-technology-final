@@ -66,7 +66,7 @@ export default async function ResourcesPage() {
     resources.length > 0
       ? {
           software: resources
-            .filter((r) => r.type === "software")
+            .filter((r) => r.type === "software" && (r.fileUrl || r.downloadUrl))
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -80,7 +80,7 @@ export default async function ResourcesPage() {
               featured: r.featured,
             })),
           manuals: resources
-            .filter((r) => r.type === "manual")
+            .filter((r) => r.type === "manual" && (r.fileUrl || r.downloadUrl))
             .map((r) => ({
               id: r._id,
               title: r.title,
