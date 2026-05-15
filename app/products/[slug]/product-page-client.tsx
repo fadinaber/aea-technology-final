@@ -164,13 +164,6 @@ function ProductVideoCard({ video }: { video: ProductResource }) {
                 <Play className="w-7 h-7 text-white ml-1" fill="currentColor" />
               </div>
             </div>
-            {/* Duration badge */}
-            {video.duration && (
-              <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
-                <Clock className="w-3 h-3" />
-                {video.duration}
-              </div>
-            )}
           </div>
         ) : (
           <iframe
@@ -885,7 +878,6 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                                 <h4 className="font-semibold text-gray-900 truncate">{resource.title}</h4>
                                 <p className="text-xs text-gray-500">
                                   {getResourceTypeLabel(resource.type)}
-                                  {resource.fileSize && ` • ${resource.fileSize}`}
                                 </p>
                               </div>
                             </div>
