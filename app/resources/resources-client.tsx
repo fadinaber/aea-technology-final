@@ -1021,20 +1021,48 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
     ],
   }
 
-  // Merge Sanity data with static fallback data
+  // Merge Sanity data with static fallback data.
+  // Sanity entries win when they have a valid download URL; otherwise the matching
+  // hardcoded default supplies the URL. Hardcoded entries not found in Sanity are
+  // always included so nothing disappears just because it hasn't been added to the CMS yet.
+  const mergeWithDefaults = (sanityItems: any[] | undefined, defaults: any[]) => {
+    if (!sanityItems || sanityItems.length === 0) return defaults
+
+    const result = defaults.map((def) => {
+      const match = sanityItems.find(
+        (s) => s.id === def.id || s.title?.trim() === def.title?.trim()
+      )
+      if (!match) return def
+      // Prefer Sanity URL; fall back to hardcoded default URL
+      const url = (match.downloadUrl && match.downloadUrl !== "#") ? match.downloadUrl : def.downloadUrl
+      return { ...def, ...match, downloadUrl: url }
+    })
+
+    // Append Sanity entries that have no matching default and have a valid URL
+    sanityItems.forEach((s) => {
+      const alreadyIncluded = result.some(
+        (r) => r.id === s.id || r.title?.trim() === s.title?.trim()
+      )
+      if (!alreadyIncluded && s.downloadUrl && s.downloadUrl !== "#") {
+        result.push(s)
+      }
+    })
+
+    return result
+  }
+
   const resourcesData = useMemo(() => {
     if (!initialData) {
       return defaultData
     }
-    
-    // Merge Sanity data with static data, prioritizing Sanity but keeping static as fallback
+
     return {
-      software: (initialData.software && initialData.software.length > 0) ? initialData.software : defaultData.software,
-      manuals: (initialData.manuals && initialData.manuals.length > 0) ? initialData.manuals : defaultData.manuals,
+      software: mergeWithDefaults(initialData.software, defaultData.software),
+      manuals: mergeWithDefaults(initialData.manuals, defaultData.manuals),
       videos: (initialData.videos && initialData.videos.length > 0) ? initialData.videos : defaultData.videos,
       faqs: (initialData.faqs && initialData.faqs.length > 0) ? initialData.faqs : defaultData.faqs,
-      "application-notes": (initialData["application-notes"] && initialData["application-notes"].length > 0) 
-        ? initialData["application-notes"] 
+      "application-notes": (initialData["application-notes"] && initialData["application-notes"].length > 0)
+        ? initialData["application-notes"]
         : defaultData["application-notes"],
     }
   }, [initialData])

@@ -66,7 +66,7 @@ export default async function ResourcesPage() {
     resources.length > 0
       ? {
           software: resources
-            .filter((r) => r.type === "software" && (r.fileUrl || r.downloadUrl))
+            .filter((r) => r.type === "software")
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -75,12 +75,12 @@ export default async function ResourcesPage() {
               type: "software" as const,
               version: r.version,
               size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
+              downloadUrl: r.fileUrl || r.downloadUrl || null,
               tags: r.tags || [],
               featured: r.featured,
             })),
           manuals: resources
-            .filter((r) => r.type === "manual" && (r.fileUrl || r.downloadUrl))
+            .filter((r) => r.type === "manual")
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -88,7 +88,7 @@ export default async function ResourcesPage() {
               category: r.category || "Manual",
               type: "manual" as const,
               size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
+              downloadUrl: r.fileUrl || r.downloadUrl || null,
               tags: r.tags || [],
               featured: r.featured,
             })),
