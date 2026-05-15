@@ -291,20 +291,6 @@ export const allProducts: Product[] = [
         thumbnailUrl: "https://img.youtube.com/vi/cOyJnAZ--WM/hqdefault.jpg",
         duration: "10:15",
       },
-      {
-        type: "manual",
-        title: "E20/20N User Manual",
-        description: "Complete operation and reference guide",
-        url: "/docs/manuals/e20-20n-manual.pdf",
-        fileSize: "4.2 MB",
-      },
-      {
-        type: "application-note",
-        title: "Broadcast Transmission Line Testing",
-        description: "Best practices for broadcast industry applications",
-        url: "/docs/app-notes/broadcast-testing.pdf",
-        fileSize: "1.8 MB",
-      },
     ],
     overviewDescription:
       "The E20/20 Series of Step TDR's are ideal for troubleshooting all types of coax, OSP cables, twisted pairs Cat2 to Cat6A and single wires in bundle/harness. Based on AEA's \"Step\" technology, these TDR's possess amazingly accurate fault locating and display capabilities. The E20/20N TDR is specifically configured for broadcast applications with an N-type connector and contains a comprehensive broadcast cable list.",
@@ -887,14 +873,8 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "E20/20B Network TDR Datasheet",
-        url: "/docs/datasheets/e20-20b-datasheet.pdf",
+        url: "/documents/datasheets/e20-20b",
         fileSize: "1.5 MB",
-      },
-      {
-        type: "manual",
-        title: "E20/20B Network TDR User Manual",
-        url: "/docs/manuals/e20-20b-manual.pdf",
-        fileSize: "3.8 MB",
       },
     ],
     overviewDescription:
@@ -1160,21 +1140,8 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "E20/20F CATV Network TDR Datasheet",
-        url: "/docs/datasheets/e20-20f-catv-datasheet.pdf",
+        url: "/documents/datasheets/e20-20f-catv",
         fileSize: "1.6 MB",
-      },
-      {
-        type: "manual",
-        title: "E20/20F CATV Network TDR User Manual",
-        url: "/docs/manuals/e20-20f-manual.pdf",
-        fileSize: "4.0 MB",
-      },
-      {
-        type: "application-note",
-        title: "Troubleshooting CATV Networks with TDR",
-        description: "Tips and techniques for CATV technicians",
-        url: "/docs/app-notes/catv-tdr-troubleshooting.pdf",
-        fileSize: "1.1 MB",
       },
     ],
     overviewDescription:
@@ -1364,20 +1331,14 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "SWR Site Analyzer Datasheet",
-        url: "/docs/datasheets/swr-site-analyzer-datasheet.pdf",
+        url: "/documents/datasheets/swr-site-analyzer",
         fileSize: "1.9 MB",
-      },
-      {
-        type: "manual",
-        title: "SWR Site Analyzer User Manual",
-        url: "/docs/manuals/swr-site-analyzer-manual.pdf",
-        fileSize: "3.5 MB",
       },
       {
         type: "software",
         title: "Site Analyzer PC Vision Software",
         description: "Software for instrument control and data analysis",
-        url: "/software/site-analyzer-pc-vision-setup.exe",
+        url: "/software/Site_Analyzer_PC_Vision.zip",
         fileSize: "22 MB",
       },
     ],
@@ -1564,21 +1525,14 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "VIA Bravo Ex2 Datasheet",
-        url: "/datasheets/Bravo_Ex_2_Analyzer.pdf",
+        url: "/documents/datasheets/via-bravo-ex2",
         fileSize: "2.1 MB",
       },
       {
         type: "manual",
         title: "VIA Bravo Ex2 User Manual",
-        url: "/docs/manuals/via-bravo-ex2-manual.pdf",
+        url: "/documents/bravo%20ex2%20manuals/Bravo%20EX2%20Operation%20Manual%2010%202021.pdf",
         fileSize: "4.5 MB",
-      },
-      {
-        type: "guide",
-        title: "Antenna Tuning Guide",
-        description: "Using the Bravo Ex2 for optimal antenna performance",
-        url: "/docs/guides/antenna-tuning-guide.pdf",
-        fileSize: "1.2 MB",
       },
     ],
     overviewDescription:
@@ -1757,28 +1711,15 @@ export const allProducts: Product[] = [
       {
         type: "datasheet",
         title: "Bravo MRI-3000 Analyzer Datasheet",
-        url: "/datasheets/Bravo_MRI_3000_Analyzer.pdf",
+        url: "/documents/datasheets/via-bravo-mri-3000",
         fileSize: "1.7 MB",
       },
       {
-        type: "manual",
-        title: "Bravo MRI-3000 Analyzer User Manual",
-        url: "/docs/manuals/bravo-mri-3000-manual.pdf",
-        fileSize: "4.0 MB",
-      },
-      {
         type: "software",
-        title: "MRI PC Vision Software",
-        description: "Specialized software for MRI coil analysis",
-        url: "/software/mri-pc-vision-setup.exe",
-        fileSize: "18 MB",
-      },
-      {
-        type: "application-note",
-        title: "MRI RF Coil Tuning Best Practices",
-        description: "Guidelines for optimal MRI coil alignment and testing",
-        url: "/docs/app-notes/mri-coil-tuning.pdf",
-        fileSize: "2.1 MB",
+        title: "MRI Vision Software",
+        description: "Remote application software for Bravo MRI 3000",
+        url: "/software/MRI_Vision.zip",
+        fileSize: "4.6 MB",
       },
     ],
     overviewDescription:

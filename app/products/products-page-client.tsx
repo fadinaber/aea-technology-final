@@ -109,7 +109,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
           )
         }
         return {
-          id: productSlug,
+          id: fallbackProduct?.id || productSlug,
           name: p.name,
           tagline: p.tagline || p.shortDescription || "",
           image: p.imageUrl || fallbackProduct?.image || "/placeholder.svg",
@@ -132,7 +132,7 @@ export default function ProductsPageClient({ products = [] }: ProductsPageClient
           )
         }
         return {
-          id: productSlug,
+          id: fallbackProduct?.id || productSlug,
           name: p.name,
           tagline: p.tagline || p.shortDescription || "",
           image: p.imageUrl || fallbackProduct?.image || "/placeholder.svg",
