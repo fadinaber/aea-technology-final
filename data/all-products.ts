@@ -228,7 +228,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/docs/datasheets/e20-20n-datasheet.pdf",
+    datasheetUrl: "/documents/datasheets/e20-20n",
     resources: [
       {
         type: "video",
@@ -525,7 +525,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/datasheets/Avionics_TDR_Kit.pdf",
+    datasheetUrl: "/documents/datasheets/e20-20-avionics",
     resources: [
       {
         type: "video",
@@ -1512,7 +1512,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/datasheets/Bravo_Ex_2_Analyzer.pdf",
+    datasheetUrl: "/documents/datasheets/via-bravo-ex2",
     resources: [
       {
         type: "video",
@@ -1706,7 +1706,7 @@ export const allProducts: Product[] = [
         iconType: "certificate",
       },
     ],
-    datasheetUrl: "/datasheets/Bravo_MRI_3000_Analyzer.pdf",
+    datasheetUrl: "/documents/datasheets/via-bravo-mri-3000",
     resources: [
       {
         type: "datasheet",
