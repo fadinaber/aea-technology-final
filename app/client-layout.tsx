@@ -3,6 +3,7 @@
 import type React from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import CookieConsent from "@/components/cookie-consent"
 
 export default function ClientLayout({
   children,
@@ -34,6 +35,7 @@ export default function ClientLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieConsent />
       </div>
     </>
   )
