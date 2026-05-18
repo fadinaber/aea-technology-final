@@ -20,9 +20,10 @@ export default defineType({
     // Basic Info
     defineField({
       name: "slug",
-      title: "Slug",
+      title: "URL Slug",
       type: "slug",
       group: "basic",
+      description: "Auto-generated from the product name. Click 'Generate' if empty.",
       options: { source: "name", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
@@ -106,11 +107,12 @@ export default defineType({
       title: "Model Images",
       type: "array",
       group: "media",
+      description: "Upload product photos. Each entry links images to a specific model (0 = first model, 1 = second, etc.).",
       of: [
         {
           type: "object",
           fields: [
-            { name: "modelIndex", type: "number", title: "Model Index" },
+            { name: "modelIndex", type: "number", title: "Model Number (0 = first model)", description: "0 for the first model, 1 for the second, and so on." },
             {
               name: "images",
               type: "array",
@@ -156,13 +158,14 @@ export default defineType({
       title: "Capability Cards",
       type: "array",
       group: "content",
+      description: "Feature highlight cards shown on the product page.",
       of: [
         {
           type: "object",
           fields: [
-            { name: "title", type: "string", title: "Title" },
-            { name: "icon", type: "string", title: "Icon Name" },
-            { name: "items", type: "array", title: "Items", of: [{ type: "string" }] },
+            { name: "title", type: "string", title: "Card Title" },
+            { name: "icon", type: "string", title: "Icon Name", description: "Icon identifier, e.g. 'Zap', 'Shield', 'Wifi'. Ask your developer for the full list." },
+            { name: "items", type: "array", title: "Bullet Points", of: [{ type: "string" }] },
           ],
         },
       ],
@@ -314,11 +317,12 @@ export default defineType({
       title: "Software Information",
       type: "object",
       group: "content",
+      description: "Optional — only fill this in if the product has companion software.",
       fields: [
         { name: "name", type: "string", title: "Software Name" },
         { name: "description", type: "text", title: "Description" },
-        { name: "screenshotUrl", type: "string", title: "Screenshot URL" },
-        { name: "features", type: "array", title: "Features", of: [{ type: "string" }] },
+        { name: "screenshotUrl", type: "string", title: "Screenshot URL", description: "Full URL to a screenshot image (ask your developer if unsure)." },
+        { name: "features", type: "array", title: "Software Features", of: [{ type: "string" }] },
       ],
     }),
 
@@ -345,6 +349,7 @@ export default defineType({
       title: "SEO Title",
       type: "string",
       group: "seo",
+      description: "Title shown in Google search results. If left blank, the product name is used. Keep under 60 characters.",
     }),
     defineField({
       name: "seoDescription",
@@ -352,6 +357,7 @@ export default defineType({
       type: "text",
       group: "seo",
       rows: 2,
+      description: "Short summary shown under the title in Google. Keep under 160 characters.",
     }),
   ],
   preview: {

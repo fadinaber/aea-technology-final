@@ -39,12 +39,14 @@ export default defineType({
       name: "order",
       title: "Display Order",
       type: "number",
+      description: "Controls the order FAQs appear in. Lower numbers show first (e.g. 1 appears before 10).",
     }),
     defineField({
       name: "featured",
-      title: "Featured",
+      title: "Show on Homepage / Featured",
       type: "boolean",
       initialValue: false,
+      description: "Turn on to highlight this FAQ at the top of the list.",
     }),
   ],
   orderings: [

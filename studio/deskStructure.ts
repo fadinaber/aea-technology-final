@@ -1,86 +1,98 @@
 import { StructureBuilder } from 'sanity/desk'
 
-export const deskStructure = (S: StructureBuilder) => {
-  return S.list()
-    .title('Content')
+export const deskStructure = (S: StructureBuilder) =>
+  S.list()
+    .title('AEA Technology CMS')
     .items([
-      // Application Notes Section - Dedicated section at the top
+
+      // ── Pages & Settings ──────────────────────────────────────────
       S.listItem()
-        .title('Application Notes')
+        .title('🏠  Homepage')
+        .child(S.document().schemaType('homepage').documentId('homepage').title('Homepage')),
+
+      S.listItem()
+        .title('ℹ️  About Page')
+        .child(S.document().schemaType('aboutPage').documentId('aboutPage').title('About Page')),
+
+      S.listItem()
+        .title('⚙️  Site Settings')
+        .child(S.document().schemaType('siteSettings').documentId('siteSettings').title('Site Settings')),
+
+      S.divider(),
+
+      // ── Products ──────────────────────────────────────────────────
+      S.listItem()
+        .title('📦  Products')
+        .child(
+          S.documentTypeList('product')
+            .title('Products')
+            .defaultOrdering([{ field: 'name', direction: 'asc' }])
+        ),
+
+      S.divider(),
+
+      // ── Resources ─────────────────────────────────────────────────
+      S.listItem()
+        .title('📝  Application Notes')
         .child(
           S.documentTypeList('resource')
             .title('Application Notes')
-            .filter('type == "application-note"')
+            .filter('_type == "resource" && type == "application-note"')
             .defaultOrdering([{ field: 'title', direction: 'asc' }])
         ),
-      
-      // Divider
-      S.divider(),
-      
-      // Other Resources
+
       S.listItem()
-        .title('Other Resources')
+        .title('💾  Software & Manuals')
         .child(
           S.documentTypeList('resource')
-            .title('Other Resources')
-            .filter('_type == "resource" && type != "application-note"')
+            .title('Software & Manuals')
+            .filter('_type == "resource" && (type == "software" || type == "manual")')
+            .defaultOrdering([{ field: 'title', direction: 'asc' }])
         ),
-      
-      // Divider
+
+      S.listItem()
+        .title('🎬  Videos')
+        .child(
+          S.documentTypeList('resource')
+            .title('Videos')
+            .filter('_type == "resource" && type == "video"')
+        ),
+
       S.divider(),
-      
-      // Products
+
+      // ── News ──────────────────────────────────────────────────────
       S.listItem()
-        .title('Products')
-        .child(S.documentTypeList('product').title('Products')),
-      
-      // Press Releases
+        .title('📰  Press Releases')
+        .child(
+          S.documentTypeList('pressRelease')
+            .title('Press Releases')
+            .defaultOrdering([{ field: 'date', direction: 'desc' }])
+        ),
+
       S.listItem()
-        .title('Press Releases')
-        .child(S.documentTypeList('pressRelease').title('Press Releases')),
-      
-      // FAQs
-      S.listItem()
-        .title('FAQs')
-        .child(S.documentTypeList('faq').title('FAQs')),
-      
-      // Distributors
-      S.listItem()
-        .title('Distributors')
-        .child(S.documentTypeList('distributor').title('Distributors')),
-      
-      // Team Members
-      S.listItem()
-        .title('Team Members')
-        .child(S.documentTypeList('teamMember').title('Team Members')),
-      
-      // Divider
+        .title('❓  FAQs')
+        .child(
+          S.documentTypeList('faq')
+            .title('FAQs')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+        ),
+
       S.divider(),
-      
-      // Pages (Singletons)
+
+      // ── People & Partners ─────────────────────────────────────────
       S.listItem()
-        .title('Homepage')
+        .title('👤  Team Members')
         .child(
-          S.document()
-            .schemaType('homepage')
-            .documentId('homepage')
+          S.documentTypeList('teamMember')
+            .title('Team Members')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
         ),
-      
+
       S.listItem()
-        .title('About Page')
+        .title('🌍  Distributors')
         .child(
-          S.document()
-            .schemaType('aboutPage')
-            .documentId('aboutPage')
-        ),
-      
-      S.listItem()
-        .title('Site Settings')
-        .child(
-          S.document()
-            .schemaType('siteSettings')
-            .documentId('siteSettings')
+          S.documentTypeList('distributor')
+            .title('Distributors')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
         ),
     ])
-}
-

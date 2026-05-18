@@ -16,8 +16,9 @@ export default defineType({
     }),
     defineField({
       name: "slug",
-      title: "Slug",
+      title: "URL Slug",
       type: "slug",
+      description: "Auto-generated from the title. Click 'Generate' if empty.",
       options: { source: "title", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
@@ -47,9 +48,10 @@ export default defineType({
     }),
     defineField({
       name: "featured",
-      title: "Featured",
+      title: "Featured (show at top)",
       type: "boolean",
       initialValue: false,
+      description: "Turn on to pin this press release to the top of the list.",
     }),
     defineField({
       name: "image",

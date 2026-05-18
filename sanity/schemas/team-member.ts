@@ -49,14 +49,16 @@ export default defineType({
     }),
     defineField({
       name: "featured",
-      title: "Featured (Leadership)",
+      title: "Show on About Page (Leadership)",
       type: "boolean",
       initialValue: false,
+      description: "Turn on to show this person in the leadership section of the About page.",
     }),
     defineField({
       name: "order",
       title: "Display Order",
       type: "number",
+      description: "Controls position on the page. Lower numbers appear first (e.g. 1 appears before 2).",
     }),
   ],
   preview: {

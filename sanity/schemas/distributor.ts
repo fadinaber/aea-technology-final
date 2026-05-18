@@ -87,6 +87,7 @@ export default defineType({
       title: "Display Order",
       type: "number",
       initialValue: 0,
+      description: "Controls the order distributors appear in. Lower numbers show first.",
     }),
   ],
   orderings: [
