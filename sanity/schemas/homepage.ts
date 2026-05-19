@@ -244,6 +244,49 @@ export default defineType({
             },
           ],
         },
+        {
+          name: "certifications",
+          type: "array",
+          title: "Certifications",
+          description: "Industry certifications shown on the homepage. Upload a file for downloadable certs (e.g. ISO 9001) or provide an external link (e.g. ANAB).",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "name", type: "string", title: "Certification Name" },
+                {
+                  name: "certFile",
+                  type: "file",
+                  title: "Certificate File (PDF)",
+                  description: "Upload a PDF to make this certification downloadable. Overrides external link.",
+                  options: { accept: ".pdf" },
+                },
+                {
+                  name: "externalLink",
+                  type: "url",
+                  title: "External Link",
+                  description: "Used if no file is uploaded (e.g. link to accreditation body website).",
+                },
+                {
+                  name: "isDownload",
+                  type: "boolean",
+                  title: "Is Download?",
+                  description: "Enable for file downloads (ISO cert). Disable for external links (ANAB).",
+                  initialValue: false,
+                },
+                {
+                  name: "image",
+                  type: "image",
+                  title: "Badge / Logo Image",
+                  description: "Logo or badge image shown for this certification.",
+                },
+              ],
+              preview: {
+                select: { title: "name" },
+              },
+            },
+          ],
+        },
       ],
     }),
 

@@ -261,7 +261,14 @@ export const homepageQuery = groq`
         description,
         "imageUrl": image.asset->url
       },
-      featureCards
+      featureCards,
+      certifications[] {
+        name,
+        "certFileUrl": certFile.asset->url,
+        externalLink,
+        isDownload,
+        "imageUrl": image.asset->url
+      }
     },
     resourcesTeaser {
       enabled,

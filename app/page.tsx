@@ -86,10 +86,22 @@ type SanityHomepageResourcesTeaser = {
   cta?: ResourcesTeaserSection["data"]["cta"]
 }
 
+type SanityCertification = {
+  name?: string
+  certFileUrl?: string
+  externalLink?: string
+  isDownload?: boolean
+  imageUrl?: string
+}
+
+type SanityHomepageWhyChooseUs = {
+  certifications?: SanityCertification[]
+}
+
 type SanityHomepage = {
   hero?: SanityHomepageHero
   featuredProducts?: SanityHomepageFeaturedProducts
-  whyChooseUs?: unknown
+  whyChooseUs?: SanityHomepageWhyChooseUs
   resourcesTeaser?: SanityHomepageResourcesTeaser
 }
 
@@ -210,11 +222,21 @@ export default async function Home() {
   const featuredProductsData = mapFeaturedProductsFromSanity(homepage?.featuredProducts)
   const resourcesTeaserData = mapResourcesTeaserFromSanity(homepage?.resourcesTeaser)
 
+  const sanityCertifications = homepage?.whyChooseUs?.certifications?.length
+    ? homepage.whyChooseUs.certifications.map((c) => ({
+        id: c.name ?? "",
+        name: c.name ?? "",
+        image: c.imageUrl ?? "",
+        link: c.certFileUrl ?? c.externalLink ?? null,
+        isDownload: c.isDownload ?? false,
+      }))
+    : undefined
+
   return (
     <main className="min-h-screen">
       <Hero data={heroData} />
       <FeaturedProducts data={featuredProductsData} />
-      <WhyChooseUs />
+      <WhyChooseUs certifications={sanityCertifications} />
       <ResourcesTeaser data={resourcesTeaserData} />
       <section className="py-12 sm:py-16 bg-background">
         <div className="container mx-auto px-4">

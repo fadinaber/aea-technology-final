@@ -4,10 +4,12 @@ import { Card } from "@/components/ui/card"
 import { Award, Flag, Check, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { mainFeature, featureCards, certifications } from "@/data/why-choose-us"
+import { mainFeature, featureCards, certifications as defaultCertifications } from "@/data/why-choose-us"
+import type { Certification } from "@/data/why-choose-us"
 import { FeatureCard } from "./why-choose-us/feature-card"
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ certifications: propCertifications }: { certifications?: Certification[] }) {
+  const certifications = propCertifications ?? defaultCertifications
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-muted via-background to-primary/5 relative overflow-hidden">
       {/* Background Elements */}
