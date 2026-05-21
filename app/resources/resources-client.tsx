@@ -1159,7 +1159,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
   }, [tabParam, noteIdParam])
 
   useEffect(() => {
-    if (idParam) {
+    if (idParam && activeTab === tabParam) {
       setTimeout(() => {
         const element = cardRefs.current[idParam]
         if (element) {
@@ -1169,7 +1169,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         }
       }, 150)
     }
-  }, [idParam])
+  }, [idParam, activeTab, tabParam])
 
   return (
     <>
