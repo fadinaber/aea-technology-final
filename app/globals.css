@@ -144,3 +144,16 @@
     overflow-wrap: break-word;
   }
 }
+
+@keyframes card-highlight {
+  0%   { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.7); background-color: rgba(219, 234, 254, 0.45); }
+  60%  { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); background-color: rgba(219, 234, 254, 0.15); }
+  100% { box-shadow: none; background-color: transparent; }
+}
+
+.search-highlight-card {
+  animation: card-highlight 2.5s ease-out forwards;
+  border-radius: 0.75rem;
+  position: relative;
+  z-index: 1;
+}

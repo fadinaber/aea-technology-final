@@ -218,12 +218,15 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
   const noteIdParam = searchParams.get("noteId") // Added for deep linking
+  const idParam = searchParams.get("id") // For software/manual/video deep linking
 
   const [activeTab, setActiveTab] = useState("software")
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [expandedSections, setExpandedSections] = useState<string[]>([])
+  const [highlightedId, setHighlightedId] = useState<string | null>(null)
 
   const noteRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
+  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
 
   // Default data if no initialData is provided
   const defaultData = {
@@ -1132,7 +1135,6 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
 
   useEffect(() => {
     if (tabParam === "application-notes" && noteIdParam) {
-      // Determine which section to expand based on note ID
       const resource = resourcesData["application-notes"].find((r) => r.id === noteIdParam)
       if (resource) {
         const sectionMap: { [key: string]: string } = {
@@ -1143,17 +1145,31 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         const sectionValue = sectionMap[resource.category]
         if (sectionValue) {
           setExpandedSections([sectionValue])
-          // Wait for accordion to expand, then scroll
           setTimeout(() => {
             const element = noteRefs.current[noteIdParam]
             if (element) {
               element.scrollIntoView({ behavior: "smooth", block: "center" })
+              setHighlightedId(noteIdParam)
+              setTimeout(() => setHighlightedId(null), 2500)
             }
-          }, 300) // A small delay to allow the accordion to open
+          }, 300)
         }
       }
     }
-  }, [tabParam, noteIdParam]) // Removed resourcesData dependency
+  }, [tabParam, noteIdParam])
+
+  useEffect(() => {
+    if (idParam) {
+      setTimeout(() => {
+        const element = cardRefs.current[idParam]
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" })
+          setHighlightedId(idParam)
+          setTimeout(() => setHighlightedId(null), 2500)
+        }
+      }, 150)
+    }
+  }, [idParam])
 
   return (
     <>
@@ -1233,7 +1249,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                             .filter((r) => r.category === "General Application Notes")
                             .map((resource) => (
                               // Added ref to each card for scrolling
-                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
+                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }} className={highlightedId === resource.id ? "search-highlight-card" : ""}>
                                 <ResourceCard resource={resource} />
                               </div>
                             ))}
@@ -1251,7 +1267,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                           {currentResources
                             .filter((r) => r.category === "VNA Application Notes")
                             .map((resource) => (
-                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
+                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }} className={highlightedId === resource.id ? "search-highlight-card" : ""}>
                                 <ResourceCard resource={resource} />
                               </div>
                             ))}
@@ -1269,7 +1285,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
                           {currentResources
                             .filter((r) => r.category === "TDR Application Notes")
                             .map((resource) => (
-                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }}>
+                              <div key={resource.id} ref={(el) => { noteRefs.current[resource.id] = el }} className={highlightedId === resource.id ? "search-highlight-card" : ""}>
                                 <ResourceCard resource={resource} />
                               </div>
                             ))}
@@ -1281,7 +1297,13 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
               ) : filteredResources.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
                   {filteredResources.map((resource) => (
-                    <ResourceCard key={resource.id} resource={resource} />
+                    <div
+                      key={resource.id}
+                      ref={(el) => { cardRefs.current[resource.id] = el }}
+                      className={highlightedId === resource.id ? "search-highlight-card" : ""}
+                    >
+                      <ResourceCard resource={resource} />
+                    </div>
                   ))}
                 </div>
               ) : (
