@@ -10,16 +10,40 @@ import type {
 } from "@/data/homepage"
 
 const FeaturedProducts = dynamic(() => import("@/components/featured-products"), {
-  loading: () => <div className="py-16 bg-background" />,
+  loading: () => (
+    <div className="py-16 bg-background animate-pulse">
+      <div className="container mx-auto px-4">
+        <div className="h-6 w-24 bg-muted rounded mx-auto mb-4" />
+        <div className="h-10 w-64 bg-muted rounded mx-auto mb-3" />
+        <div className="h-4 w-96 bg-muted rounded mx-auto mb-10" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => <div key={i} className="rounded-xl bg-muted h-64" />)}
+        </div>
+      </div>
+    </div>
+  ),
 })
 
 const WhyChooseUs = dynamic(() => import("@/components/why-choose-us"), {
-  loading: () => <div className="py-16 bg-muted/30" />,
+  loading: () => (
+    <div className="py-16 bg-muted/30 animate-pulse">
+      <div className="container mx-auto px-4">
+        <div className="h-10 w-72 bg-muted rounded mx-auto mb-10" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => <div key={i} className="rounded-xl bg-muted h-40" />)}
+        </div>
+      </div>
+    </div>
+  ),
 })
 
-const ResourcesTeaser = dynamic(() => import("@/components/resources-teaser"))
+const ResourcesTeaser = dynamic(() => import("@/components/resources-teaser"), {
+  loading: () => <div className="py-16 bg-background min-h-[300px]" />,
+})
 
-const SupportCTA = dynamic(() => import("@/components/support-cta").then((mod) => ({ default: mod.SupportCTA })))
+const SupportCTA = dynamic(() => import("@/components/support-cta").then((mod) => ({ default: mod.SupportCTA })), {
+  loading: () => <div className="min-h-[120px]" />,
+})
 
 export const revalidate = 300 // Revalidate every 5 minutes for better caching
 
@@ -212,11 +236,19 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
-      <Hero data={heroData} />
-      <FeaturedProducts data={featuredProductsData} />
-      <WhyChooseUs />
-      <ResourcesTeaser data={resourcesTeaserData} />
-      <section className="py-12 sm:py-16 bg-background">
+      <div className="section-fade-in">
+        <Hero data={heroData} />
+      </div>
+      <div className="section-fade-in" style={{ animationDelay: "0.05s" }}>
+        <FeaturedProducts data={featuredProductsData} />
+      </div>
+      <div className="section-fade-in" style={{ animationDelay: "0.1s" }}>
+        <WhyChooseUs />
+      </div>
+      <div className="section-fade-in" style={{ animationDelay: "0.15s" }}>
+        <ResourcesTeaser data={resourcesTeaserData} />
+      </div>
+      <section className="py-12 sm:py-16 bg-background section-fade-in" style={{ animationDelay: "0.2s" }}>
         <div className="container mx-auto px-4">
           <SupportCTA />
         </div>
