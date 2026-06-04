@@ -4,10 +4,16 @@ import { Card } from "@/components/ui/card"
 import { Award, Flag, Check, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { mainFeature, featureCards, certifications } from "@/data/why-choose-us"
+import { mainFeature, featureCards, defaultCertificationsSection } from "@/data/why-choose-us"
+import type { CertificationsSection } from "@/data/why-choose-us"
 import { FeatureCard } from "./why-choose-us/feature-card"
 
-export default function WhyChooseUs() {
+interface WhyChooseUsProps {
+  certifications?: CertificationsSection
+}
+
+export default function WhyChooseUs({ certifications: certsProp }: WhyChooseUsProps) {
+  const certsSection = certsProp ?? defaultCertificationsSection
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-muted via-background to-primary/5 relative overflow-hidden">
       {/* Background Elements */}
@@ -103,77 +109,61 @@ export default function WhyChooseUs() {
           {/* Certification Section */}
           <div className="bg-card rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg border border-border">
             <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 sm:mb-3">Industry Certifications</h3>
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 sm:mb-3">
+                {certsSection.sectionTitle ?? "Industry Certifications"}
+              </h3>
               <p className="text-base sm:text-lg text-muted-foreground">
-                Recognized by leading industry standards and accreditation bodies
+                {certsSection.sectionDescription ?? "Recognized by leading industry standards and accreditation bodies"}
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-12">
-              {certifications.map((cert, index) => {
-                // Non-clickable badge (SCB)
+              {certsSection.items.map((cert, index) => {
+                const hasLogo = Boolean(cert.image)
+
                 if (!cert.link) {
                   return (
-                    <div
-                      key={index}
-                      className="bg-muted/50 rounded-xl p-6 shadow-sm flex justify-center items-center h-32 w-44"
-                    >
-                      <Image
-                        src={cert.image || "/placeholder.svg"}
-                        alt={`${cert.name} certification badge`}
-                        width={80}
-                        height={80}
-                        className="h-20 w-20 object-contain"
-                        loading="lazy"
-                        decoding="async"
-                        quality={75}
-                      />
+                    <div key={index} className="bg-muted/50 rounded-xl p-6 shadow-sm flex justify-center items-center h-32 w-44">
+                      {hasLogo ? (
+                        <Image src={cert.image} alt={`${cert.name} certification badge`} width={80} height={80} className="h-20 w-20 object-contain" loading="lazy" decoding="async" quality={75} />
+                      ) : (
+                        <span className="text-foreground font-bold text-lg text-center">{cert.displayText ?? cert.name}</span>
+                      )}
                     </div>
                   )
                 }
 
                 if (cert.isDownload) {
                   return (
-                    <a
-                      key={index}
-                      href={cert.link}
-                      download
-                      className="bg-muted/50 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 flex flex-col justify-center items-center h-32 w-44 cursor-pointer group"
-                      title="Download ISO 9001 Certificate"
-                    >
-                      <div className="text-blue-600 font-bold text-lg mb-2">ISO 9001</div>
-                      <div className="flex items-center gap-1.5 text-blue-500 group-hover:text-blue-600">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                        <span className="text-sm font-medium">Certificate</span>
-                      </div>
+                    <a key={index} href={cert.link} download className="bg-muted/50 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 flex flex-col justify-center items-center h-32 w-44 cursor-pointer group" title={`Download ${cert.name}`}>
+                      {hasLogo ? (
+                        <>
+                          <Image src={cert.image} alt={`${cert.name} certification badge`} width={80} height={56} className="h-14 w-auto object-contain mb-2" loading="lazy" decoding="async" quality={75} />
+                          <div className="flex items-center gap-1.5 text-blue-500 group-hover:text-blue-600">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            <span className="text-xs font-medium">Download</span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="text-blue-600 font-bold text-lg mb-2">{cert.displayText ?? cert.name}</div>
+                          <div className="flex items-center gap-1.5 text-blue-500 group-hover:text-blue-600">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            <span className="text-sm font-medium">Certificate</span>
+                          </div>
+                        </>
+                      )}
                     </a>
                   )
                 }
 
-                // Regular clickable badge
                 return (
-                  <a
-                    key={index}
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-muted/50 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 flex justify-center items-center h-32 w-44"
-                  >
-                    <Image
-                      src={cert.image || "/placeholder.svg"}
-                      alt={`${cert.name} certification badge`}
-                      width={80}
-                      height={80}
-                      className="h-20 w-20 object-contain"
-                      loading="lazy"
-                    />
+                  <a key={index} href={cert.link} target="_blank" rel="noopener noreferrer" className="bg-muted/50 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 flex justify-center items-center h-32 w-44" title={cert.name}>
+                    {hasLogo ? (
+                      <Image src={cert.image} alt={`${cert.name} certification badge`} width={80} height={80} className="h-20 w-20 object-contain" loading="lazy" />
+                    ) : (
+                      <span className="text-foreground font-bold text-lg text-center">{cert.displayText ?? cert.name}</span>
+                    )}
                   </a>
                 )
               })}

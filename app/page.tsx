@@ -10,6 +10,7 @@ import type {
   HeroSection,
   ResourcesTeaserSection,
 } from "@/data/homepage"
+import type { CertificationsSection } from "@/data/why-choose-us"
 
 // Increase revalidation time for better TTFB - content changes monthly
 // 12 hours cache with stale-while-revalidate for instant responses
@@ -81,7 +82,20 @@ type SanityHomepageResourcesTeaser = {
 type SanityHomepage = {
   hero?: SanityHomepageHero
   featuredProducts?: SanityHomepageFeaturedProducts
-  whyChooseUs?: unknown
+  whyChooseUs?: {
+    certifications?: {
+      sectionTitle?: string
+      sectionDescription?: string
+      items?: Array<{
+        name?: string
+        displayText?: string
+        logoUrl?: string
+        fileUrl?: string
+        externalLink?: string
+        isDownload?: boolean
+      }>
+    }
+  }
   resourcesTeaser?: SanityHomepageResourcesTeaser
 }
 
@@ -204,6 +218,25 @@ function mapFeaturedProductsFromSanity(
   }
 }
 
+function mapCertificationsFromSanity(
+  whyChooseUs?: SanityHomepage["whyChooseUs"],
+): CertificationsSection | undefined {
+  const certs = whyChooseUs?.certifications
+  if (!certs?.items?.length) return undefined
+  return {
+    sectionTitle: certs.sectionTitle,
+    sectionDescription: certs.sectionDescription,
+    items: certs.items.map((item) => ({
+      id: item.name ?? "",
+      name: item.name ?? "",
+      displayText: item.displayText,
+      image: item.logoUrl ?? "",
+      link: item.isDownload ? (item.fileUrl ?? null) : (item.externalLink ?? null),
+      isDownload: item.isDownload ?? false,
+    })),
+  }
+}
+
 function mapResourcesTeaserFromSanity(
   resources?: SanityHomepageResourcesTeaser,
 ): ResourcesTeaserSection["data"] | undefined {
@@ -236,6 +269,7 @@ export default async function Home() {
   const heroData = mapHeroFromSanity(homepage?.hero)
   const featuredProductsData = mapFeaturedProductsFromSanity(homepage?.featuredProducts)
   const resourcesTeaserData = mapResourcesTeaserFromSanity(homepage?.resourcesTeaser)
+  const certificationsData = mapCertificationsFromSanity(homepage?.whyChooseUs)
   
   // Debug logging - always log to help diagnose image issues
   console.log("🔍 HOMEPAGE DEBUG:", {
@@ -264,7 +298,7 @@ export default async function Home() {
     <main className="min-h-screen">
       <Hero data={heroData} />
       <FeaturedProducts data={featuredProductsData} />
-      <WhyChooseUs />
+      <WhyChooseUs certifications={certificationsData} />
       <ResourcesTeaser data={resourcesTeaserData} />
       <section className="py-12 sm:py-16 bg-background">
         <div className="container mx-auto px-4">

@@ -308,6 +308,79 @@ export default defineType({
             },
           ],
         },
+        {
+          name: "certifications",
+          type: "object",
+          title: "Certifications",
+          description: "The ISO and ANAB certification badges shown at the bottom of this section",
+          fields: [
+            {
+              name: "sectionTitle",
+              type: "string",
+              title: "Section Title",
+              initialValue: "Industry Certifications",
+            },
+            {
+              name: "sectionDescription",
+              type: "string",
+              title: "Section Description",
+              initialValue: "Recognized by leading industry standards and accreditation bodies",
+            },
+            {
+              name: "items",
+              type: "array",
+              title: "Certification Items",
+              of: [
+                {
+                  type: "object",
+                  preview: { select: { title: "name", subtitle: "displayText" } },
+                  fields: [
+                    {
+                      name: "name",
+                      type: "string",
+                      title: "Name",
+                      description: "e.g. ISO 9001:2015 Certificate",
+                      validation: (Rule: any) => Rule.required(),
+                    },
+                    {
+                      name: "displayText",
+                      type: "string",
+                      title: "Display Text",
+                      description: "Short label shown on the card when no logo is uploaded (e.g. ISO 9001)",
+                    },
+                    {
+                      name: "logo",
+                      type: "image",
+                      title: "Logo / Badge Image",
+                      description: "Upload a PNG or JPG logo for this certification",
+                      options: { hotspot: true },
+                    },
+                    {
+                      name: "certificateFile",
+                      type: "file",
+                      title: "Certificate PDF",
+                      description: "Upload the PDF — visitors will download this file when they click the badge",
+                      options: { accept: ".pdf,application/pdf" },
+                    },
+                    {
+                      name: "externalLink",
+                      type: "url",
+                      title: "External Link",
+                      description: "Link to open in a new tab (e.g. https://anab.ansi.org/). Used when this is NOT a downloadable file.",
+                    },
+                    {
+                      name: "isDownload",
+                      type: "boolean",
+                      title: "Downloadable Certificate",
+                      description: "ON = clicking the badge downloads the PDF above. OFF = clicking opens the external link above.",
+                      initialValue: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     }),
 
