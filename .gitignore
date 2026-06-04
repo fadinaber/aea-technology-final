@@ -29,4 +29,7 @@ Thumbs.db
 # Documentation (internal - not for reviewers)
 docs/*.md
 
+# TypeScript build info
+*.tsbuildinfo
+
 
