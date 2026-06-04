@@ -6,6 +6,9 @@ studio/node_modules/
 .next/
 out/
 
+# TypeScript build info
+*.tsbuildinfo
+
 # production
 dist/
 build/
