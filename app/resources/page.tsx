@@ -39,6 +39,7 @@ export type SanityResource = {
   type: "software" | "manual" | "video" | "faq" | "application-note"
   version?: string
   downloadUrl?: string
+  localPath?: string
   fileUrl?: string
   fileSize?: string
   videoId?: string
@@ -85,9 +86,10 @@ export default async function ResourcesPage() {
     resources.length > 0
       ? {
           software: resources
-            // Only surface Sanity software that actually has a downloadable file;
-            // otherwise fall through to the static defaults instead of a dead "#".
-            .filter((r) => r.type === "software" && (r.fileUrl || r.downloadUrl))
+            // Only surface Sanity software that actually has a downloadable file
+            // (uploaded asset, external URL, or a local file); otherwise fall
+            // through to the static defaults instead of a dead "#".
+            .filter((r) => r.type === "software" && (r.fileUrl || r.downloadUrl || r.localPath))
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -96,14 +98,15 @@ export default async function ResourcesPage() {
               type: "software" as const,
               version: r.version,
               size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
+              downloadUrl: r.fileUrl || r.downloadUrl || r.localPath || "#",
               tags: r.tags || [],
               featured: r.featured,
             })),
           manuals: resources
-            // Only surface Sanity manuals that actually have a downloadable file;
-            // otherwise fall through to the static defaults instead of a dead "#".
-            .filter((r) => r.type === "manual" && (r.fileUrl || r.downloadUrl))
+            // Only surface Sanity manuals that actually have a downloadable file
+            // (uploaded asset, external URL, or a local file); otherwise fall
+            // through to the static defaults instead of a dead "#".
+            .filter((r) => r.type === "manual" && (r.fileUrl || r.downloadUrl || r.localPath))
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -111,7 +114,7 @@ export default async function ResourcesPage() {
               category: r.category || "Manual",
               type: "manual" as const,
               size: r.fileSize,
-              downloadUrl: r.fileUrl || r.downloadUrl || "#",
+              downloadUrl: r.fileUrl || r.downloadUrl || r.localPath || "#",
               tags: r.tags || [],
               featured: r.featured,
             })),

@@ -75,6 +75,7 @@ export const allResourcesQuery = groq`
     type,
     version,
     downloadUrl,
+    localPath,
     "fileUrl": file.asset->url,
     fileSize,
     videoId,
