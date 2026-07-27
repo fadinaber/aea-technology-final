@@ -866,15 +866,6 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloadUrl: getAppNoteUrl("an216"),
       },
       {
-        id: "an217",
-        title: "AN217 - Measuring Feedline on a Tower",
-        description: "Tower feedline testing procedures",
-        category: "TDR Application Notes",
-        type: "manual",
-        tags: ["TDR", "Tower", "Feedline"],
-        downloadUrl: getAppNoteUrl("an217"),
-      },
-      {
         id: "an220",
         title: "AN220 - Twisted Pair Cable Resistance",
         description: "Twisted pair cable resistance measurement",

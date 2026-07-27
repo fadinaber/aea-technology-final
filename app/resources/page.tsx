@@ -55,6 +55,25 @@ export type SanityFaq = {
   category?: string
 }
 
+// FAQ answers are stored as Sanity portable text (an array of block objects).
+// The resources UI renders this value as a plain string, so flatten it here —
+// rendering the raw array as a React child throws and crashes the FAQ tab.
+function portableTextToPlain(value: unknown): string {
+  if (!value) return ""
+  if (typeof value === "string") return value
+  if (Array.isArray(value)) {
+    return value
+      .map((block: any) =>
+        Array.isArray(block?.children)
+          ? block.children.map((child: any) => child?.text ?? "").join("")
+          : "",
+      )
+      .filter(Boolean)
+      .join("\n\n")
+  }
+  return ""
+}
+
 export default async function ResourcesPage() {
   const [resources, faqs] = await Promise.all([
     client.fetch<SanityResource[]>(allResourcesQuery).catch(() => []),
@@ -66,7 +85,9 @@ export default async function ResourcesPage() {
     resources.length > 0
       ? {
           software: resources
-            .filter((r) => r.type === "software")
+            // Only surface Sanity software that actually has a downloadable file;
+            // otherwise fall through to the static defaults instead of a dead "#".
+            .filter((r) => r.type === "software" && (r.fileUrl || r.downloadUrl))
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -80,7 +101,9 @@ export default async function ResourcesPage() {
               featured: r.featured,
             })),
           manuals: resources
-            .filter((r) => r.type === "manual")
+            // Only surface Sanity manuals that actually have a downloadable file;
+            // otherwise fall through to the static defaults instead of a dead "#".
+            .filter((r) => r.type === "manual" && (r.fileUrl || r.downloadUrl))
             .map((r) => ({
               id: r._id,
               title: r.title,
@@ -113,7 +136,7 @@ export default async function ResourcesPage() {
                   description: f.question,
                   category: f.category || "General",
                   type: "faq" as const,
-                  content: f.answer,
+                  content: portableTextToPlain(f.answer),
                   tags: [],
                 }))
               : resources

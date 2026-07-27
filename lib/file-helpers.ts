@@ -1,10 +1,12 @@
 /**
  * Helper functions for linking local PDF files
- * 
+ *
  * File naming conventions:
  * - Application Notes: Can use any filename - the system will automatically extract the ID
  * - Datasheets: Use the product slug (e.g., "e20-20n.pdf", "via-bravo-mri-3000.pdf")
  */
+
+import { applicationNoteFiles } from "./application-note-files"
 
 /**
  * Extract application note ID from a filename
@@ -54,10 +56,13 @@ function extractNoteIdFromFilename(filename: string): string | null {
 export function getApplicationNotePath(noteId: string): string | null {
   // Normalize the ID (lowercase, remove spaces)
   const normalizedId = noteId.toLowerCase().replace(/\s+/g, "-")
-  
-  // Use the dynamic route that will automatically find the file
-  // The route handler scans the folder and matches files by ID
-  return `/documents/application-notes/${normalizedId}`
+
+  // Link directly to the CDN-served static PDF using the precomputed filename
+  // map. This avoids the runtime fs route, which fails on Vercel because the
+  // public/ folder is not readable inside serverless functions.
+  const filename = applicationNoteFiles[normalizedId]
+  if (!filename) return null
+  return `/documents/application-notes/${encodeURIComponent(filename)}`
 }
 
 /**
