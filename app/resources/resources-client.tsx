@@ -257,7 +257,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.8,
         featured: true,
         tags: ["TDR", "Analysis", "Reporting", "Windows"],
-        downloadUrl: "https://s3-us-west-2.amazonaws.com/aea-technology/software/ETDR+PC+Vision+2015-3.zip",
+        downloadUrl: "/documents/software/TDR_PC_Vision.zip",
       },
       {
         id: "site-analyzer-pc-vision",
@@ -271,7 +271,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.7,
         featured: true,
         tags: ["SWR", "VNA", "EX2", "Analysis"],
-        downloadUrl: "#",
+        downloadUrl: "/documents/software/Site_Analyzer_PC_Vision.zip",
       },
       {
         id: "mri-vision",
@@ -285,7 +285,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         rating: 4.6,
         featured: true,
         tags: ["MRI", "Analysis"],
-        downloadUrl: "#",
+        downloadUrl: "/documents/software/MRI_Vision.zip",
       },
     ],
     manuals: [
@@ -362,7 +362,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloads: 2156,
         rating: 4.8,
         tags: ["VNA", "MRI", "Medical", "Safety"],
-        downloadUrl: "/datasheets/Bravo_MRI_3000_Analyzer.pdf",
+        downloadUrl: "/documents/manuals/6055/Bravo MRI-3000 Operation Manual 08 2023.pdf",
       },
       {
         id: "swr-analyzer-manual",
@@ -375,7 +375,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloads: 1834,
         rating: 4.5,
         tags: ["SWR", "Field Testing", "Maintenance"],
-        downloadUrl: "/datasheets/SWR_Site_Analyzer.pdf",
+        downloadUrl: "/documents/manuals/6050/SWR Site Analyzer Manual Oct 2021.pdf",
       },
       {
         id: "bravo-ex2-manual",
@@ -388,7 +388,7 @@ export default function ResourcesClient({ initialData }: ResourcesPageProps) {
         downloads: 1245,
         rating: 4.6,
         tags: ["Bravo EX2", "VNA", "Analysis", "Operation"],
-        downloadUrl: "/datasheets/Bravo_Ex_2_Analyzer.pdf",
+        downloadUrl: "/documents/bravo ex2 manuals/Bravo EX2 Operation Manual 10 2021.pdf",
       },
     ],
     videos: [

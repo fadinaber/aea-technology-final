@@ -18,6 +18,14 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
+  // Bundle the PDF files into the serverless functions that serve them.
+  // On Vercel the public/ folder is CDN-only and not readable via fs inside
+  // route handlers, so the dynamic application-note / datasheet routes 404
+  // without this. Static file links (software zips, manuals) are unaffected.
+  outputFileTracingIncludes: {
+    '/documents/application-notes/[noteId]': ['./public/documents/application-notes/**/*'],
+    '/documents/datasheets/[slug]': ['./public/documents/datasheets/**/*'],
+  },
   compress: true,
   async headers() {
     return [
