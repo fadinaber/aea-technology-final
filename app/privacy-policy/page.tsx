@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "AEA Technology, Inc. privacy policy and how we handle personal data.",
 }
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 86400
 
 export default function PrivacyPolicyPage() {
   return (

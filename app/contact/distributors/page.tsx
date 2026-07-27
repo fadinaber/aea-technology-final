@@ -3,7 +3,7 @@ import { client } from "@/sanity/lib/client"
 import { allDistributorsQuery } from "@/sanity/lib/queries"
 import DistributorLocatorClient from "./distributor-locator-client"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Find a Distributor | AEA Technology",

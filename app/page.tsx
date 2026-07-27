@@ -21,7 +21,7 @@ const ResourcesTeaser = dynamic(() => import("@/components/resources-teaser"))
 
 const SupportCTA = dynamic(() => import("@/components/support-cta").then((mod) => ({ default: mod.SupportCTA })))
 
-export const revalidate = 300 // Revalidate every 5 minutes for better caching
+export const revalidate = 3600
 
 type SanityHomepageHero = {
   enabled?: boolean
