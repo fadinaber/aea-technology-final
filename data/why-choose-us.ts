@@ -13,9 +13,16 @@ export interface FeatureCard {
 export interface Certification {
   id: string
   name: string
+  displayText?: string
   image: string
   link: string | null
   isDownload?: boolean
+}
+
+export interface CertificationsSection {
+  sectionTitle?: string
+  sectionDescription?: string
+  items: Certification[]
 }
 
 export const mainFeature = {
@@ -68,18 +75,26 @@ export const certifications: Certification[] = [
   {
     id: "iso-9001-certificate",
     name: "ISO 9001 Certificate",
-    image: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
+    displayText: "ISO 9001",
+    image: "",
     link: "/documents/CERT-ISO-9001-29-JAN-2027-SCB.pdf",
     isDownload: true,
   },
   {
     id: "anab-accredited",
     name: "ANAB Accredited",
+    displayText: "ANAB",
     image: "/images/design-mode/ANAB-MS-CB-3C.png",
     link: "https://anab.ansi.org/",
     isDownload: false,
   },
 ]
+
+export const defaultCertificationsSection: CertificationsSection = {
+  sectionTitle: "Industry Certifications",
+  sectionDescription: "Recognized by leading industry standards and accreditation bodies",
+  items: certifications,
+}
 
 // Helper functions for CMS integration
 export const getMainFeature = () => mainFeature

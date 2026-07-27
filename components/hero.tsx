@@ -15,6 +15,12 @@ const iconMap = {
 // Search bar is heavy and interactive; load it on the client only
 const SearchBar = dynamic(() => import("@/components/search-bar"), {
   ssr: false,
+  loading: () => (
+    <div className="relative w-full max-w-2xl mx-auto h-14 bg-white/95 rounded-xl border-2 border-white/40 shadow-lg flex items-center px-4 gap-3">
+      <div className="w-5 h-5 rounded-full bg-gray-300/60 flex-shrink-0" />
+      <div className="h-4 w-64 bg-gray-200/70 rounded" />
+    </div>
+  ),
 })
 
 interface HeroProps {

@@ -244,6 +244,80 @@ export default defineType({
             },
           ],
         },
+        {
+          name: "certifications",
+          type: "object",
+          title: "Certifications",
+          fields: [
+            {
+              name: "sectionTitle",
+              type: "string",
+              title: "Section Title",
+              initialValue: "Industry Certifications",
+            },
+            {
+              name: "sectionDescription",
+              type: "string",
+              title: "Section Description",
+              initialValue: "Recognized by leading industry standards and accreditation bodies",
+            },
+            {
+              name: "items",
+              type: "array",
+              title: "Certification Items",
+              of: [
+                {
+                  type: "object",
+                  preview: {
+                    select: { title: "name", subtitle: "displayText" },
+                  },
+                  fields: [
+                    {
+                      name: "name",
+                      type: "string",
+                      title: "Name",
+                      description: "Full name, e.g. ISO 9001:2015 Certificate",
+                      validation: (Rule: any) => Rule.required(),
+                    },
+                    {
+                      name: "displayText",
+                      type: "string",
+                      title: "Display Text",
+                      description: "Short label shown on the card when no logo is set (e.g. ISO 9001)",
+                    },
+                    {
+                      name: "logo",
+                      type: "image",
+                      title: "Logo / Badge Image",
+                      description: "Upload a logo or badge image for this certification",
+                      options: { hotspot: true },
+                    },
+                    {
+                      name: "certificateFile",
+                      type: "file",
+                      title: "Certificate File (PDF)",
+                      description: "Upload the certificate PDF — users will download this file",
+                      options: { accept: ".pdf,application/pdf" },
+                    },
+                    {
+                      name: "externalLink",
+                      type: "url",
+                      title: "External Link",
+                      description: "URL to open in a new tab (used when this is not a downloadable file)",
+                    },
+                    {
+                      name: "isDownload",
+                      type: "boolean",
+                      title: "Downloadable Certificate",
+                      description: "Turn on to make this a downloadable PDF. Turn off to use the external link instead.",
+                      initialValue: false,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     }),
 
